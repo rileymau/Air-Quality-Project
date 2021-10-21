@@ -1,0 +1,17 @@
+10/17
+
+There are two APIs that look good for air quality data.  I want to find summaries of air quality for the past month or year, to help a person know what to expect for air quality in a place they are visiting.  
+
+EPA API - is very organized.  It returns a dictionary of a few items, and all the keys are huge dictionaries.  It is very specific data so it might be hard to translate into something useful.  Like, every pollutant has a code.  I'd just be looking at ozone and PM 2.5.  It does have summary data that is averaged over time, so that is nice.  
+
+AirNow API - is not as organized.  But, they give clear summaries for ozone and PM 2.5, but its by day.  So I'd get the last 30 days, or the last year, and average it myself.   It returns a set of strings, one that is the keys and the next two that is the data.  It wouldn't be too hard to turn into a dictionary?  
+It might have a contour map feature, but it didn't seem to work when I tried it.  
+
+Website would be:
+- person provides a city or town or zipcode
+- api pulls up summary data for the last month or year (or each day and program averages it)
+- website shows the person the averages.
+- the optional things would be displaying the averages with graphs, charts, trendlines, etc.  
+- the person can decide if they want to search for another city
+
+thanks!
