@@ -21,7 +21,7 @@ I'm leaning towards using AirNow API.  Its easy to see, in these readings, that 
 They have a separate line for o3 and Pm 2.5 in the data, but I think its a shared AQI value alread calculated.  
 Weekly and yearly summaries could be pulled and calculated, the same as for the other API.  
 
-Wireframes:
+Wireframes and User Flow:
 See the static/img folder on github.  
 
 Next: 
