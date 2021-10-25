@@ -1,0 +1,29 @@
+10/24
+
+The EPA API for air quality: https://aqs.epa.gov/aqsweb/documents/data_api.html
+It returns daily data, and can be by site, by county, by box (area of a state), by cbsa (city/area) or by whole state.  
+The best data would be if the website can match the user input to a cbsa in the API.  They need to city and state, and to spell it right.  
+The next best would be the box. Box would be a bigger area that just the city.  
+
+The data looks like: https://aqs.epa.gov/data/api/list/cbsas?email=test@aqs.api&key=test
+
+I would need to pull date for PM2.5 and ozone and use that to get the AQI for the day.  
+The data is a big dictionary, and I would pull out the right value for each search and make the daily AIQ from that.  
+The weekly data would be the last 6 days plus today.
+The yearly data would be averages by month for the last year (if I have time to do it). 
+
+The AirNow API: https://docs.airnowapi.org/webservices
+
+The data looks like: https://www.airnowapi.org/aq/forecast/zipCode/?format=text/csv&zipCode=55427&date=2021-10-24&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70  
+
+AQI is the 8th value in the list.  The list is all the keys, then all the values, so would need to make it into a dictionary.  
+I'm leaning towards using AirNow API.  Its easy to see, in these readings, that the AQI is 1 for October 24th for Minneapolis-St. Paul area.  They also have a nice "dicussion" key and value that I could import to the website for today's air info.  The category "Good" could also be imported, and used to label weekly and yearly summaries.  
+They have a separate line for o3 and Pm 2.5 in the data, but I think its a shared AQI value alread calculated.  
+Weekly and yearly summaries could be pulled and calculated, the same as for the other API.  
+
+Wireframes:
+See the static/img folder on github.  
+
+Next: 
+I will hopefully have a basic website running soon! 
+
