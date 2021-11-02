@@ -1,12 +1,54 @@
-<!DOCTYPE html>
-<head>
-    <title>
-        My Project Homepage
-    </title>
-</head>
+{% extends 'base.html' %}
+{% block title %}My Project Homepage{% endblock %}
 
+{% block body %}
 <body>
     <h1>Welcome to Air Quality Project Page</h1>
     <br>
     <h2>API testing</h2>
+    <p>
+        testing here
+    </p>
+
+    <h2>Navigation</h2>
+    <ul>
+      <li><a href="/">View route</a></li>
+      <li><a href="/">View route</a></li>
+    </ul>
+  
+    <h2>Create an Account</h2>
+    <form action="/users" method="POST">
+      <p>
+        Email <input type="text" name="email">
+      </p>
+  
+      <p>
+        Password <input type="password" name="password">
+      </p>
+  
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+  
+  
+    <h2>Log In</h2>
+    <form action="/login" method="POST">
+      <p>
+        Email <input type="text" name="email">
+      </p>
+  
+      <p>
+        Password <input type="password" name="password">
+      </p>
+  
+      <p>
+        <input type="submit">
+      </p>
+    </form> 
+
+
+
 </body>
+
+{% endblock %}

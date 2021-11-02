@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}User Profile for {{ user }}{% endblock %}
+
+{% block body %}
+
+<h1>
+Welcome Back {{ user.email }}
+</h1>
+
+<h2> Here are your past searches:</h2>
+<br>
+<p>The searches go here. </p>
+<br>
+{% endblock %}

@@ -38,7 +38,17 @@ def create_search(user, date, zipcode, ozone, pm, category):
 #from today's date, get last 6 days too
 #and run ajax for all those days
 
+def get_users():
+    #returns all users
+    return User.query.all()
 
+def get_user_by_id(user_id):
+    #returns one user
+    return User.query.get(user_id)
+
+def get_user_by_email(email):
+    #get user from email to see if in database already
+    return User.query.get(email)
 
 
 
