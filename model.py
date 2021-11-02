@@ -5,6 +5,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+#db name is airsearch
 
 class User(db.Model):
     """A user."""
@@ -29,10 +30,10 @@ class Search(db.Model):
     search_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     date = db.Column(db.DateTime)
-    zipcode = db. Column(db.Integer)
-    ozone = db. Column(db.Integer)
-    pm = db. Column(db.Integer)
-    category = db. Column(db.Integer)
+    zipcode = db.Column(db.Integer)
+    ozone = db.Column(db.Integer)
+    pm = db.Column(db.Integer)
+    category = db.Column(db.Integer)
     distance = 10
 
     #pm2.5 is called pm for simplicity

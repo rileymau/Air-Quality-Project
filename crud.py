@@ -1,6 +1,7 @@
 """Project CRUD Operations"""
 
 from model import db, User, Search, connect_to_db
+from datetime import datetime
 
 
 
@@ -15,10 +16,18 @@ def create_user(email, password):
     return user
 
 
-def create_search(user, date, zipcode, ozone, pm, category, distance=10):
+def create_search(user, date, zipcode, ozone, pm, category):
 
-    search = Search(useer=user, date=date, zipcode=zipcode, ozone=ozone, pm=pm, category=category, distance=distance)
-    
+    #date = datetime.strptime
+    #date format edit to match json format
+    #format = "%d-%b-%Y"
+    #date=datetime.strptime(date_str, format)
+    #props date.day, month, year, hour, minute)
+    #strftime.org if need more formats
+
+    search = Search(user=user, date=date, zipcode=zipcode, ozone=ozone, pm=pm, category=category)
+    #nb user needs to be the user object, not list of one user object. 
+
     db.session.add(search)
     db.session.commit()
 
