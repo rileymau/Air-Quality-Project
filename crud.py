@@ -4,10 +4,10 @@ from model import db
 
 
 
-def create_user(login, password, email):
+def create_user(email, password):
     """Create and return a new user."""
 
-    user = User(login=login, password=password, email=email)
+    user = User(email=email, password=password)
 
     db.session.add(user)
     db.session.commit()
