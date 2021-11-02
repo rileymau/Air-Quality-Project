@@ -35,7 +35,8 @@ def create_search(user, date, zipcode, ozone, pm, category):
 
 
 #functions needed
-#set date time calc now for today's search 
+#from today's date, get last 6 days too
+#and run ajax for all those days
 
 
 
