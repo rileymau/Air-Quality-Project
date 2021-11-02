@@ -1,6 +1,6 @@
 """Project CRUD Operations"""
 
-from model import db
+from model import db, User, Search, connect_to_db
 
 
 
