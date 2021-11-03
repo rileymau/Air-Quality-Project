@@ -49,7 +49,7 @@ def get_user_by_id(user_id):
 
 def get_user_by_email(email):
     #get user from email to see if in database already
-    #.first() brings up just to object, not list of object.
+    #.first() brings up just object, not list of object.
     return User.query.filter(User.email == email).first()
 
 #Search functions
@@ -57,9 +57,25 @@ def get_searches():
     #returns all searches
     return Search.query.all()
 
-def get_search_by_id(search_id):
+#def get_search_by_id(search_id):
     #returns search object by id
-    return Search.query.filter(Search.search_id == search_id).first()
+ #   return Search.query.filter(Search.search_id == search_id).first()
+
+def get_search_by_id(search_id):
+    return Search.query.get(search_id)
+    #returns one search
+
+def get_searches_for_user(user_id):
+    searches_by_user = Search.query.filter(Search.user_id ==user_id).all()
+    return searches_by_user
+    #returns a list of search objects by user
+
+
+
+def most_recent_search():
+    return
+    #returns the most recent search in the database
+
 
 
 if __name__ == '__main__':

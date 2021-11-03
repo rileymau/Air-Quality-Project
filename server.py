@@ -71,10 +71,17 @@ def show_profile(user_id):
 def go_to_login():
     return render_template('login.page.html')
 
+@app.route('/searches')
+def all_searches():
+    """view all searches"""
+    searches = crud.get_searches()
+    return render_template("allsearches.html", searches=searches)
 
-#To do:
-#add forgot password buttons
-
+@app.route("/searches/<search_id>")
+def show_search(search_id):
+    """ Show a zipcode search page. """
+    search = crud.get_search_by_id(search_id)
+    return render_template("search.details.html", search=search)
 
 
 

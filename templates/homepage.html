@@ -11,42 +11,26 @@
     </p>
 
     <h2>Navigation</h2>
+    <!--Make a nav bar later-->
     <ul>
       <li><a href="/searches">View all past searches</a></li>
       <li><a href="/users">All users (temporary)</a></li>
       <li><a href="/login.page">Login or Create User</a></li>
     </ul>
   
-    <h2>Create an Account</h2>
-    <form action="/users" method="POST">
-      <p>
-        Email <input type="text" name="email">
-      </p>
+  <h2>About this website</h2>
+  <!--side by side layout later-->
+
+  <ul>
+    <li>Login as a user, and then do an Air quality search. </li>
+    <li>You can search for today's data, the data from the last week, </li>
+    <li>and a summary of the last year's AQI's for any zipcode! </li>
+  </ul>
   
-      <p>
-        Password <input type="password" name="password">
-      </p>
-  
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-  
-  
-    <h2>Log In</h2>
-    <form action="/login" method="POST">
-      <p>
-        Email <input type="text" name="email">
-      </p>
-  
-      <p>
-        Password <input type="password" name="password">
-      </p>
-  
-      <p>
-        <input type="submit">
-      </p>
-    </form> 
+  <h2>Most recent search and graph:</h2>
+  <!--bring up most recent search-->
+  <canvas></canvas>
+
 
 
 

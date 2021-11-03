@@ -2,5 +2,39 @@
 {% block title %}User Login, Create User{% endblock %}
 
 {% block body %}
+<h1>Create User Account and User Login Page</h1>
+<!--Side by side layout later-->
+
+<h2>Create an Account</h2>
+<form action="/users" method="POST">
+  <p>
+    Email <input type="text" name="email">
+  </p>
+
+  <p>
+    Password <input type="password" name="password">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+<h2>Log In</h2>
+<form action="/login" method="POST">
+  <p>
+    Email <input type="text" name="email">
+  </p>
+
+  <p>
+    Password <input type="password" name="password">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form> 
+
+<!--forgot password button tbd-->
 
 {% endblock %}

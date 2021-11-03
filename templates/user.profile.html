@@ -7,10 +7,22 @@
 <h1>
 Welcome Back {{ user.email }}
 </h1>
-<p>User ID {{ user.user_id }}</p>
+    <p>User ID {{ user.user_id }}</p>
 
+<h2>Create a new air quality search!</h2>
+
+<p>form for entering new zipcode, making search route</p>
+
+<p>flash, if not enough data: "Sorry, that zipcode doesn't have enough air quality data for this search.  Enter another zipcode."</p>
+
+<h3>If you need help finding a zipcode for the city you are looking up:</h3>
+<p>link a zipcode lookup</p>
+<br>
 <h2> Here are your past searches:</h2>
-<br>
-<p>The searches go here. </p>
-<br>
+    <p>The searches go here. </p>
+
+<h3>future nav bar</h3>
+<ul>
+<li><a href="/">Homepage</a></li>
+</ul>
 {% endblock %}
