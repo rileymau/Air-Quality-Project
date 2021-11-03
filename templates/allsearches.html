@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Air Quality Project - All Searches{% endblock %}
+
+{% block body %}
+<ul>
+    {% for search in searches %}
+      <li>
+        <a href="/searches/{{ search.search_id }}">
+          {{ search.search_id }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

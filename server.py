@@ -12,10 +12,23 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined 
 
+
 @app.route('/')
 def homepage():
     """View homepage."""
     return render_template('homepage.html')
+
+@app.route('/users')
+def all_users():
+    """view all users list"""
+    users = crud.get_users()
+    return render_template("allusers.html", users=users)
+
+@app.route("/users/<user_id>")
+def show_user(user_id):
+    """ Show user's profile page. """
+    user = crud.get_user_by_id(user_id)
+    return render_template("user.profile.html", user=user)
 
 @app.route("/users", methods=["POST"])
 def register_user():
@@ -24,7 +37,7 @@ def register_user():
 
     user = crud.get_user_by_email(email)
     if user:
-        flash("you are already registred, try another email")
+        flash("You are already registred, please try another email")
 
     else:
         crud.create_user(email, password)
@@ -45,23 +58,24 @@ def login_page():
         return redirect("/")
     else:
         session["user_email"] = user.email
-        flash("Welcome back!")
-        return redirect("/")
-        #change to user profile once set up
+        flash("Logged In!")
+        return render_template('user.profile.html', user=user)
 
 @app.route('/<user_id>')
 def show_profile(user_id):
     """show a user's profile"""
     user = crud.get_user_by_id(user_id)
     return render_template('user.profile.html', user=user)
-#this is not connected to/from anything yet
+
+@app.route('/login.page')
+def go_to_login():
+    return render_template('login.page.html')
 
 
 #To do:
 #add forgot password buttons
-#create separate login page
-#create account links to login page
-#user login links to user's profile page
+
+
 
 
 
