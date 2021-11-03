@@ -73,8 +73,10 @@ def get_searches_for_user(user_id):
 
 
 def most_recent_search():
-    return
+#search get all, index -1
+    return Search.query.last()
     #returns the most recent search in the database
+    #Does this work?
 
 
 

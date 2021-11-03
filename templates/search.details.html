@@ -5,19 +5,20 @@
 {% block body %}
 
 <h1>
-Search Details for search # {{ search.search_id  }}. 
+Search Details for search # {{ search.search_id  }} zipcode {{ search.zipcode }}
 </h1>
 <h2>Display search info, AQI</h2>
 <p>Link to extended search for past year, "if you want to see an annual summary"</p>
+  <a href="/searches/extended/{{ search.search_id }}">
+    {{ search.search_id }} More Info
+  </a>
 
-
-<h2> Here are your past searches:</h2>
-<br>
-<p>The searches go here. </p>
-<br>
+  <h2>Display chart here</h2>
+  <canvas></canvas>
 
 <h3>future nav bar</h3>
 <ul>
 <li><a href="/">Homepage</a></li>
 </ul>
 {% endblock %}
+<!--chart links downloaded here, where chart displayed-->

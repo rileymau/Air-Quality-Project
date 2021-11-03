@@ -60,12 +60,20 @@ def login_page():
         session["user_email"] = user.email
         flash("Logged In!")
         return render_template('user.profile.html', user=user)
+        #same problem as line 71
 
 @app.route('/<user_id>')
 def show_profile(user_id):
-    """show a user's profile"""
+    """show a user's profile with their searches"""
     user = crud.get_user_by_id(user_id)
-    return render_template('user.profile.html', user=user)
+    my_searches = crud.get_searches_for_user(user)
+    return render_template('user.profile.html', user=user, my_searches=my_searches)
+    ##what if no searches yet? 
+
+    # @app.route("/tbd")
+# def show_user_searches(user_id):
+#     user = crud.get_user_by_id(user_id)
+# #####
 
 @app.route('/login.page')
 def go_to_login():
@@ -83,9 +91,11 @@ def show_search(search_id):
     search = crud.get_search_by_id(search_id)
     return render_template("search.details.html", search=search)
 
-
-
-
+@app.route("/searches/extended/<search_id>")
+def show_extendeed_search(search_id):
+    """ Show an extended info zipcode search page. """
+    search = crud.get_search_by_id(search_id)
+    return render_template("search.extended.html", search=search)
 
 
 if __name__ == "__main__":

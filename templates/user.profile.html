@@ -19,7 +19,14 @@ Welcome Back {{ user.email }}
 <p>link a zipcode lookup</p>
 <br>
 <h2> Here are your past searches:</h2>
-    <p>The searches go here. </p>
+    {% for search in my_searches %}
+    <li>
+      <a href="/searches/{{ search.search_id }}">
+        {{ search.search_id }} for zipcode {{ search.zipcode }}
+      </a>
+    </li>
+  {% endfor %}
+    {}
 
 <h3>future nav bar</h3>
 <ul>
