@@ -1,7 +1,7 @@
 """Project Server"""
 
 from flask import (Flask, render_template, request, flash, session,
-    redirect)
+    redirect, jsonify)
 
 from model import connect_to_db
 import crud
@@ -41,7 +41,7 @@ def show_user(user_id):
 
 @app.route("/users", methods=["POST"])
 def register_user():
-    #Creating a user account
+    """Creating a new user account"""
     # It gets the email and password the user put in, and regiters user in database
     email = request.form.get("email")
     password = request.form.get("password")
@@ -62,7 +62,7 @@ def register_user():
 
 @app.route("/login", methods = ["POST"])
 def login_page(): 
-    #Login process for user
+    """Login process for returning user"""
     #email, password are from user input in form
     #user is pulled up by email
     email = request.form.get("email")
@@ -78,7 +78,6 @@ def login_page():
         #add user email to session, get searches by user to show on user profile, if any
         #send flash message, and log user in to their user profile
         session["user_email"] = user.email
-        session["user"] = user
         my_searches = crud.get_searches_for_user(user.user_id)
         flash("Logged In!")
         return render_template('user.profile.html', user=user, my_searches=my_searches)
@@ -95,7 +94,7 @@ def show_profile(user_id):
 
 @app.route('/login.page')
 def go_to_login():
-    #Send user to login page
+    """Send user to login page"""
     return render_template('login.page.html')
 
 
@@ -134,7 +133,7 @@ def new_user_search():
     zipcode = request.form.get("zicode")
     date = request.form.get("date")
         #or datetime.now()
-    user = session[user]
+#    user = session["user"]
 
     #If API doesn't work, not enough info: 
     if not API: 
@@ -147,11 +146,12 @@ def new_user_search():
         #ozone, pm, category come from API
 
         crud.create_search(user, date, zipcode, ozone, pm, category)
+    pass
 
 
-#Footer
+"""Connects to Flask, on localhost"""
 if __name__ == "__main__":
-    #DebugToolbarExtension(app)
     connect_to_db(app)
-    #Connects to Flask, on localhost
     app.run(host="0.0.0.0", debug=True)
+    #DebugToolbarExtension(app)
+
