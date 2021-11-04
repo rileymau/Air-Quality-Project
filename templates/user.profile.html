@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
+
 {% block title %}User Profile for {{ user.email }}
 {% endblock %}
 
-{% block body %}
+{% block head %}
+  <script
+src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"
+></script>
+{% endblock %}
 
-<h1>
-Welcome Back {{ user.email }}
-</h1>
+
+{% block body %}
+<h1>Welcome Back {{ user.email }}</h1>
     <p>User ID {{ user.user_id }}</p>
 
 <h2>Create a new air quality search!</h2>
@@ -25,11 +32,16 @@ Welcome Back {{ user.email }}
   </p>
 </form> 
 
-
-
 <h3>If you need help finding a zipcode for the city you are looking up:</h3>
-<p>link a zipcode lookup</p>
+  <p>link a zipcode lookup</p>
 <br>
+
+<h2>Your New Search Info</h2>
+  <ul id="ajax"></ul>
+
+
+  <h3>Some Names of Berries from Pokemon</h3>
+  <ol id="berries"></ol>
 
 {% if my_searches %}
  <h2> Here are your past searches:</h2>
@@ -47,4 +59,8 @@ Welcome Back {{ user.email }}
 <ul>
 <li><a href="/">Homepage</a></li>
 </ul>
+{% endblock %}
+
+{% block after_body %}
+<script src="/static/js/initialsearch.js"></script>
 {% endblock %}

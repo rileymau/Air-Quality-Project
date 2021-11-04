@@ -136,16 +136,16 @@ def new_user_search():
 #    user = session["user"]
 
     #If API doesn't work, not enough info: 
-    if not API: 
-        flash("Sorry, that zipcode doesn't have enough air quality data for this search.  Enter another zipcode.")
-        redirect("/user.profile/<user_id>")
+    # if not API: 
+    #     flash("Sorry, that zipcode doesn't have enough air quality data for this search.  Enter another zipcode.")
+    #     redirect("/user.profile/<user_id>")
 
-    if API: 
-        flash("Click on the new search below to see details")
+    # if API: 
+    #     flash("Click on the new search below to see details")
 
         #ozone, pm, category come from API
 
-        crud.create_search(user, date, zipcode, ozone, pm, category)
+        #crud.create_search(user, date, zipcode, ozone, pm, category)
     pass
 
 

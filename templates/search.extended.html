@@ -2,8 +2,15 @@
 {% block title %}Search Extended Info for {{ search.search_id }}
 {% endblock %}
 
-{% block body %}
+{% block head %}
+  <script
+src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"
+></script>
+{% endblock %}
 
+{% block body %}
 <h1>Extended Info Zipcode Search for {{ search.search_id  }} zipcode {{ search.zipcode }}</h1>
     <h2>Display search info, AQI</h2>
     
@@ -14,4 +21,9 @@
     <ul>
     <li><a href="/">Homepage</a></li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+{% block after_body %}
+<script src="/static/js/initialsearch.js"></script>
+<script src="/static/js/extendedsearch.js"></script>
+{% endblock %}
