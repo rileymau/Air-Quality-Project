@@ -6,9 +6,6 @@
 
 //tbd make a chart.js
 
-console.log("here");
-//console.log(secrets.sh/AIRNOWKEY)
-
 //get one airnow json string
 //let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipcode=55101&distance=10&API_KEY="
 let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=55101&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70";
@@ -47,7 +44,18 @@ function displayResults(evt){
     // if date === week
 
     let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
-  
+
+    const searchData = {
+        //create key-value pairs to display and pass back to server.py
+        user: user,
+        date: date,
+        zipcode: $('#zipcode').val(),
+        reporting_area: 0,
+        ozone: 0,
+        pm: 0,
+        category: 0
+      };
+
     function displayResultDetails(result) {
         for (let key in result[0]) {
             $('#display').append(`<li>${key}: ${result[0][key]}</li>`)
@@ -58,7 +66,14 @@ function displayResults(evt){
         return
     }
 
-    console.log("in inner function")
+    function sendData(result) {
+
+
+          //send searchData to server.py
+          $.post('/savesearch', searchData, console.log("sent"));
+    }
+
+    console.log("in inner function");
 
     $.get(url, (result) => {
         displayResultDetails(result);
@@ -66,7 +81,10 @@ function displayResults(evt){
         //sendData(result/data)
     });
 
+    
   }
-  
+
 //on clicking submit, the functions above run
 $('#newsearch-form').on('submit', displayResults);
+
+

@@ -124,29 +124,24 @@ def show_extendeed_search(search_id):
 ## API Routes ##
 
 
-#@app.route("/newsearch", methods = ["POST"])
-#def new_user_search():
+@app.route("/savesearch", methods = ["POST"])
+def save_user_search(Data):
     """Create a search database object with user search"""
+    print(Data)
     #get zipcode
     #get date
     #get 7 day option - later
 #    zipcode = request.form.get("zicode")
 #    date = datetime.now()
-#    user = session["user"]
+    user = crud.get_user_by_id(user_id)
 
-    #If API doesn't work, not enough info: 
-    # if not API: 
-    #     flash("Sorry, that zipcode doesn't have enough air quality data for this search.  Enter another zipcode.")
-    #     redirect("/user.profile/<user_id>")
-
-    # if API: 
-    #     flash("Click on the new search below to see details")
 
         #ozone, pm, category come from API
 
-        #crud.create_search(user, date, zipcode, ozone, pm, category)
-#    pass
+    search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
 
+    #return render_template("search.details.html", search=search)
+    redirect('/<user_id>')
 
 """Connects to Flask, on localhost"""
 if __name__ == "__main__":
