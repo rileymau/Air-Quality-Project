@@ -17,31 +17,31 @@ crossorigin="anonymous"
     <p>User ID {{ user.user_id }}</p>
 
 <h2>Create a new air quality search!</h2>
-<form action="/newsearch" method="POST">
-  <p>
-    Zipcode <input type="number" name="zipcode">
-  </p>
+<form id="newsearch-form">
+  <!-- was action="/newsearch" method="POST", tbd if server.py route needed for database-->
+  
+  <h3>Zipcode</h3>
+    <input type="text" name="zipcode" id="zipcode">
+  <p>If you need help finding a zipcode for the city you are looking up:</p>
+  <p>link a zipcode lookup</p>
 
-  <p>
-    Date <input type="datetime" name="date">
-  </p>
+  <h3>Choose Date Range </h3>
+    <input type="checkbox" id="date" name="today" value="today">
+    <label for="today">See Today's AQI</label>
+    <input type="checkbox" id="date" name="week" value="week">
+    <label for="week">See Last 7 Days AQI</label>
 
-  <!--more options here later-->
   <p>
     <input type="submit">
   </p>
 </form> 
 
-<h3>If you need help finding a zipcode for the city you are looking up:</h3>
-  <p>link a zipcode lookup</p>
-<br>
+<h3>Test Data</h3>
+<ul id="ajax"></ul>
 
 <h2>Your New Search Info</h2>
-  <ul id="ajax"></ul>
+  <ul id="display"></ul>
 
-
-  <h3>Some Names of Berries from Pokemon</h3>
-  <ol id="berries"></ol>
 
 {% if my_searches %}
  <h2> Here are your past searches:</h2>

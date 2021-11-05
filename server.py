@@ -124,15 +124,14 @@ def show_extendeed_search(search_id):
 ## API Routes ##
 
 
-@app.route("/newsearch", methods = ["POST"])
-def new_user_search():
-    """Create a new API search with user input"""
+#@app.route("/newsearch", methods = ["POST"])
+#def new_user_search():
+    """Create a search database object with user search"""
     #get zipcode
     #get date
     #get 7 day option - later
-    zipcode = request.form.get("zicode")
-    date = request.form.get("date")
-        #or datetime.now()
+#    zipcode = request.form.get("zicode")
+#    date = datetime.now()
 #    user = session["user"]
 
     #If API doesn't work, not enough info: 
@@ -146,7 +145,7 @@ def new_user_search():
         #ozone, pm, category come from API
 
         #crud.create_search(user, date, zipcode, ozone, pm, category)
-    pass
+#    pass
 
 
 """Connects to Flask, on localhost"""
