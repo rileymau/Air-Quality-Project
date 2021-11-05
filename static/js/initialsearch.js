@@ -11,7 +11,7 @@ console.log("here");
 
 //get one airnow json string
 //let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipcode=55101&distance=10&API_KEY="
-let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=55101&distance=10&API_KEY=";
+let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=55101&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70";
 
 //${AIRNOWKEY}
 //use later 
@@ -45,8 +45,8 @@ function displayResults(evt){
     // if date === today
     //     const date= datetiime.now()
     // if date === week
-    const AIRNOWKEY="";
-    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=${AIRNOWKEY}`;
+
+    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
   
     function displayResultDetails(result) {
         for (let key in result[0]) {
@@ -63,6 +63,7 @@ function displayResults(evt){
     $.get(url, (result) => {
         displayResultDetails(result);
         displayChart(result);
+        //sendData(result/data)
     });
 
   }
