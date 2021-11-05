@@ -29,6 +29,7 @@ CREATE TABLE public.searches (
     user_id integer,
     date timestamp without time zone,
     zipcode integer,
+    reporting_area character varying(50),
     ozone integer,
     pm integer,
     category integer
@@ -112,8 +113,9 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: searches; Type: TABLE DATA; Schema: public; Owner: hackbright
 --
 
-COPY public.searches (search_id, user_id, date, zipcode, ozone, pm, category) FROM stdin;
-1	2	2021-11-02 19:48:12.526137	12345	31	12	1
+COPY public.searches (search_id, user_id, date, zipcode, reporting_area, ozone, pm, category) FROM stdin;
+1	2	2021-11-05 16:26:12.608438	55119	Minneapolis	10	12	1
+2	2	2021-11-05 16:26:33.260297	55119	Minneapolis	15	20	1
 \.
 
 
@@ -122,8 +124,9 @@ COPY public.searches (search_id, user_id, date, zipcode, ozone, pm, category) FR
 --
 
 COPY public.users (user_id, email, password) FROM stdin;
-1	test@test.com	12
-2	me@test.com	13
+1	me@gmail.com	123
+2	hi@gmail.com	123
+3	test@gmail.com	123
 \.
 
 
@@ -131,14 +134,14 @@ COPY public.users (user_id, email, password) FROM stdin;
 -- Name: searches_search_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.searches_search_id_seq', 1, true);
+SELECT pg_catalog.setval('public.searches_search_id_seq', 2, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 3, true);
 
 
 --

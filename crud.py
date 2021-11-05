@@ -15,7 +15,7 @@ def create_user(email, password):
     return user
 
 
-def create_search(user, date, zipcode, ozone, pm, category):
+def create_search(user, date, zipcode, reporting_area, ozone, pm, category):
     """create and return a new search"""
     #date = datetime.strptime
     #date format edit to match json format
@@ -24,7 +24,7 @@ def create_search(user, date, zipcode, ozone, pm, category):
     #props date.day, month, year, hour, minute)
     #strftime.org if need more formats
 
-    search = Search(user=user, date=date, zipcode=zipcode, ozone=ozone, pm=pm, category=category)
+    search = Search(user=user, date=date, zipcode=zipcode, reporting_area=reporting_area, ozone=ozone, pm=pm, category=category)
     #nb user needs to be the user object, not list of one user object. 
 
     db.session.add(search)
@@ -66,7 +66,7 @@ def get_search_by_id(search_id):
 
 def get_searches_for_user(user_id):
     """returns a list of search objects by user"""
-    searches_by_user = Search.query.filter(Search.user_id==user_id).all()
+    searches_by_user = Search.query.filter(Search.user_id==user_id).order_by(Search.reporting_area).all()
     return searches_by_user
 
 

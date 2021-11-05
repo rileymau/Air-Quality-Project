@@ -31,6 +31,7 @@ class Search(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     date = db.Column(db.DateTime)
     zipcode = db.Column(db.Integer)
+    reporting_area = db.Column(db.String(50))
     ozone = db.Column(db.Integer)
     pm = db.Column(db.Integer)
     category = db.Column(db.Integer)
@@ -42,7 +43,7 @@ class Search(db.Model):
     user = db.relationship("User", backref="searches")
 
     def __repr__(self):
-        return f"<Search: search_id={self.search_id} date={self.date} zipcode={self.zipcode} ozone={self.ozone} pm2.5={self.pm} category={self.category}>"
+        return f"<Search: search_id={self.search_id} date={self.date} zipcode={self.zipcode} reporting_area={self.reporting_area} ozone={self.ozone} pm2.5={self.pm} category={self.category}>"
 
 
 
