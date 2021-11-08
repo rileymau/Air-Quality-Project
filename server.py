@@ -123,29 +123,34 @@ def show_extendeed_search(search_id):
 
 ## API Routes ##
 
-
 @app.route("/savesearch", methods = ["POST"])
-def save_user_search(Data):
+def save_user_search(searchData, user_id):
     """Create a search database object with user search"""
-    print(Data)
-    #get zipcode
-    #get date
-    #get 7 day option - later
-#    zipcode = request.form.get("zicode")
-#    date = datetime.now()
+
+    print(searchData)
+
+#get data from html/js
+#id each part
+
+
+    #user = request.form.get("<{{ user }}>")
     user = crud.get_user_by_id(user_id)
 
-
+ 
         #ozone, pm, category come from API
 
-    search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
+    #Create new user from data above, send user flash message
+    #search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
+    flash("Seach has been saved, see list below")
 
-    #return render_template("search.details.html", search=search)
-    redirect('/<user_id>')
+    #re-run my searches, return user profile with updates
+    my_searches = crud.get_searches_for_user(user_id)
+    return render_template('user.profile.html', user=user, my_searches=my_searches)
+
 
 """Connects to Flask, on localhost"""
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
-    #DebugToolbarExtension(app)
+    #DebugToolbarExtension(app), optional
 
