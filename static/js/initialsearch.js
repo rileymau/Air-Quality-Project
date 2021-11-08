@@ -32,26 +32,24 @@ function displayResults(evt){
     //url for today's data by user zipcode input
     let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
 
-    let user_id = $('user-num').html
-
     function makeSearchData(result) {
         //create key-value pairs to display and pass back to server.py
         console.log("make search data");
-        console.log(result);
         const searchData = {
-            'date': result[0]['DateObserved'],
-            'zipcode': $('#zipcode').val(),
-            'reporting_area': result[0]['ReportingArea'],
+            'Date': result[0]['DateObserved'],
+            'Zipcode': $('#zipcode').val(),
+            'Reporting Area': result[0]['ReportingArea'],
             // if result.hasOwnProperty('Ozone') { 
-            //     'ozone': result[0]['Ozone'],
+                //need value of ozone
+            //     'ozone': result[0]['AQI'],
             //     'pm': None,
             // } else {
             //     'ozone': None,
-            //     'pm': result[0]['PM2.5'],
+            //     'pm': result[0]['AQI'],
             // },
-            'category': result[0]['Category']['Number']
+            'Category': result[0]['Category']['Number']
         };
-        return(searchData);
+        return searchData;
       }
 
     function displayResultDetails(searchData) {
@@ -64,15 +62,20 @@ function displayResults(evt){
         return
     }
 
-    function sendData(searchData, user_id) {
+    function sendData(searchData) {
           //send searchData and user id back to server.py
-          $.post('/savesearch', searchData, user_id);
+        const data = searchData;
+        data.user_id = 4
+        //$('#user-num').text.valueof();
+            //Number(number); 
+        console.log("in send data");
+        console.log(data);
+        $.post('/savesearch', data);
     }
 
     console.log("in inner function");
 
     $.get(url, (result) => {
-        console.log(result);
         const searchData = makeSearchData(result); 
         displayResultDetails(searchData);
         displayChart(searchData);

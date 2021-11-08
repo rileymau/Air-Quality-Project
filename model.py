@@ -43,7 +43,7 @@ class Search(db.Model):
     user = db.relationship("User", backref="searches")
 
     def __repr__(self):
-        return f"<Search: search_id={self.search_id} date={self.date} zipcode={self.zipcode} reporting_area={self.reporting_area} ozone={self.ozone} pm2.5={self.pm} category={self.category}>"
+        return f"<Search: search_id={self.search_id} user={self.user_id} date={self.date} zipcode={self.zipcode} reporting_area={self.reporting_area} ozone={self.ozone} pm2.5={self.pm} category={self.category}>"
 
 
 

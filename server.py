@@ -10,7 +10,7 @@ from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
-app.jinja_env.undefined = StrictUndefined 
+app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
@@ -26,7 +26,7 @@ def all_users():
     """view all users list"""
     users = crud.get_users()
     return render_template("allusers.html", users=users)
-    #may be able to delete this route when all user page deleted. 
+    #may be able to delete this route when all user page deleted.
 
 
 @app.route("/users/<user_id>")
@@ -56,12 +56,12 @@ def register_user():
         crud.create_user(email, password)
         flash("Account has been created, please login")
 
-    #redirects to login/create account page   
+    #redirects to login/create account page
     return redirect("/login.page")
 
 
 @app.route("/login", methods = ["POST"])
-def login_page(): 
+def login_page():
     """Login process for returning user"""
     #email, password are from user input in form
     #user is pulled up by email
@@ -69,7 +69,7 @@ def login_page():
     password = request.form.get("password")
     user = crud.get_user_by_email(email)
 
-    #if user doesn't exist in database or password is wrong: 
+    #if user doesn't exist in database or password is wrong:
     #flash message and send to homepage
     if not user or user.password != password:
         flash("Incorrect password, or need to register")
@@ -124,33 +124,33 @@ def show_extendeed_search(search_id):
 ## API Routes ##
 
 @app.route("/savesearch", methods = ["POST"])
-def save_user_search(searchData, user_id):
+def save_user_search():
     """Create a search database object with user search"""
-
-    print(searchData)
-
-#get data from html/js
-#id each part
-
-
-    #user = request.form.get("<{{ user }}>")
+    print("****************************got back to py")
+    #define each piece neeeded for saving the search
+    user_id = request.form.get("user_id")
     user = crud.get_user_by_id(user_id)
-
- 
-        #ozone, pm, category come from API
+    
+    date = request.form.get("Date")
+    zipcode = request.form.get("Zipcode")
+    reporting_area = request.form.get("Reporting Area")
+    ozone = request.form.get("Ozone")
+    pm = request.form.get("PM2.5")
+    category = request.form.get("Catgory")
 
     #Create new user from data above, send user flash message
-    #search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
+    search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
     flash("Seach has been saved, see list below")
+    print(search)
 
     #re-run my searches, return user profile with updates
     my_searches = crud.get_searches_for_user(user_id)
+    print("search saved")
     return render_template('user.profile.html', user=user, my_searches=my_searches)
 
 
-"""Connects to Flask, on localhost"""
 if __name__ == "__main__":
+    """Connects to Flask, on localhost"""
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
     #DebugToolbarExtension(app), optional
-
