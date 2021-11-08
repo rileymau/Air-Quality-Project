@@ -128,9 +128,9 @@ def save_user_search():
     """Create a search database object with user search"""
     print("****************************got back to py")
     #define each piece neeeded for saving the search
-    user_id = request.form.get("user_id")
-    user = crud.get_user_by_id(user_id)
-    
+    user_id = request.form.get("user_num")
+    user = crud.get_user_by_id(int(user_id))
+
     date = request.form.get("Date")
     zipcode = request.form.get("Zipcode")
     reporting_area = request.form.get("Reporting Area")
@@ -145,7 +145,7 @@ def save_user_search():
 
     #re-run my searches, return user profile with updates
     my_searches = crud.get_searches_for_user(user_id)
-    print("search saved")
+    print("search saved ******************************")
     return render_template('user.profile.html', user=user, my_searches=my_searches)
 
 

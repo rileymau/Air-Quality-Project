@@ -65,7 +65,7 @@ function displayResults(evt){
     function sendData(searchData) {
           //send searchData and user id back to server.py
         const data = searchData;
-        data.user_id = 4
+        data.user_num = $('#user-num').text();
         //$('#user-num').text.valueof();
             //Number(number); 
         console.log("in send data");
