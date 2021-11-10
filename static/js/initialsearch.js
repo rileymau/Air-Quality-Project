@@ -4,21 +4,21 @@
 //outputs url, json info
 
 //get one airnow json string
-let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=55101&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70";
+// let api = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=55101&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70";
 
-//text request, save for now:
-$.get(api, (result) => {
-    console.log(result);
-    console.log(result[0]["ReportingArea"])
-    displayResultsTest(result)
-});
+// //text request, save for now:
+// $.get(api, (result) => {
+//     console.log(result);
+//     console.log(result[0]["ReportingArea"])
+//     displayResultsTest(result)
+// });
 
-//shows results by key for test api request
-function displayResultsTest(result) {
-    for (let key in result[0]) {
-        $('#ajax').append(`<li>${key}: ${result[0][key]}</li>`)
-    }
-}
+// //shows results by key for test api request
+// function displayResultsTest(result) {
+//     for (let key in result[0]) {
+//         $('#ajax').append(`<li>${key}: ${result[0][key]}</li>`)
+//     }
+// }
 
 
 //shows results and graph on profile page
