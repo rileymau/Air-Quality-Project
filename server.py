@@ -126,8 +126,9 @@ def show_extendeed_search(search_id):
 @app.route("/savesearch", methods = ["POST"])
 def save_user_search():
     """Create a search database object with user search"""
-    print("****************************got back to py")
-    #define each piece neeeded for saving the search
+    print("**************************** got back to py")
+    #define each piece needed for saving the search
+    #adjust date format for python, to keep time stamp off
     user_id = request.form.get("user_num")
     user = crud.get_user_by_id(int(user_id))
 
@@ -141,7 +142,6 @@ def save_user_search():
     #Create new user from data above, send user flash message
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
     flash("Seach has been saved, see list below")
-    print(search)
 
     #re-run my searches, return user profile with updates
     my_searches = crud.get_searches_for_user(user_id)
@@ -150,7 +150,7 @@ def save_user_search():
 
 
 if __name__ == "__main__":
-    """Connects to Flask, on localhost"""
+    #Connects to Flask, on localhost"""
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
     #DebugToolbarExtension(app), optional

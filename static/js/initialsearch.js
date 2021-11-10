@@ -27,19 +27,19 @@ function displayResults(evt){
     evt.preventDefault();
 
     const zipcode= $('#zipcode').val();
-    //const date= $('#date').val();
 
     //url for today's data by user zipcode input
     let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
 
     function makeSearchData(result) {
         //create key-value pairs to display and pass back to server.py
-        console.log("make search data");
+        //check if data has Ozone or PM2.5, get that key-value pair and make the other undefined
+        //console.log("make search data");
+
         const searchData = {
             'Date': result[0]['DateObserved'],
             'Zipcode': $('#zipcode').val(),
             'Reporting Area': result[0]['ReportingArea'],
-            'Category': result[0]['Category']['Number']
         };
 
         if (result[0]['ParameterName'] === 'Ozone') {
@@ -50,25 +50,32 @@ function displayResults(evt){
             searchData['PM2.5'] = result[0]['AQI'];
         };
 
+        searchData['Category'] = result[0]['Category']['Number'];
+
         return searchData;
       }
 
     function displayResultDetails(searchData) {
+        //loop through key, values in search data to display on user profile
+        //skip any keys with undefined values
         for (const key in searchData) {
-            $('#display').append(`<li>${key}: ${searchData[key]}</li>`)
+            if (typeof searchData[key] !== 'undefined') {
+                $('#display').append(`<li>${key}: ${searchData[key]}</li>`)
+            }
         }
     }
+
 
     function displayChart(searchData) {
         return
     }
 
     function sendData(searchData) {
-          //send searchData and user id back to server.py
+          //send searchData and user id back to server.py, as data
         const data = searchData;
         data.user_num = $('#user-num').text();
-        console.log("in send data");
-        console.log(data);
+        console.log("data sent to server.py");
+        //console.log(data);
         $.post('/savesearch', data);
     }
 

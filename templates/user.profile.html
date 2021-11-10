@@ -13,19 +13,19 @@ crossorigin="anonymous"
 
 
 {% block body %}
-<h1>Welcome Back {{ user.email }}</h1>
-<span id="user-num">{{ user.user_id }}</span>
+<h1>Welcome Back {{ user.email }}!</h1>
+<span id="user-num" style="visibility:hidden;">{{ user.user_id }}  </span>
 
-<h2>Create a new air quality search!</h2>
+<h2>Create a new air quality search:</h2>
 <form id="newsearch-form">
-  <!-- was action="/newsearch" method="POST", tbd if server.py route needed for database-->
   
-  <h3>Zipcode</h3>
+  <h3>Enter Zipcode:
     <input type="text" name="zipcode" id="zipcode">
-  <p>If you need help finding a zipcode for the city you are looking up:</p>
-  <p>link a zipcode lookup</p>
-
-  <h3>Choose Date Range </h3>
+  </h3> 
+  <p>
+    If you need help finding a zipcode for a city: <a href=https://tools.usps.com/zip-code-lookup.htm>USPS Zip Code Lookup</a>
+  </p>
+  <h3>Choose Date Range:</h3>
     <input type="checkbox" id="date" name="today" value="today">
     <label for="today">See Today's AQI</label>
     <input type="checkbox" id="date" name="week" value="week">
@@ -36,8 +36,8 @@ crossorigin="anonymous"
   </p>
 </form> 
 
-<h3>Test Data</h3>
-<ul id="ajax"></ul>
+<!-- <h3>Test Data</h3>
+<ul id="ajax"></ul> -->
 
 <h2>Your New Search Info</h2>
   <ul id="display"></ul>
@@ -53,7 +53,9 @@ crossorigin="anonymous"
     </li>
     {% endfor %}
 {% endif %}
-
+<!--if the user has saved serches, display past searches-->
+<!-- loop to show searches by id, zipcode, and date-->
+<!--if search.prop doesn't exist/undefined, don't display that one-->
 
 <h3>future nav bar</h3>
 <ul>
