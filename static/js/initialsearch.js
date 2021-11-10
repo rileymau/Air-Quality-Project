@@ -92,14 +92,3 @@ function displayResults(evt){
 
 //on clicking submit, the functions above run
 $('#newsearch-form').on('submit', displayResults);
-
-
-// make a route to get back the search data and send it to js. 
-// function displayResultDetails(searchData) {
-//     for (const key in searchData) {
-//$('#search-info').append(`<li>${key}: ${searchData[key]}</li>`);
-//}
-
-//for 7 day search
-//data before today's: 
-//$.get("https://aq/observation/zipCode/historical...", (result) => {console.log(result)}); 
