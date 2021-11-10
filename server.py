@@ -1,7 +1,7 @@
 """Project Server"""
 
 from flask import (Flask, render_template, request, flash, session,
-    redirect, jsonify)
+    redirect)
 
 from model import connect_to_db
 import crud

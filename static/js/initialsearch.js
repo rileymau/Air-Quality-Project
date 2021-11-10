@@ -39,16 +39,17 @@ function displayResults(evt){
             'Date': result[0]['DateObserved'],
             'Zipcode': $('#zipcode').val(),
             'Reporting Area': result[0]['ReportingArea'],
-            // if result.hasOwnProperty('Ozone') { 
-                //need value of ozone
-            //     'ozone': result[0]['AQI'],
-            //     'pm': None,
-            // } else {
-            //     'ozone': None,
-            //     'pm': result[0]['AQI'],
-            // },
             'Category': result[0]['Category']['Number']
         };
+
+        if (result[0]['ParameterName'] === 'Ozone') {
+            searchData['Ozone'] = result[0]['AQI'];
+            searchData['PM2.5'] = undefined;
+        } else {
+            searchData['Ozone'] = undefined;
+            searchData['PM2.5'] = result[0]['AQI'];
+        };
+
         return searchData;
       }
 
@@ -66,8 +67,6 @@ function displayResults(evt){
           //send searchData and user id back to server.py
         const data = searchData;
         data.user_num = $('#user-num').text();
-        //$('#user-num').text.valueof();
-            //Number(number); 
         console.log("in send data");
         console.log(data);
         $.post('/savesearch', data);
@@ -87,6 +86,13 @@ function displayResults(evt){
 //on clicking submit, the functions above run
 $('#newsearch-form').on('submit', displayResults);
 
+
+// make a route to get back the search data and send it to js. 
+// function displayResultDetails(searchData) {
+//     for (const key in searchData) {
+//$('#search-info').append(`<li>${key}: ${searchData[key]}</li>`);
+//}
+
 //for 7 day search
 //data before today's: 
-//$.get("https://aq/observatiion/zipCode/historical...", (result) => {console.log(result)}); 
+//$.get("https://aq/observation/zipCode/historical...", (result) => {console.log(result)}); 
