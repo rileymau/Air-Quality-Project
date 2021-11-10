@@ -8,10 +8,14 @@
 Search Details for search # {{ search.search_id  }} zipcode {{ search.zipcode }}
 </h1>
 <h2>Display search info, AQI</h2>
-  <ul id="search-info"></ul>
-
-
-
+  <ul id="search-info">
+    <li>Date: {{ search.date }}</li>
+    <li>Zipcde: {{ search.zipcode }}</li>
+    <li>Reporting Area: {{ search.reporting_area }}</li>
+    <li>Category: {{ search.category }}</li>
+    <li>Ozone: {{ search.ozone }}</li>
+    <li>PM2.5: {{ search.pm }}</li>
+  </ul>
 
 <h2>Link to extended search for past year, "if you want to see an annual summary"</h2>
   <a href="/searches/extended/{{ search.search_id }}">

@@ -136,7 +136,7 @@ def save_user_search():
     reporting_area = request.form.get("Reporting Area")
     ozone = request.form.get("Ozone")
     pm = request.form.get("PM2.5")
-    category = request.form.get("Catgory")
+    category = request.form.get("Category")
 
     #Create new user from data above, send user flash message
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
