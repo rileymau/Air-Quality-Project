@@ -2,29 +2,36 @@
 {% block title %}Search Details for {{ search.search_id }}
 {% endblock %}
 
+{% block head %}
+  <script
+src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"
+></script>
+{% endblock %}
+
 {% block body %}
 
 <h1>
-Search Details for search # {{ search.search_id  }} zipcode {{ search.zipcode }}
+Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcode }}
 </h1>
-<h2>Display search info, AQI</h2>
+<h2>Your AQI Search Info</h2>
   <ul id="search-info">
     <li>Date: {{ search.date }}</li>
     <li>Zipcde: {{ search.zipcode }}</li>
     <li>Reporting Area: {{ search.reporting_area }}</li>
     {% if search.ozone %}
-      <li>Ozone: {{ search.ozone }}</li>
+      <li>Ozone AQI: {{ search.ozone }}</li>
       {% endif %}
     {% if search.pm %}
-      <li>PM2.5: {{ search.pm }}</li>
+      <li>PM2.5 AQI: {{ search.pm }}</li>
       {% endif %}
     <li>Category: {{ search.category }}</li>
   </ul>
   <!--Skips ozone, pm, if they are undefined.  Displays all other search attributes (except user)-->
 
 
-
-<h2>Display chart here</h2>
+<h2>Chart for AQI over last week</h2>
   <canvas></canvas>
 
 <h2>To see extended annual summary: 
@@ -32,6 +39,7 @@ Search Details for search # {{ search.search_id  }} zipcode {{ search.zipcode }}
     Search #{{ search.search_id }} More Info</a>
 </h2>
 
+<span id="search-date" style="visibility:hidden;">{{ search.date }}</span>
 
 <h3>future nav bar</h3>
 <ul>

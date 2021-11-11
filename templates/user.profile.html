@@ -14,7 +14,6 @@ crossorigin="anonymous"
 
 {% block body %}
 <h1>Welcome Back {{ user.email }}!</h1>
-<span id="user-num" style="visibility:hidden;">{{ user.user_id }}  </span>
 
 <h2>Create a new air quality search:</h2>
 <form id="newsearch-form">
@@ -39,7 +38,7 @@ crossorigin="anonymous"
 <!-- <h3>Test Data</h3>
 <ul id="ajax"></ul> -->
 
-<h2>Your New Search Info</h2>
+<h2>Your New AQI Search Info</h2>
   <ul id="display"></ul>
 
 
@@ -56,6 +55,8 @@ crossorigin="anonymous"
 <!--if the user has saved serches, display past searches-->
 <!-- loop to show searches by id, zipcode, and date-->
 <!--if search.prop doesn't exist/undefined, don't display that one-->
+
+<span id="user-num" style="visibility:hidden;">{{ user.user_id }}</span>
 
 <h3>future nav bar</h3>
 <ul>

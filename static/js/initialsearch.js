@@ -43,11 +43,11 @@ function displayResults(evt){
         };
 
         if (result[0]['ParameterName'] === 'Ozone') {
-            searchData['Ozone'] = result[0]['AQI'];
-            searchData['PM2.5'] = undefined;
+            searchData['Ozone AQI'] = result[0]['AQI'];
+            searchData['PM2.5 AQI'] = undefined;
         } else {
-            searchData['Ozone'] = undefined;
-            searchData['PM2.5'] = result[0]['AQI'];
+            searchData['Ozone AQI'] = undefined;
+            searchData['PM2.5 AQI'] = result[0]['AQI'];
         };
 
         searchData['Category'] = result[0]['Category']['Number'];
@@ -92,3 +92,5 @@ function displayResults(evt){
 
 //on clicking submit, the functions above run
 $('#newsearch-form').on('submit', displayResults);
+
+//end 

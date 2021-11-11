@@ -135,8 +135,8 @@ def save_user_search():
     date = request.form.get("Date")
     zipcode = request.form.get("Zipcode")
     reporting_area = request.form.get("Reporting Area")
-    ozone = request.form.get("Ozone")
-    pm = request.form.get("PM2.5")
+    ozone = request.form.get("Ozone AQI")
+    pm = request.form.get("PM2.5 AQI")
     category = request.form.get("Category")
 
     #Create new user from data above, send user flash message
