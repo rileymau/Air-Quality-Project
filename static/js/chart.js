@@ -7,22 +7,10 @@
 
     //get search date
 const today = $('#search-date').text();
-const sevenDays = [];
-console.log('here');
+//send to server.py with separate post req if needed, 
 
-function make_seven_days(today) {
-    //using search date, list last six days too. 
-    //redo whole function.  get year, month, day, and subtract days.  need to change month too though. 
-    for (const num in [-6, -5, -4, -3, -2, -1]) {
-        mult = (num * 1000 *3600 *24);
-        date = today + mult;
-        sevenDays.push(date);
-    };
-    console.log(sevenDays);
-    return sevenDays;
-}
 
-make_seven_days(today);
+
 
     //url historical - ajax with new date
     //and search.zipcode

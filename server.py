@@ -8,6 +8,8 @@ import crud
 
 from jinja2 import StrictUndefined
 
+from datetime import datetime, timedelta
+
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -147,6 +149,24 @@ def save_user_search():
     my_searches = crud.get_searches_for_user(user_id)
     print("search saved ******************************")
     return render_template('user.profile.html', user=user, my_searches=my_searches)
+
+
+@app.route("/savesearch", methods = ["POST"])
+def make_seven_days():
+    #using search date, list last six days too. 
+    seven_days = []
+
+    date_get = request.form.get("Date")
+    today = date_get.date()
+    zipcode = request.form.get("Zipcode")
+    
+    previous = range(-6, 0)
+    for num in previous:
+        date_var = today + num
+        seven_days.append(date_var)
+
+    print(seven_days)
+    return seven_days
 
 
 if __name__ == "__main__":
