@@ -1,17 +1,15 @@
 'use strict';
 
-//for extended serch functions:
-    // if date === today
-    //     const date= datetiime.now()
-    // if date === week
-
     //get search date
 const today = $('#search-date').text();
 //send to server.py with separate post req if needed, 
 
+//get 6 days of dates from search details page. 
+//make chart of 7 dates. 
+//fill in date, pm and ozone from search already done. 
 
 
-
+//for day in six_days...
     //url historical - ajax with new date
     //and search.zipcode
     //pass date, pm, ozone to chart

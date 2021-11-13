@@ -8,7 +8,7 @@ import crud
 
 from jinja2 import StrictUndefined
 
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -145,7 +145,7 @@ def save_user_search():
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
     flash("Seach has been saved, see list below")
 
-    #re-run my searches, return user profile with updates
+    #re-run my searches, return user profile with updates - needs to be in separate route/function to run now. 
     my_searches = crud.get_searches_for_user(user_id)
     print("search saved ******************************")
     return render_template('user.profile.html', user=user, my_searches=my_searches)
@@ -154,19 +154,25 @@ def save_user_search():
 @app.route("/savesearch", methods = ["POST"])
 def make_seven_days():
     #using search date, list last six days too. 
-    seven_days = []
-
-    date_get = request.form.get("Date")
-    today = date_get.date()
-    zipcode = request.form.get("Zipcode")
     
+    #get search.date and search.zipcode from displayResults function and initialsearch.js
+    #set day7, make into datetime object, and set delta1 as 1 day increments
+    six_days = []
+    date_get = request.form.get("Date")
+    zipcode = request.form.get("Zipcode")
+    day7 = datetime.strptime(date_get, '%Y-%m-%d')
+    delta1 = timedelta(days=1)
     previous = range(-6, 0)
-    for num in previous:
-        date_var = today + num
-        seven_days.append(date_var)
 
-    print(seven_days)
-    return seven_days
+    #loop through -6 to -1, subtract that many days from day7, and add to list
+    for num in previous:
+        date_var = day7 + (num * delta1)
+        six_days.append(date_var)
+
+    #add day 7 to list, and return search.details page with 7 day date list.  
+    #seven_days.append(day7)
+    print(six_days)
+    return render_templay("search.details.html", search=search, six_days=six_days)
 
 
 if __name__ == "__main__":

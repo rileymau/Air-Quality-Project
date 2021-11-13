@@ -66,7 +66,7 @@ def get_search_by_id(search_id):
 
 def get_searches_for_user(user_id):
     """returns a list of search objects by user"""
-    searches_by_user = Search.query.filter(Search.user_id==user_id).order_by(Search.reporting_area).all()
+    searches_by_user = Search.query.filter(Search.user_id==user_id).order_by(Search.zipcode).all()
     return searches_by_user
 
 

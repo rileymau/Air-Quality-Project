@@ -1,7 +1,7 @@
 """Project Data Model"""
 
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -29,7 +29,7 @@ class Search(db.Model):
 
     search_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Date)
     zipcode = db.Column(db.Integer)
     reporting_area = db.Column(db.String(50))
     ozone = db.Column(db.Integer)
@@ -38,7 +38,6 @@ class Search(db.Model):
     distance = 10
 
     #pm2.5 is called pm for simplicity
-    #tbd save url or json
 
     user = db.relationship("User", backref="searches")
 
