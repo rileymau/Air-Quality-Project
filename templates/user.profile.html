@@ -24,11 +24,13 @@ crossorigin="anonymous"
   <p>
     If you need help finding a zipcode for a city: <a href=https://tools.usps.com/zip-code-lookup.htm>USPS Zip Code Lookup</a>
   </p>
-  <h3>Choose Date Range:</h3>
-    <input type="checkbox" id="date" name="today" value="today">
-    <label for="today">See Today's AQI</label>
-    <input type="checkbox" id="date" name="week" value="week">
-    <label for="week">See Last 7 Days AQI</label>
+  <h3>Choose Search Radius:</h3>
+    <input type="checkbox" id="size" name="1 mile" value="1">
+    <label for="1 mile">1 Mile</label>
+    <input type="checkbox" id="size" name="10 mile" value="10">
+    <label for="10 mile">10 Miles</label>
+    <input type="checkbox" id="size" name="100 mile" value="100">
+    <label for="100 mile">100 Miles</label>
 
   <p>
     <input type="submit">
@@ -47,7 +49,7 @@ crossorigin="anonymous"
     {% for search in my_searches %}
     <li>
       <a href="/searches/{{ search.search_id }}">
-        {{ search.search_id }} for zipcode {{ search.zipcode }} for {{ search.date }}
+        Search #{{ search.search_id }} for zipcode {{ search.zipcode }} for {{ search.date }}
       </a>
     </li>
     {% endfor %}

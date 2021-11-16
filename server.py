@@ -144,11 +144,12 @@ def save_user_search():
     #Create new user from data above, send user flash message
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
     flash("Seach has been saved, see list below")
+    new_search = search
 
     #re-run my searches, return user profile with updates - needs to be in separate route/function to run now. 
     my_searches = crud.get_searches_for_user(user_id)
     print("search saved ******************************")
-    return render_template('user.profile.html', user=user, my_searches=my_searches)
+    return render_template('user.profile.html', user=user, new_search=new_search, my_searches=my_searches)
 
 
 @app.route("/savesearch", methods = ["POST"])

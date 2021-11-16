@@ -27,9 +27,10 @@ function displayResults(evt){
     evt.preventDefault();
 
     const zipcode= $('#zipcode').val();
+    const size = $('#size').val(); 
 
     //url for today's data by user zipcode input
-    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=10&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
+    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=${size}&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
 
     function makeSearchData(result) {
         //create key-value pairs to display and pass back to server.py
@@ -66,8 +67,12 @@ function displayResults(evt){
     }
 
 
-    function displayChart(searchData) {
-        return
+    function displayLink(searchData) {
+        //$.place - CSS.style = visible... with new search id
+        $('#display').append(`<break>`);
+        $('#display').append(`<li><a href="/searches/{{ new_search.search_id }}">
+          Click to see air quality details. Search # {{ new_search.search_id }} for zipcode {{ new_search.zipcode }} for {{ new_search.date }}
+        </a></li>`)
     }
 
     function sendData(searchData) {
@@ -84,7 +89,7 @@ function displayResults(evt){
     $.get(url, (result) => {
         const searchData = makeSearchData(result); 
         displayResultDetails(searchData);
-        displayChart(searchData);
+        displayLink(searchData);
         sendData(searchData);
     });
 
