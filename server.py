@@ -169,8 +169,6 @@ def make_seven_days():
         date_var = day7 + (num * delta1)
         six_days.append(date_var)
 
-    #add day 7 to list, and return search.details page with 7 day date list.  
-    #seven_days.append(day7)
     print(six_days)
     return render_templay("search.details.html", search=search, six_days=six_days)
 
