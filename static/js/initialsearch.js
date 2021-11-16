@@ -77,10 +77,10 @@ function displayResults(evt){
 
     function displayLink() {
         //$.place - CSS.style = visible... with new search id
-        $('#show-button').style="visibility:visible;";
+        $('#show-button').css('visibility', 'visible');
     }
 
-    console.log("in inner function");
+    //console.log("in inner function");
 
     $.get(url, (result) => {
         const searchData = makeSearchData(result); 
