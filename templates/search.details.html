@@ -30,10 +30,18 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
   </ul>
   <!--Skips ozone, pm, if they are undefined.  Displays all other search attributes (except user)-->
 
-  <!--seven_days is the seven days for the chart-->
+  <!--six_days is the previous six days, for the chart-->
   <!--chart columns are date, pm aqi, ozone aqi-->
+  
+  <!--if it allows it, neeed to add jinga if six_days, and endif to below-->
+
+
 <h2>Chart for AQI over last week</h2>
+
+<h2>Graph for AQI over last week</h2>
   <canvas></canvas>
+
+
 
 <h2>To see extended annual summary: 
   <a href="/searches/extended/{{ search.search_id }}">

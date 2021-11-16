@@ -76,7 +76,7 @@ function displayResults(evt){
     }
 
     function displayLink() {
-        //$.place - CSS.style = visible... with new search id
+        //show new search link button
         $('#show-button').css('visibility', 'visible');
     }
 

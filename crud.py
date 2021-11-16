@@ -69,13 +69,14 @@ def get_searches_for_user(user_id):
     return searches_by_user
 
 
-def get_new_search_for_user(my_searches):
-    """returns the newest search for that user """
-    ids_list = []
-    for search in my_searches:
-        ids_list.append(search_id)
-        newest = (max(ids_list))
-    return get_search_by_id(newest)
+# def get_new_search_for_user(my_searches):
+#     """returns the newest search for that user """
+#     ids_list = []
+#     for search in my_searches:
+#         ids_list.append(search_id)
+#         newest = (max(ids_list))
+#     return get_search_by_id(newest)
+
 
 def most_recent_search():
     """returns most reecent search in the database"""

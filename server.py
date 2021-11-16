@@ -124,6 +124,12 @@ def show_extendeed_search(search_id):
     return render_template("search.extended.html", search=search)
 
 
+@app.route("/getnewsearch")
+def show_new_search():
+    """ Show the newest search page. """
+    search = crud.most_recent_search()
+    return render_template("search.details.html", search=search)
+
 
 ## API Routes ##
 
@@ -145,18 +151,18 @@ def save_user_search():
 
     #Create new user from data above, send user flash message
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
-    flash("Seach has been saved, see list below")
 
     #re-run my searches, return user profile with updates - needs to be in separate route/function to run now.
     my_searches = crud.get_searches_for_user(user_id)
-    new_search = crud.get_new_search_for_user(my_searches)
+    #print(my_searches)
+    #new_search = crud.get_new_search_for_user(my_searches)
     print("search saved ******************************")
-    return redirect("/user.profile")
-    #return render_template('user.profile.html', user=user, new_search=new_search, my_searches=my_searches)
+    #return redirect("/user.profile")
+    return render_template('user.profile.html', user=user, my_searches=my_searches)
     #this refresh is not working.
 
 
-@app.route("/make_seven_day", methods = ["POST"])
+@app.route("/savesearch", methods = ["POST"])
 def make_seven_days():
     #using search date, list last six days too. 
     
@@ -164,8 +170,9 @@ def make_seven_days():
     #set day7, make into datetime object, and set delta1 as 1 day increments
     six_days = []
     date_get = request.form.get("Date")
-    zipcode = request.form.get("Zipcode")
     day7 = datetime.strptime(date_get, '%Y-%m-%d')
+    print(day7)
+    print(date_get)
     delta1 = timedelta(days=1)
     previous = range(-6, 0)
 

@@ -28,6 +28,7 @@ const today = $('#search-date').text();
 //}
 function displayDetails(evt) {
     evt.preventDefault();
+
     function makeChart(six_days) {
         console.log(six_days)
     }
@@ -39,7 +40,7 @@ function displayDetails(evt) {
     }
 }
 
-$('#show-button').on('submit', displayDetails);
+$('#show-button').on('click', displayDetails);
 //on click, do make 7 day route
 //and make chart
 //on search details page
