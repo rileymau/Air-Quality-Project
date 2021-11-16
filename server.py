@@ -144,12 +144,14 @@ def save_user_search():
     #Create new user from data above, send user flash message
     search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
     flash("Seach has been saved, see list below")
-    new_search = search
 
-    #re-run my searches, return user profile with updates - needs to be in separate route/function to run now. 
+    #re-run my searches, return user profile with updates - needs to be in separate route/function to run now.
     my_searches = crud.get_searches_for_user(user_id)
+    new_search = crud.get_new_search_for_user(my_searches)
     print("search saved ******************************")
-    return render_template('user.profile.html', user=user, new_search=new_search, my_searches=my_searches)
+    return redirect("/user.profile")
+    #return render_template('user.profile.html', user=user, new_search=new_search, my_searches=my_searches)
+    #this refresh is not working.
 
 
 @app.route("/savesearch", methods = ["POST"])
@@ -171,7 +173,7 @@ def make_seven_days():
         six_days.append(date_var)
 
     print(six_days)
-    return render_templay("search.details.html", search=search, six_days=six_days)
+    return render_template("search.details.html", search=search, six_days=six_days)
 
 
 if __name__ == "__main__":

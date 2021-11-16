@@ -66,15 +66,6 @@ function displayResults(evt){
         }
     }
 
-
-    function displayLink(searchData) {
-        //$.place - CSS.style = visible... with new search id
-        $('#display').append(`<break>`);
-        $('#display').append(`<li><a href="/searches/{{ new_search.search_id }}">
-          Click to see air quality details. Search # {{ new_search.search_id }} for zipcode {{ new_search.zipcode }} for {{ new_search.date }}
-        </a></li>`)
-    }
-
     function sendData(searchData) {
           //send searchData and user id back to server.py, as data
         const data = searchData;
@@ -84,13 +75,20 @@ function displayResults(evt){
         $.post('/savesearch', data);
     }
 
+    function displayLink() {
+        //$.place - CSS.style = visible... with new search id
+        $('#newsearch').append(`<li><a href="/searches/{{ new_search.search_id }}">
+          Click to see air quality details. Search # {{ new_search.search_id }} for zipcode {{ new_search.zipcode }} for {{ new_search.date }}
+        </a></li>`)
+    }
+
     console.log("in inner function");
 
     $.get(url, (result) => {
         const searchData = makeSearchData(result); 
         displayResultDetails(searchData);
-        displayLink(searchData);
         sendData(searchData);
+        displayLink();
     });
 
   }
