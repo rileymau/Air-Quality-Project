@@ -26,3 +26,20 @@ const today = $('#search-date').text();
     //$$user.profile.append(chart.table)
     //$$search.details.append(chart.table)
 //}
+function displayDetails(evt) {
+    evt.preventDefault();
+    function makeChart(six_days) {
+        console.log(six_days)
+    }
+
+    function makeGraph(six_days) {
+    }
+    function goToSearchDetails {
+        //calls that route
+    }
+}
+
+$('#show-button').on('submit', displayDetails);
+//on click, do make 7 day route
+//and make chart
+//on search details page

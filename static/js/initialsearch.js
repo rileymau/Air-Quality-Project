@@ -77,9 +77,7 @@ function displayResults(evt){
 
     function displayLink() {
         //$.place - CSS.style = visible... with new search id
-        $('#newsearch').append(`<li><a href="/searches/{{ new_search.search_id }}">
-          Click to see air quality details. Search # {{ new_search.search_id }} for zipcode {{ new_search.zipcode }} for {{ new_search.date }}
-        </a></li>`)
+        $('#show-button').style="visibility:visible;";
     }
 
     console.log("in inner function");
@@ -95,5 +93,3 @@ function displayResults(evt){
 
 //on clicking submit, the functions above run
 $('#newsearch-form').on('submit', displayResults);
-
-//end 

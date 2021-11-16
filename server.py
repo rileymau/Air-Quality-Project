@@ -156,7 +156,7 @@ def save_user_search():
     #this refresh is not working.
 
 
-@app.route("/savesearch", methods = ["POST"])
+@app.route("/make_seven_day", methods = ["POST"])
 def make_seven_days():
     #using search date, list last six days too. 
     
