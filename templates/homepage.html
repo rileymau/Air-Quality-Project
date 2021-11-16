@@ -4,15 +4,8 @@
 {% block body %}
 <body>
     <h1>Welcome to Air Quality Project Page</h1>
-
-
-    <h2>Navigation</h2>
-    <!--Make a nav bar later-->
-    <ul>
-      <li><a href="/login.page">Login or Create User</a></li>
-    </ul>
   
-  <h2>About this website</h2>
+  <h2>About This Website</h2>
   <!--side by side layout later-->
 
   <p>
@@ -28,15 +21,32 @@
   <h2>For more information on AQI and these measurements:</h2>
   <a href="https://docs.airnowapi.org/aq101">AirNow API AQI Information</a>
   
-  <h2>Most recent search and graph:</h2>
-  <!--bring up most recent search-->
-  <canvas></canvas>
-
+  {% if recent %}
+  <h2>Most Recent Search and Graph:</h2>
+  <p>This is what our searches look like. </p>
+  <!--bring up most recent search, if there is one in database-->
   <ul>
-  <li><a href="/searches">View all past searches (temporary)</a></li>
-  <li><a href="/users">All users (temporary)</a></li>
+    <li>Date: {{ recent.date }}</li>
+    <li>Zipcde: {{ recent.zipcode }}</li>
+    <li>Reporting Area: {{ recent.reporting_area }}</li>
+    {% if recent.ozone %}
+      <li>Ozone AQI: {{ recent.ozone }}</li>
+      {% endif %}
+    {% if recent.pm %}
+      <li>PM2.5 AQI: {{ recent.pm }}</li>
+      {% endif %}
+    <li>Category: {{ recent.category }}</li>
   </ul>
 
+
+  <canvas></canvas>
+  {% endif %}
+
+  <h2>Log In to Create an Air Quality Search</h2>
+  <!--Make a nav bar later-->
+  <ul>
+    <li><a href="/login.page">Login or Create User</a></li>
+  </ul>
 
 </body>
 

@@ -17,8 +17,9 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
-    """View homepage."""
-    return render_template('homepage.html')
+    """View homepage, with most recent search"""
+    recent = crud.most_recent_search()
+    return render_template('homepage.html', recent=recent)
 
 
 ## User and Login Routes ##
@@ -121,6 +122,7 @@ def show_extendeed_search(search_id):
     """ Show an extended info zipcode search page. """
     search = crud.get_search_by_id(search_id)
     return render_template("search.extended.html", search=search)
+
 
 
 ## API Routes ##

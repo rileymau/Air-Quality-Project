@@ -78,9 +78,9 @@ def get_new_search_for_user(my_searches):
 
 def most_recent_search():
     """search get all, index -1"""
-    return Search.query.last()
+    all_searches = get_searches()
+    return all_searches[-1]
     #returns the most recent search in the database
-    #Does this work?
 
 
 #connects to Flask app, runs page on localhost
