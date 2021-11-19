@@ -1,14 +1,14 @@
 """Project Server"""
 
 from flask import (Flask, render_template, request, flash, session,
-    redirect)
+    redirect, jsonify)
 
 from model import connect_to_db
 import crud
 
 from jinja2 import StrictUndefined
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -128,6 +128,7 @@ def show_extendeed_search(search_id):
 def show_new_search():
     """ Show the newest search page. """
     search = crud.most_recent_search()
+    #print("in search on py")
     return render_template("search.details.html", search=search)
 
 
@@ -183,6 +184,39 @@ def make_seven_days():
 
     print(six_days)
     return render_template("search.details.html", search=search, six_days=six_days)
+
+
+## Chart Routes ##
+
+# @app.route('/chartjs')
+# def show_chartjs():
+#     """Show ChartJS demo."""
+
+#     return render_template('search.details.html')
+
+def get_sales_this_week():
+    """Get melon sales data as JSON."""
+
+    # Create fake data. This could also be real data from your database.
+
+    order_dates = []
+    date = datetime.now()
+    for _ in range(7):
+        order_dates.append(date)
+        date = date - timedelta(days=1)
+    order_totals = [20, 24, 36, 27, 20, 17, 22]
+
+    sales_this_week = []
+    for date, total in zip(order_dates, order_totals):
+        # `date` is a datetime object; datetime objects can't be JSONified,
+        # so we have to convert it to a string with `date.isoformat()`
+        # ISO is a standard date/time format that most progamming languages can parse
+        # See https://www.iso.org/iso-8601-date-and-time-format.html for more.
+
+        sales_this_week.append({'date': date.isoformat(),
+                                'melons_sold': total})
+
+    return jsonify({'data': sales_this_week})
 
 
 if __name__ == "__main__":

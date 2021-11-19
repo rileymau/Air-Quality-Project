@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block head %}
+{# JQuery #}
   <script
 src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-crossorigin="anonymous"
-></script>
+crossorigin="anonymous"></script>
 {% endblock %}
 
 
@@ -45,7 +45,7 @@ crossorigin="anonymous"
 
   <form action="/getnewsearch">
     <button type="submit" id="show-button" style="visibility:hidden;">See New Search Details</button>
-</form>
+  </form>
 
 {% if my_searches %}
  <h2> Here are your past searches:</h2>
@@ -72,5 +72,4 @@ crossorigin="anonymous"
 
 {% block after_body %}
 <script src="/static/js/initialsearch.js"></script>
-<script src="/static/js/chart.js"></script>
 {% endblock %}

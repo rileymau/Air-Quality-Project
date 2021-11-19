@@ -25,22 +25,73 @@ const today = $('#search-date').text();
 //function display_chart(table) {
     //$$user.profile.append(chart.table)
     //$$search.details.append(chart.table)
-//}
-function displayDetails(evt) {
-    evt.preventDefault();
+// //}
+// function displayDetails(evt) {
+//     evt.preventDefault();
 
-    function makeChart(six_days) {
-        console.log(six_days)
-    }
+//     function makeChart(six_days) {
+//         console.log(six_days)
+//     }
 
-    function makeGraph(six_days) {
-    }
-    function goToSearchDetails {
-        //calls that route
-    }
-}
+//     function makeGraph(six_days) {
+//     }
+//     function goToSearchDetails() {
+//         //goes to that route
+//     }
+// }
 
-$('#show-button').on('click', displayDetails);
-//on click, do make 7 day route
+// $('#show-button').on('click', displayDetails);
+// move to initial search.js if need to call this button. 
+
+//on click, make 7 day route
 //and make chart
 //on search details page
+
+
+new Chart($('#7-day-chart'), {
+    type: 'bar',
+    data: {
+      labels: ['Watermelon', 'Cantaloupe', 'Honeydew'],
+      datasets: [
+        {
+          label: 'Today',
+          data: [10, 36, 27],
+        },
+        {
+          label: 'Yesterday',
+          data: [5, 10, 7],
+        },
+      ],
+    },
+  });
+
+$.get('/sales_this_week.json', res => {
+    // In order to make this work, you need to use ISO-formatted date/time
+    // strings. Check out the view function for `/sales_this_week.json` in
+    // server.py to see an example.
+  const data = res.data.map(dailyTotal => ({x: dailyTotal.date, y: dailyTotal.melons_sold}));
+  
+  new Chart($('#line-time'), {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: 'All Melons',
+            data,  // equivalent to data: data
+          },
+        ],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              // Luxon format string
+              tooltipFormat: 'LLLL dd',
+              unit: 'day',
+            },
+          },
+        },
+      },
+    });
+  });

@@ -3,11 +3,20 @@
 {% endblock %}
 
 {% block head %}
+{# JQuery #}
   <script
 src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-crossorigin="anonymous"
-></script>
+crossorigin="anonymous"></script>
+
+{# ChartJS #}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+{# If you want to use time scales, you have to import a date library and the Chart.js adapter #}
+<script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
+{# randomColor: generate random colors #}
+<script src="https://cdn.jsdelivr.net/npm/randomcolor@0.6.2/randomColor.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +27,7 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
 <h2>Your AQI Search Info</h2>
   <ul id="search-info">
     <li>Date: {{ search.date }}</li>
-    <li>Zipcde: {{ search.zipcode }}</li>
+    <li>Zipcode: {{ search.zipcode }}</li>
     <li>Reporting Area: {{ search.reporting_area }}</li>
     {% if search.ozone %}
       <li>Ozone AQI: {{ search.ozone }}</li>
@@ -36,11 +45,15 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
   <!--if it allows it, neeed to add jinga if six_days, and endif to below-->
 
 
+<div id="site-content"></div>
 <h2>Chart for AQI over last week</h2>
 
 <h2>Graph for AQI over last week</h2>
-  <canvas></canvas>
 
+  <canvas id="7-day-chart"></canvas>
+
+
+</div>
 
 
 <h2>To see extended annual summary: 
