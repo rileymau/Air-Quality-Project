@@ -73,6 +73,7 @@ function displayResults(evt){
         console.log("data sent to server.py");
         //console.log(data);
         $.post('/savesearch', data);
+        $.post('/makeweekdata', data);
     }
 
     function displayLink() {

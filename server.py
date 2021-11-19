@@ -163,60 +163,57 @@ def save_user_search():
     #this refresh is not working.
 
 
-@app.route("/savesearch", methods = ["POST"])
+## Chart Routes ##
+
+@app.route("/makeweekdata", methods = ["POST"])
 def make_seven_days():
-    #using search date, list last six days too. 
-    
-    #get search.date and search.zipcode from displayResults function and initialsearch.js
+    """using search date, list of last six days too."""
+    print("py is getting to make weekdata route route * * * * * * *")
+
+    #get user id and search id from user number from user profile.
+    #if needed, look up search id by date since my_searches[-1] will change.
+
+    # user_id = request.form.get("user_num")
+    # user = crud.get_user_by_id(int(user_id))
+    # my_searches = crud.get_searches_for_user(user_id)
+    # search = my_searches[-1]
+
+
+    #get search.date from displayResults function and initialsearch.js
     #set day7, make into datetime object, and set delta1 as 1 day increments
     six_days = []
     date_get = request.form.get("Date")
-    day7 = datetime.strptime(date_get, '%Y-%m-%d')
-    print(day7)
+    date_var = datetime.strptime(date_get, '%Y-%m-%d')
+    print(date_var)
     print(date_get)
     delta1 = timedelta(days=1)
-    previous = range(-6, 0)
 
-    #loop through -6 to -1, subtract that many days from day7, and add to list
-    for num in previous:
-        date_var = day7 + (num * delta1)
-        six_days.append(date_var)
+    #add dates 1 to 6 to list
+    for num in range(6):
+        date_var = date_var - delta1
+        six_days.append(date_var.isoformat())
 
     print(six_days)
-    return render_template("search.details.html", search=search, six_days=six_days)
+    return jsonify({six_days})
+    #render_template("search.details.html", search=search, six_days=six_days)
 
+    #SAVE the six day list to search in database?
 
-## Chart Routes ##
+## class example: 
+# def get_sales_this_week():
+#     """Get melon sales data as JSON."""
 
-# @app.route('/chartjs')
-# def show_chartjs():
-#     """Show ChartJS demo."""
+#     sales_this_week = []
+#     for date, total in zip(order_dates, order_totals):
+#         # `date` is a datetime object; datetime objects can't be JSONified,
+#         # so we have to convert it to a string with `date.isoformat()`
+#         # ISO is a standard date/time format that most progamming languages can parse
+#         # See https://www.iso.org/iso-8601-date-and-time-format.html for more.
 
-#     return render_template('search.details.html')
+#         sales_this_week.append({'date': date.isoformat(),
+#                                 'melons_sold': total})
 
-def get_sales_this_week():
-    """Get melon sales data as JSON."""
-
-    # Create fake data. This could also be real data from your database.
-
-    order_dates = []
-    date = datetime.now()
-    for _ in range(7):
-        order_dates.append(date)
-        date = date - timedelta(days=1)
-    order_totals = [20, 24, 36, 27, 20, 17, 22]
-
-    sales_this_week = []
-    for date, total in zip(order_dates, order_totals):
-        # `date` is a datetime object; datetime objects can't be JSONified,
-        # so we have to convert it to a string with `date.isoformat()`
-        # ISO is a standard date/time format that most progamming languages can parse
-        # See https://www.iso.org/iso-8601-date-and-time-format.html for more.
-
-        sales_this_week.append({'date': date.isoformat(),
-                                'melons_sold': total})
-
-    return jsonify({'data': sales_this_week})
+#     return jsonify({'data': sales_this_week})
 
 
 if __name__ == "__main__":
