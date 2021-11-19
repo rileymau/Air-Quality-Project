@@ -159,16 +159,11 @@ def save_user_search():
     #new_search = crud.get_new_search_for_user(my_searches)
     print("search saved ******************************")
     #return redirect("/user.profile")
-    return render_template('user.profile.html', user=user, my_searches=my_searches)
+    #return render_template('user.profile.html', user=user, my_searches=my_searches)
+    #return render_template('makeweekdata.html', search = search)
     #this refresh is not working.
 
-
-## Chart Routes ##
-
-@app.route("/makeweekdata", methods = ["POST"])
-def make_seven_days():
-    """using search date, list of last six days too."""
-    print("py is getting to make weekdata route route * * * * * * *")
+    """This was a separate route before.  Using search date, list of last six days too."""
 
     #get user id and search id from user number from user profile.
     #if needed, look up search id by date since my_searches[-1] will change.
@@ -182,22 +177,30 @@ def make_seven_days():
     #get search.date from displayResults function and initialsearch.js
     #set day7, make into datetime object, and set delta1 as 1 day increments
     six_days = []
-    date_get = request.form.get("Date")
-    date_var = datetime.strptime(date_get, '%Y-%m-%d')
-    print(date_var)
+    #date_get = request.form.get("Date")
+
+    #make date from above, a datetime.
+    #date_get = date.datetime()
+    date_get = datetime.now()
     print(date_get)
+    print('#################################################')
+    #date_var = datetime.strptime(date_get, '%Y-%m-%d')
+    #print(date_var)
+
     delta1 = timedelta(days=1)
 
     #add dates 1 to 6 to list
     for num in range(6):
-        date_var = date_var - delta1
-        six_days.append(date_var.isoformat())
+        date_get = date_get - delta1
+        date = date_get.date()
+        six_days.append(date.isoformat())
 
     print(six_days)
-    return jsonify({six_days})
-    #render_template("search.details.html", search=search, six_days=six_days)
+    #SAVE the six day list to search in database, jsonify? 
+    #search.six_days = six_days
+    #return jsonify({six_days}) and search data, ozone, pm, if possible. 
+    return render_template("search.details.html", search=search, six_days=six_days), jsonify({'data': six_days})
 
-    #SAVE the six day list to search in database?
 
 ## class example: 
 # def get_sales_this_week():

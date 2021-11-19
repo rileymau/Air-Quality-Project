@@ -7,10 +7,13 @@
     //get search date
 const today = $('#search-date').text();
 const zipcode = $('#search-zipcode').text();
+//const six_days = $('#search-six-days').text();
 
 //get 6 days of dates from search details page. 
 //make chart of 7 dates. 
 //fill in date, pm and ozone from search already done. 
+
+
 
 function makeBigData(res) {
     const data = [];
@@ -44,7 +47,7 @@ function makeBigData(res) {
     return graphOzone, graphPM, graphCat
 };
 
-$.get('/six_days.json', res => {makeBigData(res)});
+$.get('/tbd.json', res => {makeBigData(res)});
 
 
 
