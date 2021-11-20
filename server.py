@@ -8,7 +8,7 @@ import crud
 
 from jinja2 import StrictUndefined
 
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -143,7 +143,7 @@ def save_user_search():
     user_id = request.form.get("user_num")
     user = crud.get_user_by_id(int(user_id))
 
-    date = request.form.get("Date")
+    tdate = request.form.get("Date")
     zipcode = request.form.get("Zipcode")
     reporting_area = request.form.get("Reporting Area")
     ozone = request.form.get("Ozone AQI")
@@ -151,55 +151,56 @@ def save_user_search():
     category = request.form.get("Category")
 
     #Create new user from data above, send user flash message
-    search = crud.create_search(user, date, zipcode, reporting_area, ozone, pm, category)
+    search = crud.create_search(user, tdate, zipcode, reporting_area, ozone, pm, category)
 
-    #re-run my searches, return user profile with updates - needs to be in separate route/function to run now.
-    my_searches = crud.get_searches_for_user(user_id)
-    #print(my_searches)
-    #new_search = crud.get_new_search_for_user(my_searches)
+    #re-run my searches, so user profile has update on next visit - needs to be in separate route/function to run now.
+    #my_searches = crud.get_searches_for_user(user_id)
+
     print("search saved ******************************")
-    #return redirect("/user.profile")
-    #return render_template('user.profile.html', user=user, my_searches=my_searches)
-    #return render_template('makeweekdata.html', search = search)
-    #this refresh is not working.
 
-    """This was a separate route before.  Using search date, list of last six days too."""
+    #This was a separate route before.  Using search date, list of last six days too.
 
-    #get user id and search id from user number from user profile.
-    #if needed, look up search id by date since my_searches[-1] will change.
-
-    # user_id = request.form.get("user_num")
-    # user = crud.get_user_by_id(int(user_id))
-    # my_searches = crud.get_searches_for_user(user_id)
-    # search = my_searches[-1]
-
-
-    #get search.date from displayResults function and initialsearch.js
     #set day7, make into datetime object, and set delta1 as 1 day increments
     six_days = []
     #date_get = request.form.get("Date")
 
     #make date from above, a datetime.
-    #date_get = date.datetime()
-    date_get = datetime.now()
+    #the date comes with a space at the end that needs to be removed. sliced date :10.
+    date_get = tdate
     print(date_get)
+    print(type(date_get))
+    #print(len(date_get))
+    #print(date_get[:10])
+    
+    date_get = datetime.strptime(date_get[:10], "%Y-%m-%d")
+
+    print(date_get)
+    print(type(date_get))
     print('#################################################')
-    #date_var = datetime.strptime(date_get, '%Y-%m-%d')
-    #print(date_var)
+
 
     delta1 = timedelta(days=1)
 
     #add dates 1 to 6 to list
-    for num in range(6):
+    for _ in range(6):
         date_get = date_get - delta1
         date = date_get.date()
         six_days.append(date.isoformat())
 
     print(six_days)
-    #SAVE the six day list to search in database, jsonify? 
+    six_days.reverse()
+
+    print(six_days)
+
+    # json_six_days = jsonify(six_days)
+    # print(json_six_days)
+
+    #SAVE the six day list to search in database, jsonify?
     #search.six_days = six_days
     #return jsonify({six_days}) and search data, ozone, pm, if possible. 
-    return render_template("search.details.html", search=search, six_days=six_days), jsonify({'data': six_days})
+    return render_template("search.details.html", search=search, six_days=six_days)
+    #...six_days=six_days, jsonify({'data': six_days})
+    # ... json_six_days=json_six_days)
 
 
 ## class example: 
