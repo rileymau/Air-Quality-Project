@@ -84,6 +84,12 @@ def most_recent_search():
     return all_searches[-1]
 
 
+def get_searches_by_zipcode(zipcode):
+    """returns a list of search objects by zipcode"""
+    searches_by_zipcode = Search.query.filter(Search.zipcode==zipcode).order_by(Search.date).all()
+    return searches_by_zipcode
+
+
 #connects to Flask app, runs page on localhost
 if __name__ == '__main__':
     from server import app

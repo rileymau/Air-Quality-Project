@@ -22,9 +22,19 @@ crossorigin="anonymous"
 <h1>Extended Info Zipcode Search for Search ID#{{ search.search_id  }} zipcode {{ search.zipcode }}</h1>
     <h2>Display search info, AQI</h2>
     
+    <div id="site-content">
       <h2>Display chart here</h2>
-      <canvas></canvas>
+      <canvas id="zipcode-chart"></canvas>
+    </div>
     
+      <h3>Choose Extra Search Dates:</h3>
+      <input type="checkbox" id="size" name="1 mile" value="1">
+      <label for="1 mile">1 Mile</label>
+      <input type="checkbox" id="size" name="10 mile" value="10">
+      <label for="10 mile">10 Miles</label>
+      <input type="checkbox" id="size" name="100 mile" value="100">
+      <label for="100 mile">100 Miles</label>
+
     <h3>Nav Bar</h3>
     <ul>
     <li><a href="/">Homepage</a></li>

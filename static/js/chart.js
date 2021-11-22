@@ -12,9 +12,14 @@ const six_days = $('#six-day-list').text();
 console.log(six_days)
 console.log(today)
 //get 6 days of dates from search details page. 
-//make chart of 7 dates. 
+
+//six_days and today are both strings
 //fill in date, pm and ozone from search already done. 
 
+//make 7 day list for graph key. 
+const seven_days = six_days;
+seven_days.push(today);
+console.log(seven_days);
 
 function makeBigData(res) {
     const data = [];
@@ -48,15 +53,15 @@ function makeBigData(res) {
     return graphOzone, graphPM, graphCat
 };
 
-//$.get('/tbd.json', res => {makeBigData(res)});
 
 
 
 new Chart($('#7-day-chart'), {
     type: 'bar',
     data: {
-      labels: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
-      //from six_days
+      labels: [seven_days],
+      //['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
+      //from six_days -> [day for day in six_days] (if python)
       datasets: [
         {
           label: 'Ozone AQI',

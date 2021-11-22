@@ -188,7 +188,7 @@ def show_new_search():
     return render_template("search.details.html", search=search, six_days=six_days)
 
 
-## API Routes ##
+## Graph Routes ##
 
 @app.route("/savesearch", methods = ["POST"])
 def save_user_search():
@@ -214,11 +214,19 @@ def save_user_search():
     #my_searches = crud.get_searches_for_user(user_id)
 
     print("search saved ******************************")
-
+    
     return "search saved"
     #see show new search above for next steps, when "see new search details" button clicked on user profile page.  
 
 
+@app.route("/allzipsearch")
+def searches_by_zipcode(zipcode):
+    searches_by_zip = crud.get_searches_by_zipcode(zipcode)
+    #print(crud.get_searches_by_zipcode(55112)) ... it works.
+    data = {"dates": [search.date for search in searches_by_zip], "ozone": [search.ozone for search in searches_by_zip], "pm": [search.pm for search in searches_by_zip]}
+    return("jsonify(data)")
+    #add to extended search page route tbd.
+    #create list of dates, ozones, pm's, then jsonify and send to extended search.
 
 
 ## class example: 

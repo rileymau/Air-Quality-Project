@@ -27,10 +27,10 @@ function displayResults(evt){
     evt.preventDefault();
 
     const zipcode= $('#zipcode').val();
-    const size = $('#size').val(); 
+    //const size = $('#size').val(); 
 
-    //url for today's data by user zipcode input
-    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=${size}&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
+    //url for today's data by user zipcode input, use distance=1 since zip code data is set by region anyway. 
+    let url = `https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=${zipcode}&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`;
 
     function makeSearchData(result) {
         //create key-value pairs to display and pass back to server.py
