@@ -114,7 +114,24 @@ def all_searches():
 def show_search(search_id):
     """ Show a zipcode search page. """
     search = crud.get_search_by_id(search_id)
-    return render_template("search.details.html", search=search)
+
+    #set day7, and set delta1 as 1 day increments
+    six_days = []
+
+    date_get = search.date
+
+    delta1 = timedelta(days=1)
+
+    #add dates 1 to 6 to list
+    for _ in range(6):
+        date_get = date_get - delta1
+        date = date_get
+        six_days.append(date.isoformat())
+
+    #print(six_days)
+    six_days.reverse()
+    print(six_days)
+    return render_template("search.details.html", search=search, six_days=six_days)
 
 
 @app.route("/searches/extended/<search_id>")
@@ -129,7 +146,46 @@ def show_new_search():
     """ Show the newest search page. """
     search = crud.most_recent_search()
     #print("in search on py")
-    return render_template("search.details.html", search=search)
+
+    #set day7, make into datetime object, and set delta1 as 1 day increments
+    six_days = []
+    #date_get = request.form.get("Date")
+
+    #make date from above, a datetime.
+    #the date comes with a space at the end that needs to be removed. sliced date :10.
+    date_get = search.date
+    print(date_get)
+    print(type(date_get))
+    #print(len(date_get))
+    #print(date_get[:10])
+    
+    #date_get = datetime.strptime(date_get, "%Y-%m-%d")
+
+    print(date_get)
+    print(type(date_get))
+    print('#################################################')
+
+    delta1 = timedelta(days=1)
+
+    #add dates 1 to 6 to list
+    for _ in range(6):
+        date_get = date_get - delta1
+        date = date_get
+        #was .date()
+        six_days.append(date.isoformat())
+
+    print(six_days)
+    six_days.reverse()
+
+    print(six_days)
+
+    # json_six_days = jsonify(six_days)
+    # print(json_six_days)
+
+    #SAVE the six day list to search in database, jsonify?
+    #search.six_days = six_days
+    #return jsonify({six_days}) and search data, ozone, pm, if possible.
+    return render_template("search.details.html", search=search, six_days=six_days)
 
 
 ## API Routes ##
@@ -151,6 +207,7 @@ def save_user_search():
     category = request.form.get("Category")
 
     #Create new user from data above, send user flash message
+    #if request.method == "POST":
     search = crud.create_search(user, tdate, zipcode, reporting_area, ozone, pm, category)
 
     #re-run my searches, so user profile has update on next visit - needs to be in separate route/function to run now.
@@ -158,49 +215,10 @@ def save_user_search():
 
     print("search saved ******************************")
 
-    #This was a separate route before.  Using search date, list of last six days too.
-
-    #set day7, make into datetime object, and set delta1 as 1 day increments
-    six_days = []
-    #date_get = request.form.get("Date")
-
-    #make date from above, a datetime.
-    #the date comes with a space at the end that needs to be removed. sliced date :10.
-    date_get = tdate
-    print(date_get)
-    print(type(date_get))
-    #print(len(date_get))
-    #print(date_get[:10])
-    
-    date_get = datetime.strptime(date_get[:10], "%Y-%m-%d")
-
-    print(date_get)
-    print(type(date_get))
-    print('#################################################')
+    return "search saved"
+    #see show new search above for next steps, when "see new search details" button clicked on user profile page.  
 
 
-    delta1 = timedelta(days=1)
-
-    #add dates 1 to 6 to list
-    for _ in range(6):
-        date_get = date_get - delta1
-        date = date_get.date()
-        six_days.append(date.isoformat())
-
-    print(six_days)
-    six_days.reverse()
-
-    print(six_days)
-
-    # json_six_days = jsonify(six_days)
-    # print(json_six_days)
-
-    #SAVE the six day list to search in database, jsonify?
-    #search.six_days = six_days
-    #return jsonify({six_days}) and search data, ozone, pm, if possible. 
-    return render_template("search.details.html", search=search, six_days=six_days)
-    #...six_days=six_days, jsonify({'data': six_days})
-    # ... json_six_days=json_six_days)
 
 
 ## class example: 

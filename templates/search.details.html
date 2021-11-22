@@ -59,7 +59,11 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
 
 <span id="search-date" style="visibility:hidden;">{{ search.date }}</span>
 <span id="search-zipcode" style="visibility:hidden;">{{ search.zipcode }}</span>
-<span id="six-day-list" style="visibility:hidden;">six_days(add to database first)</span>
+<div id="six-day-list" style="visibility:hidden;">
+  {% for day in six_days %}
+    {{ day }}
+  {% endfor %}
+</div>
 
 <h3>Nav Bar</h3>
 <ul>
@@ -69,7 +73,6 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
 {% endblock %}
 
 {% block after_body %}
-<script src="/static/js/initialsearch.js"></script>
 <script src="/static/js/chart.js"></script>
 {% endblock %}
 <!--chart links downloaded here, where chart displayed-->
