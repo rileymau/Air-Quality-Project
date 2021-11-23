@@ -39,7 +39,7 @@ const graphAQI = [];
 const graphLabels = []
 //const dayCount = graphAQI.length;
 
-//function makeGraphData() {
+//function makeG() {
 for (const day of APIDays) {
   //console.log(day);
   //setTimeout(() => console.log('wait'), 10000)
@@ -51,10 +51,16 @@ for (const day of APIDays) {
       console.log(result[0]['AQI']);
       graphAQI.push(result[0]['AQI']);
       graphLabels.push(result[0]['ParameterName']);
+      if (graphAQI.length === 6) {
+        makeGraphData();
+        makeTheChart();
+      };
       //graphOzone.push([result[0]['Ozone']]);
       //graphPM.push(result[0]['PM2.5']);
     }); 
   };
+
+
     //finishGraphData(dayCount);
 
   // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
@@ -70,54 +76,49 @@ console.log(searchPM);
 
 function makeGraphData() {
   //if ozone is None, define search pm.
+  let searchLabel;
+  let searchAQI;
   if (searchOzone === 'None') {
     console.log("in ozone None");
-    const searchLabel = 'PM2.5';
+    searchLabel = 'PM2.5';
     console.log(searchLabel);
-    const searchAQI = searchPM;
+    searchAQI = searchPM;
     console.log(searchAQI)
+    graphAQI.push(Number(searchAQI));
+    graphLabels.push(searchLabel);
   }
   //if pm is None, define search ozone.  (searchPM === 'None')
   else {
     console.log("in else");
-    const searchLabel = 'OZONE';
+    searchLabel = 'OZONE';
     console.log(searchLabel);
-    const searchAQI = searchOzone;
+    searchAQI = searchOzone;
     console.log(searchAQI)
-  };
-};
-//console.log(searchAQI);
-//console.log(searchLabel);
- // Set length requirement so that JS doesn't add the searchAQI and searchLabel before the API calls all run. 
-
-//function finishGraphData(dayCount) { HERE.
-//if (dayCount === 6) {
-if (graphAQI.length === 6) {
-    graphAQI.push(searchAQI);
+    graphAQI.push(Number(searchAQI));
     graphLabels.push(searchLabel);
-    console.log(graphAQI);
-    console.log(graphLabels); 
   };
-//};
+  console.log(graphAQI);
+  console.log(graphLabels);
+  // return {searchLabel: searchLabel,
+  //   searchAQI: searchAQI};
+};
 
-makeGraphData();
-
-//}
-
-  //pass graphDays, graphAQI, graphLabels to chart
-
-new Chart($('#7-day-chart'), {
+  //pass graphDays, graphAQI, graphLabels to chart.  
+  //Call chart after the 6 api calls run and after graph AQI list is complete with 7 items.
+function makeTheChart() {
+  new Chart($('#7-day-chart'), {
     type: 'bar',
     data: {
       labels: graphDays,  
       datasets: [
         {
           label: 'AQI',
-          data: graphAQI
+          data: graphAQI,
         },
       ],
     },
   });
+}
   //add barcode colors acording to AQI category.
   
 
@@ -166,3 +167,10 @@ new Chart($('#7-day-chart'), {
         //     graphPM.push.data['PM2.5 AQI'];
         //     graphCat.push.data['Category'];
         // };
+
+//console.log(searchAQI);
+//console.log(searchLabel);
+ // Set length requirement so that JS doesn't add the searchAQI and searchLabel before the API calls all run. 
+
+//function finishGraphData(dayCount) { HERE.
+//if (dayCount === 6) {}
