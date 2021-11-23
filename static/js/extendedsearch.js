@@ -19,12 +19,12 @@ function makeChart(result) {
           datasets: [
             {
               label: 'Ozone AQI',
-              ozoneData: [10, 36, 27, 12, 16, 32, 41],
+              data: [10, 36, 27, 12, 16, 32, 41],
               //from graphOzone
             },
             {
               label: 'PM 2.5 AQI',
-              pmData: [5, 10, 7, 5, 8, 12, 15],
+              data: [5, 10, 7, 5, 8, 12, 15],
               //from graphPM
             },
           ],

@@ -4,10 +4,14 @@
 //Create chart from graph data.
 //only today is saved in searches db, any search can be turned into 7 days. 
 
-    //get search date
+//get search date, zipcode, and 6 day list from html. split six days into array.
 const today = $('#search-date').text();
 const zipcode = $('#search-zipcode').text();
-const six_days = $('#six-day-list').text();
+const six_d = $('#six-day-list').text();
+const six_days = six_d.split(',');
+let text = "How are you doing today?";
+const myArray = text.split(" ");
+console.log(myArray);
 
 console.log(six_days)
 console.log(today)
@@ -17,60 +21,57 @@ console.log(today)
 //fill in date, pm and ozone from search already done. 
 
 //make 7 day list for graph key. 
-const seven_days = six_days;
-seven_days.push(today);
-console.log(seven_days);
-
-function makeBigData(res) {
-    const data = [];
-    const graphOzone = [];
-    const graphPM = [];
-    const graphCat = [];
-
-    for (const day in six_days) {
-
-        function makeGraphData(result) {
-            data['Ozone AQI'] = result[0]['Ozone'];
-            data['PM2.5 AQI'] = result[0]['PM2.5'];
-            data['Category'] = result[0]['Category']['Number'];
-            return data
-        };
-
-        function storeGraphData(data) {
-
-            graphOzone.push.data['Ozone AQI'];
-            graphPM.push.data['PM2.5 AQI'];
-            graphCat.push.data['Category'];
-        };
-
-        $.get("https://aq/observation/zipCode/historical ...${day} ..${zipcode}.", (result) => {
-                console.log(result);
-                makeGraphData(result);
-                storeGraphData();
-            }); 
-        };
-    //pass date, pm, ozone to chart
-    return graphOzone, graphPM, graphCat
+//the string in six_days comes with spaces and returns, only use last 10 chars to get date. 
+//Also need to remove last item from six_days. 
+function makeSevenDays(stringList, string) {
+  const seven_days = [];
+  for (const day of stringList) {
+    seven_days.push(day.slice(-10));
+  };
+  seven_days.pop(-1)
+  seven_days.push(string);
+  console.log(seven_days);
+  return(seven_days)
 };
 
+const graphDays = makeSevenDays(six_days, today);
 
+//pop last one on seven days before doing api CALLS. 
+const APIDays = graphDays.slice(7);
 
+const graphOzone = [];
+const graphPM = [];
+
+for (const day in APIDays) {
+
+  $.get("https://aq/observation/zipCode/historical ...${day} ..${zipcode}.", (result) => {   //here2
+      console.log(result);
+      graphOzone.push([result[0]['Ozone']]);
+      graphPM.push(result[0]['PM2.5']);
+    }); 
+  };
+
+  const searchOzone = 5
+  const searchPM = 6
+
+  graphOzone.push(searchOzone);
+  graphPM.push(searchPM);
+
+  //pass graphDays, graphOzone, graphPM to chart
 
 new Chart($('#7-day-chart'), {
     type: 'bar',
     data: {
-      labels: [seven_days],
-      //['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
-      //from six_days -> [day for day in six_days] (if python)
+      labels: graphDays,  
       datasets: [
         {
           label: 'Ozone AQI',
-          ozoneData: [10, 36, 27, 12, 16, 32, 41],
+          data: [10, 36, 27, 12, 16, 32, 41],
           //from graphOzone
         },
         {
           label: 'PM 2.5 AQI',
-          pmData: [5, 10, 7, 5, 8, 12, 15],
+          data: [5, 10, 7, 5, 8, 12, 15],
           //from graphPM
         },
       ],
@@ -136,3 +137,21 @@ new Chart($('#7-day-chart'), {
 //on click, make 7 day route
 //and make chart
 //on search details page
+
+
+      //data['Ozone AQI'] = result[0]['Ozone'];
+      //data['PM2.5 AQI'] = result[0]['PM2.5'];
+
+        // function makeGraphData(result) {
+        //     data['Ozone AQI'] = result[0]['Ozone'];
+        //     data['PM2.5 AQI'] = result[0]['PM2.5'];
+        //     data['Category'] = result[0]['Category']['Number'];
+        //     return data
+        // };
+
+        // function storeGraphData(data) {
+
+        //     graphOzone.push.data['Ozone AQI'];
+        //     graphPM.push.data['PM2.5 AQI'];
+        //     graphCat.push.data['Category'];
+        // };

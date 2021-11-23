@@ -161,8 +161,8 @@ def show_new_search():
     
     #date_get = datetime.strptime(date_get, "%Y-%m-%d")
 
-    print(date_get)
-    print(type(date_get))
+    #print(date_get)
+    #print(type(date_get))
     print('#################################################')
 
     delta1 = timedelta(days=1)
