@@ -36,7 +36,8 @@ const APIDays = graphDays.slice(0,6);
 console.log(APIDays);
 
 const graphAQI = [];
-const graphLabels = []
+const graphLabels = [];
+const customColors = [];
 //const dayCount = graphAQI.length;
 
 //function makeG() {
@@ -46,20 +47,21 @@ for (const day of APIDays) {
 
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
-      //splitResult = result.split(',');
       console.log(result);
       console.log(result[0]['AQI']);
       graphAQI.push(result[0]['AQI']);
       graphLabels.push(result[0]['ParameterName']);
       if (graphAQI.length === 6) {
         makeGraphData();
+        //makeCustomColors();
         makeTheChart();
       };
       //graphOzone.push([result[0]['Ozone']]);
       //graphPM.push(result[0]['PM2.5']);
     }); 
-  };
+};
     //finishGraphData(dayCount);
+
 
   // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
 const searchOzone = $('#search-ozone').text();
@@ -98,9 +100,38 @@ function makeGraphData() {
   //   searchAQI: searchAQI};
 };
 
+
+
   //pass graphDays, graphAQI, graphLabels to chart.  
   //Call chart after the 6 api calls run and after graph AQI list is complete with 7 items.
 function makeTheChart() {
+  function makeCustomColors() {
+  //this function sets the bar colors depending on the value.  
+  //this uses the same color scheme as the AirNow website.
+    for (let i = 0; i < graphAQI.length; i += 1) {
+      if (graphAQI[i] < 50) {
+        customColors.push('green')
+      };
+      if (graphAQI[i] < 100 && graphAQI[i] >= 51) {
+          customColors.push('yellow')
+      };
+      if (graphAQI[i] < 150 && graphAQI[i] >= 101) {
+          customColors.push('orange')
+       };
+      if (graphAQI[i] < 200 && graphAQI[i] >= 151) {
+          customColors.push('red')
+      };
+      if (graphAQI[i] < 300 && graphAQI[i] >= 201) {
+          customColors.push('purple')
+      };
+      if (graphAQI[i] < 500 && graphAQI[i] >= 301) {
+          customColors.push('maroon')
+      };
+    }; 
+  };
+  makeCustomColors();
+  console.log(customColors);
+
   new Chart($('#7-day-chart'), {
     type: 'bar',
     data: {
@@ -109,7 +140,7 @@ function makeTheChart() {
         {
           label: 'Daily AQI',
           data: graphAQI,
-          backgroundColor: 'rgba(255, 100, 130, 0.5)',
+          backgroundColor: customColors,  //'rgba(255, 100, 130, 0.5)',
           borderColor: 'rgba(255, 100, 130)',
           borderWidth: 1,
         },
@@ -119,11 +150,13 @@ function makeTheChart() {
       datasets: {
         bar: {
         },
+        
       },
     },
   });
 }
-  //add barcode colors acording to AQI category.
+
+  //add code of colors acording to AQI category.
   
 
 
