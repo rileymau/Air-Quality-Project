@@ -37,39 +37,72 @@ console.log(APIDays);
 
 const graphAQI = [];
 const graphLabels = []
+//const dayCount = graphAQI.length;
 
+//function makeGraphData() {
 for (const day of APIDays) {
-  console.log(day);
+  //console.log(day);
   //setTimeout(() => console.log('wait'), 10000)
-  $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=text/csv&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
+
+  $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
+      //splitResult = result.split(',');
       console.log(result);
+      console.log(result[0]['AQI']);
       graphAQI.push(result[0]['AQI']);
       graphLabels.push(result[0]['ParameterName']);
       //graphOzone.push([result[0]['Ozone']]);
       //graphPM.push(result[0]['PM2.5']);
     }); 
   };
+    //finishGraphData(dayCount);
 
   // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
-let searchAQI = 0;
-let searchLabel = "";
+ 
+
+//let searchAQI = 0;
+//let searchLabel = "";
 const searchOzone = $('#search-ozone').text();
+console.log(searchOzone);
+
 const searchPM = $('#search-pm').text();
-if (Number(searchOzone)  > 0) {
-    let searchLabel = "OZONE";
-    let searchAQI = searchOzone;
+console.log(searchPM);
+
+function makeGraphData() {
+  //if ozone is None, define search pm.
+  if (searchOzone === 'None') {
+    console.log("in ozone None");
+    const searchLabel = 'PM2.5';
+    console.log(searchLabel);
+    const searchAQI = searchPM;
+    console.log(searchAQI)
+  }
+  //if pm is None, define search ozone.  (searchPM === 'None')
+  else {
+    console.log("in else");
+    const searchLabel = 'OZONE';
+    console.log(searchLabel);
+    const searchAQI = searchOzone;
+    console.log(searchAQI)
+  };
 };
-if (Number(searchPM)  > 0) {
-    let searchLabel = "PM2.5";
-    let searchAQI = searchPM;
-}
+//console.log(searchAQI);
+//console.log(searchLabel);
+ // Set length requirement so that JS doesn't add the searchAQI and searchLabel before the API calls all run. 
 
-graphAQI.push(searchAQI);
-graphLabels.push(searchLabel);
-console.log(graphAQI);
-console.log(graphLabels);
+//function finishGraphData(dayCount) { HERE.
+//if (dayCount === 6) {
+if (graphAQI.length === 6) {
+    graphAQI.push(searchAQI);
+    graphLabels.push(searchLabel);
+    console.log(graphAQI);
+    console.log(graphLabels); 
+  };
+//};
 
+makeGraphData();
+
+//}
 
   //pass graphDays, graphAQI, graphLabels to chart
 

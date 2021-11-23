@@ -58,7 +58,7 @@ function displayResults(evt){
 
     function displayResultDetails(searchData) {
         //loop through key, values in search data to display on user profile
-        //skip any keys with undefined values
+        //skip any keys with undefined values (either ozone or pm 2.5)
         for (const key in searchData) {
             if (typeof searchData[key] !== 'undefined') {
                 $('#display').append(`<li>${key}: ${searchData[key]}</li>`)
