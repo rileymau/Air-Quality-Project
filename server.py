@@ -19,6 +19,7 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage, with most recent search"""
     recent = crud.most_recent_search()
+    #add 6 day loop for recent search.
     return render_template('homepage.html', recent=recent)
 
 
@@ -227,23 +228,6 @@ def searches_by_zipcode(zipcode):
     return("jsonify(data)")
     #add to extended search page route tbd.
     #create list of dates, ozones, pm's, then jsonify and send to extended search.
-
-
-## class example: 
-# def get_sales_this_week():
-#     """Get melon sales data as JSON."""
-
-#     sales_this_week = []
-#     for date, total in zip(order_dates, order_totals):
-#         # `date` is a datetime object; datetime objects can't be JSONified,
-#         # so we have to convert it to a string with `date.isoformat()`
-#         # ISO is a standard date/time format that most progamming languages can parse
-#         # See https://www.iso.org/iso-8601-date-and-time-format.html for more.
-
-#         sales_this_week.append({'date': date.isoformat(),
-#                                 'melons_sold': total})
-
-#     return jsonify({'data': sales_this_week})
 
 
 if __name__ == "__main__":

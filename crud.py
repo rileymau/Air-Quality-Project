@@ -88,6 +88,7 @@ def get_searches_by_zipcode(zipcode):
     """returns a list of search objects by zipcode"""
     searches_by_zipcode = Search.query.filter(Search.zipcode==zipcode).order_by(Search.date).all()
     return searches_by_zipcode
+    #sort by first of each date...first()
 
 
 #connects to Flask app, runs page on localhost
