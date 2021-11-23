@@ -19,8 +19,24 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage, with most recent search"""
     recent = crud.most_recent_search()
-    #add 6 day loop for recent search.
-    return render_template('homepage.html', recent=recent)
+    
+    #6 day loop for recent search.
+    #set day7, and set delta1 as 1 day increments
+    six_days_recent = []
+
+    date_get = recent.date
+
+    delta1 = timedelta(days=1)
+
+    #add dates 1 to 6 to list
+    for _ in range(6):
+        date_get = date_get - delta1
+        date = date_get
+        six_days_recent.append(date.isoformat())
+
+    six_days_recent.reverse()
+    print(six_days_recent)
+    return render_template('homepage.html', recent=recent, six_days_recent=six_days_recent)
 
 
 ## User and Login Routes ##
@@ -224,8 +240,19 @@ def save_user_search():
 def searches_by_zipcode(zipcode):
     searches_by_zip = crud.get_searches_by_zipcode(zipcode)
     #print(crud.get_searches_by_zipcode(55112)) ... it works.
-    data = {"dates": [search.date for search in searches_by_zip], "ozone": [search.ozone for search in searches_by_zip], "pm": [search.pm for search in searches_by_zip]}
-    return("jsonify(data)")
+    data = {"dates": [], "ozone": [], "pm": []}
+    for search in searches_by_zip:
+        if search.date not in data["dates"]:
+            #add search.date to dates
+            #add search.ozone to ozone
+            #add search.pm to pm
+            pass
+        else:
+            pass
+    # data = {"dates": [search.date for search in searches_by_zip], 
+    #     "ozone": [search.ozone for search in searches_by_zip], 
+    #     "pm": [search.pm for search in searches_by_zip]}
+    return(jsonify(data))
     #add to extended search page route tbd.
     #create list of dates, ozones, pm's, then jsonify and send to extended search.
 

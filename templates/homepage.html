@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Air Quality Project Homepage{% endblock %}
 
+{% block head %}
+{# JQuery #}
+  <script
+src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"></script>
+
+{# ChartJS #}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+{# If you want to use time scales, you have to import a date library and the Chart.js adapter #}
+<script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
+{# randomColor: generate random colors #}
+<script src="https://cdn.jsdelivr.net/npm/randomcolor@0.6.2/randomColor.js"></script>
+{% endblock %}
 {% block body %}
 <body>
     <h1>Welcome to Air Quality Project Page</h1>
@@ -39,8 +55,19 @@
   </ul>
 
   <div id="site-content">
+    <h2>Graph for Most Recent Search and Previous Week</h2>
   <canvas id="most-recent-chart"></canvas>
   </div>
+
+<span id="recent-date" style="visibility:hidden;">{{ recent.date }}</span>
+<span id="recent-zipcode" style="visibility:hidden;">{{ recent.zipcode }}</span>
+<div id="six-day-recent-list" style="visibility:hidden;">
+  {% for day in six_days_recent %}
+    {{ day }},
+  {% endfor %}
+</div>
+<span id="recent-ozone" style="visibility:hidden;">{{ recent.ozone }}</span>
+<span id="recent-pm" style="visibility:hidden;">{{ recent.pm }}</span>
   {% endif %}
 
   <h2>Log In to Create an Air Quality Search</h2>
@@ -51,4 +78,8 @@
 
 </body>
 
+{% endblock %}
+
+{% block after_body %}
+<script src="/static/js/homepagechart.js"></script>
 {% endblock %}
