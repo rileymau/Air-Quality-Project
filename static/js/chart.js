@@ -4,19 +4,14 @@
 //Create chart from graph data.
 //only today is saved in searches db, any search can be turned into 7 days. 
 
-//get search date, zipcode, and 6 day list from html. split six days into array.
+//get search date, zipcode, and 6 day list from earch details html. split six days into array.
 const today = $('#search-date').text();
 const zipcode = $('#search-zipcode').text();
 const six_d = $('#six-day-list').text();
 const six_days = six_d.split(',');
-let text = "How are you doing today?";
-const myArray = text.split(" ");
-console.log(myArray);
 
-console.log(six_days)
-console.log(today)
-//get 6 days of dates from search details page. 
-
+//console.log(six_days)
+//console.log(today)
 //six_days and today are both strings
 //fill in date, pm and ozone from search already done. 
 
@@ -36,28 +31,47 @@ function makeSevenDays(stringList, string) {
 
 const graphDays = makeSevenDays(six_days, today);
 
-//pop last one on seven days before doing api CALLS. 
-const APIDays = graphDays.slice(7);
+  //pop last one on seven days before doing api CALLS. 
+const APIDays = graphDays.slice(0,6);
+console.log(APIDays);
 
-const graphOzone = [];
-const graphPM = [];
+const graphAQI = [];
+const graphLabels = []
 
-for (const day in APIDays) {
-
-  $.get("https://aq/observation/zipCode/historical ...${day} ..${zipcode}.", (result) => {   //here2
+for (const day of APIDays) {
+  console.log(day);
+  //setTimeout(() => console.log('wait'), 10000)
+  $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=text/csv&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
+  (result) => { 
       console.log(result);
-      graphOzone.push([result[0]['Ozone']]);
-      graphPM.push(result[0]['PM2.5']);
+      graphAQI.push(result[0]['AQI']);
+      graphLabels.push(result[0]['ParameterName']);
+      //graphOzone.push([result[0]['Ozone']]);
+      //graphPM.push(result[0]['PM2.5']);
     }); 
   };
 
-  const searchOzone = 5
-  const searchPM = 6
+  // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
+let searchAQI = 0;
+let searchLabel = "";
+const searchOzone = $('#search-ozone').text();
+const searchPM = $('#search-pm').text();
+if (Number(searchOzone)  > 0) {
+    let searchLabel = "OZONE";
+    let searchAQI = searchOzone;
+};
+if (Number(searchPM)  > 0) {
+    let searchLabel = "PM2.5";
+    let searchAQI = searchPM;
+}
 
-  graphOzone.push(searchOzone);
-  graphPM.push(searchPM);
+graphAQI.push(searchAQI);
+graphLabels.push(searchLabel);
+console.log(graphAQI);
+console.log(graphLabels);
 
-  //pass graphDays, graphOzone, graphPM to chart
+
+  //pass graphDays, graphAQI, graphLabels to chart
 
 new Chart($('#7-day-chart'), {
     type: 'bar',
@@ -65,51 +79,15 @@ new Chart($('#7-day-chart'), {
       labels: graphDays,  
       datasets: [
         {
-          label: 'Ozone AQI',
-          data: [10, 36, 27, 12, 16, 32, 41],
-          //from graphOzone
-        },
-        {
-          label: 'PM 2.5 AQI',
-          data: [5, 10, 7, 5, 8, 12, 15],
-          //from graphPM
+          label: 'AQI',
+          data: graphAQI
         },
       ],
     },
   });
+  //add barcode colors acording to AQI category.
   
 
-  //class example: 
-//$.get('/sales_this_week.json', res => {
-    // In order to make this work, you need to use ISO-formatted date/time
-    // strings. Check out the view function for `/sales_this_week.json` in
-    // server.py to see an example.
-  //const data = res.data.map(dailyTotal => ({x: dailyTotal.date, y: dailyTotal.melons_sold}));
-  
-//   new Chart($('#line-time'), {
-//       type: 'line',
-//       data: {
-//         datasets: [
-//           {
-//             label: 'All Melons',
-//             data,  // equivalent to data: data
-//           },
-//         ],
-//       },
-//       options: {
-//         scales: {
-//           x: {
-//             type: 'time',
-//             time: {
-//               // Luxon format string
-//               tooltipFormat: 'LLLL dd',
-//               unit: 'day',
-//             },
-//           },
-//         },
-//       },
-//     });
-//   });
 
 
 //previous function ideas: 
@@ -138,7 +116,7 @@ new Chart($('#7-day-chart'), {
 //and make chart
 //on search details page
 
-
+//previous data dictionary idea: 
       //data['Ozone AQI'] = result[0]['Ozone'];
       //data['PM2.5 AQI'] = result[0]['PM2.5'];
 
