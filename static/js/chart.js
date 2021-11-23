@@ -2,18 +2,17 @@
 
 //Create graph data from saved search and 6 new API calls.
 //Create chart from graph data.
-//only today is saved in searches db, any search can be turned into 7 days. 
+//only today is saved in searches db, any search can be turned into 7 days of data. 
 
 //get search date, zipcode, and 6 day list from earch details html. split six days into array.
+//six_days and today are both strings
 const today = $('#search-date').text();
 const zipcode = $('#search-zipcode').text();
 const six_d = $('#six-day-list').text();
 const six_days = six_d.split(',');
-
 //console.log(six_days)
 //console.log(today)
-//six_days and today are both strings
-//fill in date, pm and ozone from search already done. 
+
 
 //make 7 day list for graph key. 
 //the string in six_days comes with spaces and returns, only use last 10 chars to get date. 
@@ -29,6 +28,7 @@ function makeSevenDays(stringList, string) {
   return(seven_days)
 };
 
+//make master list of six previous days plus current search day.
 const graphDays = makeSevenDays(six_days, today);
 
   //pop last one on seven days before doing api CALLS. 
@@ -59,15 +59,9 @@ for (const day of APIDays) {
       //graphPM.push(result[0]['PM2.5']);
     }); 
   };
-
-
     //finishGraphData(dayCount);
 
   // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
- 
-
-//let searchAQI = 0;
-//let searchLabel = "";
 const searchOzone = $('#search-ozone').text();
 console.log(searchOzone);
 
@@ -75,6 +69,7 @@ const searchPM = $('#search-pm').text();
 console.log(searchPM);
 
 function makeGraphData() {
+  //with search label and AQI value, add to graphAQI and graphLabels lists, as 7th items.
   //if ozone is None, define search pm.
   let searchLabel;
   let searchAQI;
@@ -112,10 +107,19 @@ function makeTheChart() {
       labels: graphDays,  
       datasets: [
         {
-          label: 'AQI',
+          label: 'Daily AQI',
           data: graphAQI,
+          backgroundColor: 'rgba(255, 100, 130, 0.5)',
+          borderColor: 'rgba(255, 100, 130)',
+          borderWidth: 1,
         },
       ],
+    },
+    options: {
+      datasets: {
+        bar: {
+        },
+      },
     },
   });
 }
