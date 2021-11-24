@@ -20,7 +20,6 @@ crossorigin="anonymous"
 
 {% block body %}
 <h1>Extended Info Zipcode Search for Search ID#{{ search.search_id  }} zipcode {{ search.zipcode }}</h1>
-    <h2>Display search info, AQI</h2>
     
     <div id="site-content">
       <h2>Display chart here</h2>
@@ -34,18 +33,40 @@ crossorigin="anonymous"
       <input type="checkbox" id="option" name="once a month" value="year">
       <label for="once a month">Add data for one day a month for the last year</label>
 
-      <p> Note any dates before December 2006 have a different format.  Please choose a date after 12/1/2006. </p>
+      
 
-    <div id="site-content">
-      <h2>Display chart here</h2>
-      <canvas id="monthly-chart"></canvas>
+      <br>
+      <h2>######################################################################</h2>
 
-    <div id="site-content">
-      <h2>Display chart here</h2>
-      <canvas id="spec-date-chart"></canvas>
+<div id="site-content">
+  <h2>Your Search AQI Graph: 
+    <br> Zipcode {{ search.zipcode }} in {{ search.reporting_area }} on {{ search.date}} and Previous Week,
+  <br> Plus added dates below.</h2>
+    <canvas id="spec-date-chart"></canvas>
 
+  <h2> Add your own dates to the search:
+      <form>
+        <input type="date" id="custom-date" name="custom-date">
+        <label for="custom-date">Date</label>
+        <input type="submit">
+      </form>
+  </h2>
+  <p> Note any dates before December 2006 have a different format.  Please choose a date after 12/1/2006. </p>
+</div>
+
+<span id="search-date" style="visibility:hidden;">{{ search.date }}</span>
+<span id="search-zipcode" style="visibility:hidden;">{{ search.zipcode }}</span>
+<div id="six-day-list" style="visibility:hidden;">
+  {% for day in six_days %}
+    {{ day }},
+  {% endfor %}
+</div>
+<span id="search-ozone" style="visibility:hidden;">{{ search.ozone }}</span>
+<span id="search-pm" style="visibility:hidden;">{{ search.pm }}</span>
+
+<br>
     <div id="site-content">
-      <h2>Display chart here</h2>
+      <h2>Display chart here if prev week chart</h2>
       <canvas id="prev-week-chart"></canvas>
 
 

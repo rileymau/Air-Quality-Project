@@ -155,7 +155,25 @@ def show_search(search_id):
 def show_extendeed_search(search_id):
     """ Show an extended info zipcode search page. """
     search = crud.get_search_by_id(search_id)
-    return render_template("search.extended.html", search=search)
+
+    #copy six day code from @app.route("/searches/<search_id>")
+    #set day7, and set delta1 as 1 day increments
+    six_days = []
+
+    date_get = search.date
+
+    delta1 = timedelta(days=1)
+
+    #add dates 1 to 6 to list
+    for _ in range(6):
+        date_get = date_get - delta1
+        date = date_get
+        six_days.append(date.isoformat())
+
+    #print(six_days)
+    six_days.reverse()
+    print(six_days)
+    return render_template("search.extended.html", search=search, six_days=six_days)
 
 
 @app.route("/getnewsearch")
