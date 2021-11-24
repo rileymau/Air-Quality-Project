@@ -38,7 +38,7 @@ crossorigin="anonymous"></script>
   <a href="https://docs.airnowapi.org/aq101">AirNow API AQI Information</a>
   
   {% if recent %}
-  <h2>Most Recent Search and Graph:</h2>
+  <h2>Most Recent Search:</h2>
   <p>This is what our searches look like. </p>
   <!--bring up most recent search, if there is one in database-->
   <ul>
@@ -55,7 +55,8 @@ crossorigin="anonymous"></script>
   </ul>
 
   <div id="site-content">
-    <h2>Graph for Most Recent Search and Previous Week</h2>
+    <h2>Graph for Most Recent AQI Search: 
+      <br>Zicode {{ recent.zipcode }} in {{ recent.reporting_area }} on {{ recent.date}} and the Previous Week</h2>
   <canvas id="most-recent-chart"></canvas>
   </div>
 

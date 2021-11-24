@@ -46,13 +46,14 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
 
 
 <div id="site-content">
-<h2>Chart for AQI for Search Date and Previous Week</h2>
+<h2>Your Search AQI Graph: 
+  <br> Zipcode {{ search.zipcode }} in {{ search.reporting_area }} on {{ search.date}} and Previous Week</h2>
   <canvas id="7-day-chart"></canvas>
 
 </div>
 
 
-<h2>To see extended annual summary: 
+<h2>To see extended data: 
   <a href="/searches/extended/{{ search.search_id }}">
     Search #{{ search.search_id }} More Info</a>
 </h2>
@@ -69,7 +70,7 @@ Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcod
 
 <h3>Nav Bar</h3>
 <ul>
-<li><a href="/">Homepage</a></li>
+<li><a href="/">Homepage (Logout)</a></li>
 <li><a href="/users/{{ search.user_id }}">User Profile</a></li>
 </ul>
 {% endblock %}
