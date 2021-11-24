@@ -254,22 +254,30 @@ def save_user_search():
     #see show new search above for next steps, when "see new search details" button clicked on user profile page.  
 
 
-@app.route("/allzipsearch")
+@app.route("/allzipsearch.json", methods = ["GET"])
 def searches_by_zipcode(zipcode):
     searches_by_zip = crud.get_searches_by_zipcode(zipcode)
     #print(crud.get_searches_by_zipcode(55112)) ... it works.
-    data = {"dates": [], "ozone": [], "pm": []}
+    date_values = []
+    ozone_values = []
+    pm_values = []
+    aqi_values = []
+
     for search in searches_by_zip:
-        if search.date not in data["dates"]:
-            #add search.date to dates
-            #add search.ozone to ozone
-            #add search.pm to pm
-            pass
-        else:
-            pass
-    # data = {"dates": [search.date for search in searches_by_zip], 
-    #     "ozone": [search.ozone for search in searches_by_zip], 
+        if search.date not in date_values:
+            date_values.append(search.date)
+            if search.ozone == "None":
+                aqi_values.append(search.pm)
+            else:
+                aqi_values.append(search.ozone)
+            # ozone.values.append(search.ozone)
+            # pm_values.append(search.pm)
+        # else:
+        #     continue
+    # data = {"dates": [search.date for search in searches_by_zip],
+    #     "ozone": [search.ozone for search in searches_by_zip],
     #     "pm": [search.pm for search in searches_by_zip]}
+    data = {"dates": date_values, "AQIs": aqi_values}
     return(jsonify(data))
     #add to extended search page route tbd.
     #create list of dates, ozones, pm's, then jsonify and send to extended search.

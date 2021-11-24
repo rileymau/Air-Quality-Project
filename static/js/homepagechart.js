@@ -5,6 +5,8 @@
 //or, get 6 day list from homepage hidden divs. 
 //Most of this page is copies from chart.js with a few changes (for recent search).
 
+//Customized functions for recent search data are called "recent" or ...R.
+
 //Create graph data from saved search and 6 new API calls.
 //Create chart from graph data.
 //only today is saved in searches db, any search can be turned into 7 days of data. 

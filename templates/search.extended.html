@@ -19,19 +19,38 @@ crossorigin="anonymous"
 {% endblock %}
 
 {% block body %}
-<h1>Extended Info Zipcode Search for Search ID#{{ search.search_id  }} zipcode {{ search.zipcode }}</h1>
+<h1>Extended Search Info</h1>
     
+<h1>
+  Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcode }}
+  </h1>
+  <h2>Your AQI Search Info</h2>
+    <ul id="search-info">
+      <li>Date: {{ search.date }}</li>
+      <li>Zipcode: {{ search.zipcode }}</li>
+      <li>Reporting Area: {{ search.reporting_area }}</li>
+      {% if search.ozone %}
+        <li>Ozone AQI: {{ search.ozone }}</li>
+        {% endif %}
+      {% if search.pm %}
+        <li>PM2.5 AQI: {{ search.pm }}</li>
+        {% endif %}
+      <li>Category: {{ search.category }}</li>
+    </ul>
+    <!--Skips ozone, pm, if they are undefined.  Displays all other search attributes (except user)-->
+
+
     <div id="site-content">
-      <h2>Display chart here</h2>
+      <h2>Graph of all Zipcode Searches for Zipcode {{ search.zipcode }} in {{ search.reporting_area }}</h2>
       <canvas id="zipcode-chart"></canvas>
       
     </div>
     
-      <h3>Choose Extra Search Dates:</h3>
+      <!-- <h3>Choose Extra Search Dates:</h3>
       <input type="checkbox" id="option" name="previous week" value="week">
       <label for="previous week">Add data from previous week</label>
       <input type="checkbox" id="option" name="once a month" value="year">
-      <label for="once a month">Add data for one day a month for the last year</label>
+      <label for="once a month">Add data for one day a month for the last year</label> -->
 
       
 
@@ -41,17 +60,18 @@ crossorigin="anonymous"
 <div id="site-content">
   <h2>Your Search AQI Graph: 
     <br> Zipcode {{ search.zipcode }} in {{ search.reporting_area }} on {{ search.date}} and Previous Week,
-  <br> Plus added dates below.</h2>
+  <br> Plus dates added below.</h2>
     <canvas id="spec-date-chart"></canvas>
 
-  <h2> Add your own dates to the search:
-      <form>
+  <h2>Add your own dates to the search:</h2>
+  <h3> 
+      <form id="date-form">
         <input type="date" id="custom-date" name="custom-date">
         <label for="custom-date">Date</label>
         <input type="submit">
       </form>
-  </h2>
-  <p> Note any dates before December 2006 have a different format.  Please choose a date after 12/1/2006. </p>
+  </h3>
+  <p> Note any dates before December 2006 have a different format.  Please choose a date after 12/01/2006. </p>
 </div>
 
 <span id="search-date" style="visibility:hidden;">{{ search.date }}</span>
@@ -64,10 +84,10 @@ crossorigin="anonymous"
 <span id="search-ozone" style="visibility:hidden;">{{ search.ozone }}</span>
 <span id="search-pm" style="visibility:hidden;">{{ search.pm }}</span>
 
-<br>
+<!-- <br>
     <div id="site-content">
       <h2>Display chart here if prev week chart</h2>
-      <canvas id="prev-week-chart"></canvas>
+      <canvas id="prev-week-chart"></canvas> -->
 
 
     <h3>Nav Bar</h3>
