@@ -254,22 +254,43 @@ def save_user_search():
     #see show new search above for next steps, when "see new search details" button clicked on user profile page.  
 
 
-@app.route("/allzipsearch.json", methods = ["GET"])
-def searches_by_zipcode(zipcode):
+@app.route("/allzipsearch.json") # methods = ["GET"])  #tried allzipsearch.json, allzipsearch.json/<zipcode>,
+def searches_by_zipcode():  #tried (zipcode):
+    zipcode = request.args.get("zipcode")
+    print(zipcode)
     searches_by_zip = crud.get_searches_by_zipcode(zipcode)
+    print("in zipcode route")
+    #print(searches_by_zip)
     #print(crud.get_searches_by_zipcode(55112)) ... it works.
-    date_values = []
-    ozone_values = []
-    pm_values = []
-    aqi_values = []
+
+    date_tracker = []
+    data_dict = []
+    # ozone_values = []
+    # pm_values = []
+    # aqi_values = []
+
 
     for search in searches_by_zip:
-        if search.date not in date_values:
-            date_values.append(search.date)
+        if search.date not in date_tracker:
+            date_value = search.date
             if search.ozone == "None":
-                aqi_values.append(search.pm)
+                aqi_value = search.pm
             else:
-                aqi_values.append(search.ozone)
+                aqi_value = search.ozone
+            data_dict.append({'date': date_value, 'AQI': aqi_value})
+            date_tracker.append(search.date)
+
+    # sales_this_week.append({'date': date.isoformat(),
+    #                             'melons_sold': total})
+
+    # for search in searches_by_zip:
+    #     if search.date not in date_values:
+    #         date_values.append(search.date)
+    #         if search.ozone == "None":
+    #             aqi_values.append(search.pm)
+    #         else:
+    #             aqi_values.append(search.ozone)
+
             # ozone.values.append(search.ozone)
             # pm_values.append(search.pm)
         # else:
@@ -277,10 +298,16 @@ def searches_by_zipcode(zipcode):
     # data = {"dates": [search.date for search in searches_by_zip],
     #     "ozone": [search.ozone for search in searches_by_zip],
     #     "pm": [search.pm for search in searches_by_zip]}
-    data = {"dates": date_values, "AQIs": aqi_values}
-    return(jsonify(data))
+    # data = {"dates": date_values, "AQIs": aqi_values}
+    # print(data)
+    print(data_dict)
+
+    return jsonify({'data': data_dict})
     #add to extended search page route tbd.
     #create list of dates, ozones, pm's, then jsonify and send to extended search.
+
+
+    # return jsonify({'data': sales_this_week})
 
 
 if __name__ == "__main__":

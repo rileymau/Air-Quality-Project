@@ -40,11 +40,7 @@ crossorigin="anonymous"
     <!--Skips ozone, pm, if they are undefined.  Displays all other search attributes (except user)-->
 
 
-    <div id="site-content">
-      <h2>Graph of all Zipcode Searches for Zipcode {{ search.zipcode }} in {{ search.reporting_area }}</h2>
-      <canvas id="zipcode-chart"></canvas>
-      
-    </div>
+
     
       <!-- <h3>Choose Extra Search Dates:</h3>
       <input type="checkbox" id="option" name="previous week" value="week">
@@ -63,7 +59,7 @@ crossorigin="anonymous"
   <br> Plus dates added below.</h2>
     <canvas id="spec-date-chart"></canvas>
 
-  <h2>Add your own dates to the search:</h2>
+  <h2>Add your own date to the graph:</h2>
   <h3> 
       <form id="date-form">
         <input type="date" id="custom-date" name="custom-date">
@@ -84,6 +80,14 @@ crossorigin="anonymous"
 <span id="search-ozone" style="visibility:hidden;">{{ search.ozone }}</span>
 <span id="search-pm" style="visibility:hidden;">{{ search.pm }}</span>
 
+<br>
+<h2>######################################################################</h2>
+
+<div id="site-content">
+  <h2>Graph of all Zipcode Searches for Zipcode {{ search.zipcode }} in {{ search.reporting_area }}</h2>
+  <canvas id="zipcode-chart"></canvas>
+  
+</div>
 <!-- <br>
     <div id="site-content">
       <h2>Display chart here if prev week chart</h2>

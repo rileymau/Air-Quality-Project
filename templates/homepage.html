@@ -43,7 +43,7 @@ crossorigin="anonymous"></script>
   <!--bring up most recent search, if there is one in database-->
   <ul>
     <li>Date: {{ recent.date }}</li>
-    <li>Zipcde: {{ recent.zipcode }}</li>
+    <li>Zipcode: {{ recent.zipcode }}</li>
     <li>Reporting Area: {{ recent.reporting_area }}</li>
     {% if recent.ozone %}
       <li>Ozone AQI: {{ recent.ozone }}</li>
@@ -56,7 +56,7 @@ crossorigin="anonymous"></script>
 
   <div id="site-content">
     <h2>Graph for Most Recent AQI Search: 
-      <br>Zicode {{ recent.zipcode }} in {{ recent.reporting_area }} on {{ recent.date}} and the Previous Week</h2>
+      <br>Zipcode {{ recent.zipcode }} in {{ recent.reporting_area }} on {{ recent.date}} and the Previous Week</h2>
   <canvas id="most-recent-chart"></canvas>
   </div>
 

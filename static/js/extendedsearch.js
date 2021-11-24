@@ -196,24 +196,29 @@ $('#date-form').on('submit', addData);
   
 function makeAllZipChart(result) {
     //make the graph with big list ofsearches, and their AQI data and dates.
+    const data = result.data.map(zipcodedata => ({x: zipcodedata.date, y: zipcodedata.AQI})); 
+      //z: zipcodedata.labels}));
+      //loop result.data each item
+    console.log("in js zipcode")
 
     new Chart($('#zipcode-chart'), {
         type: 'bar',
         data: {
-          labels: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'], //dates.values,
           datasets: [
             {
               label: 'AQI',
-              data: [10, 36, 27, 12, 16, 32, 41], //AQIs.values,
+              data, //AQIs.values,
             },
           ],
         },
+        options: {},
       });
 };
 //add color info later.
 
-//$.get('/allzipsearch.json', result => {makeAllZipChart(result)})
+$.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(result)})
 
+// tried `${zipcode}`
 
 
   
