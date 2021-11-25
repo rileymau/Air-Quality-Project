@@ -1,6 +1,6 @@
 """Project Server Test File"""
 
-import server, crud
+import server
 import unittest, doctest
 
 from unittest import TestCase
@@ -58,16 +58,17 @@ class FlaskTestsDatabase(TestCase):
         """Test that a search page is showing a graph canvas. Working."""
 
         result = self.client.get("/searches/3")
-                                #   data={"search_id": 3},
-                                #   follow_redirects=True)
         self.assertIn(b"<canvas id=", result.data)
 
 
-    # def test_create_searche(self):
-    #     """Test departments page."""
-
-    #     result = self.client.get("/departments")
-    #     self.assertIn(b"Legal", result.data)
+    def test_savesearch_route(self):
+        """Test that search is saved with api result data."""
+        result = self.client.post("/savesearch",
+                                  data={'''[{DateObserved: "2021-11-22 ", HourObserved: 0, LocalTimeZone: "CST", 
+                                  ReportingArea: "Minneapolis-St. Paul", StateCode: "MN", Latitude: 44.955,
+                                  Longitude: -93.185, ParameterName: "PM2.5", AQI: 19, Category: {Number: 1, Name: "Good"}}]'''},
+                                  follow_redirects=True)
+        self.assertIn(b"search saved", result.data)
 
 
 ## note for saving database before testing
