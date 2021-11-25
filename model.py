@@ -61,6 +61,8 @@ def example_data():
     s2 = Search(user=u2, date='2021-11-15', zipcode=13579, reporting_area="Area2", ozone=None, pm=70, category=2)
     s3 = Search(user=u3, date='2021-11-16', zipcode=90000, reporting_area="Area3", ozone=30, pm=None, category=1)
 
+    users = [u1, u2, u3]
+    searches = [s1, s2, s3]
     db.session.add_all([s1, s2, s3, u1, u2, u3])
     db.session.commit()
 

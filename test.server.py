@@ -11,28 +11,9 @@ from flask import session
 
 def load_tests(loader, tests, ignore):
     """run the tests in other places.
-    There is a doctest in server.py"""
+    There is a doctest in server.py.  Working."""
     tests.addTests(doctest.DocTestSuite(server))
     return tests
-
-
-class aqiAppTests(TestCase):
-    """Flask tests."""
-
-    def setUp(self):
-        """Before every test."""
-
-        # Get the Flask test client
-        self.client = app.test_client()
-
-        # Show Flask errors that happen during tests
-        app.config['TESTING'] = True
-
-    def test_homepage(self):
-        """check that the homepage title is in the result of '/' route."""
-
-        result = self.client.get("/")
-        self.assertIn(b'<h1 id="doctest">Welcome to Air Quality Project Page</h1>', result.data)
 
 
 class FlaskTestsDatabase(TestCase):
@@ -59,51 +40,41 @@ class FlaskTestsDatabase(TestCase):
         db.drop_all()
         db.engine.dispose()
 
+    def test_homepage(self):
+        """check that the homepage title is in the result of '/' route. Working."""
+
+        result = self.client.get("/")
+        self.assertIn(b'<h1 id="doctest">Welcome to Air Quality Project Page</h1>', result.data)
+
     def test_login(self):
-        """Test login page."""
+        """Test login page. Working."""
 
         result = self.client.post("/login",
                                   data={"email": "1@mail.com", "password": "123"},
                                   follow_redirects=True)
         self.assertIn(b"<h1>Welcome Back", result.data)
 
-    # def test_searches(self):
+    def test_search_details_page(self):
+        """Test that a search page is showing a graph canvas. Working."""
+
+        result = self.client.get("/searches/3")
+                                #   data={"search_id": 3},
+                                #   follow_redirects=True)
+        self.assertIn(b"<canvas id=", result.data)
+
+
+    # def test_create_searche(self):
     #     """Test departments page."""
 
     #     result = self.client.get("/departments")
     #     self.assertIn(b"Legal", result.data)
 
-    # def test_departments_details(self):
-    #     """Test departments page."""
-
-        # result = self.client.get("/department/fin")
-        # self.assertIn(b"Phone: 555-1000", result.data)
-
-
-class FlaskTestsLoggedIn(TestCase):
-    """Flask tests with user logged in to session."""
-
-    def setUp(self):
-        """Stuff to do before every test."""
-
-        app.config['TESTING'] = True
-        app.config['SECRET_KEY'] = 'key'
-        self.client = app.test_client()
-
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess['user_id'] = 1
-
-    def test_important_page(self):
-        """Test important page."""
-
-        result = self.client.get('/<user_id>')
-        self.assertIn(b"<h1>Welcome Back", result.data)
-
-
 
 ## note for saving database before testing
 ## $ pg_dump airsearch > database.sql
+
+## before testing, create testing db
+## $ createdb testdb
 
 if __name__ == "__main__":
     import unittest
