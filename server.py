@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session,
 
 from model import connect_to_db
 import crud
+import doctest
 
 from jinja2 import StrictUndefined
 
@@ -178,7 +179,7 @@ def show_extendeed_search(search_id):
 
 @app.route("/getnewsearch")
 def show_new_search():
-    """ Show the newest search page. """
+    """ Show the newest search page, with previous 6 days dates available."""
     search = crud.most_recent_search()
     #print("in search on py")
 
@@ -186,14 +187,15 @@ def show_new_search():
     six_days = []
     #date_get = request.form.get("Date")
 
-    #make date from above, a datetime.
-    #the date comes with a space at the end that needs to be removed. sliced date :10.
     date_get = search.date
     print(date_get)
     print(type(date_get))
+
+    #a previous way before six days added to routes
+    #make date from above, a datetime.
+    #the date comes with a space at the end that needs to be removed. sliced date :10.
     #print(len(date_get))
     #print(date_get[:10])
-    
     #date_get = datetime.strptime(date_get, "%Y-%m-%d")
 
     #print(date_get)
@@ -206,7 +208,7 @@ def show_new_search():
     for _ in range(6):
         date_get = date_get - delta1
         date = date_get
-        #was .date()
+        #was .date(), only need in original with date from js.
         six_days.append(date.isoformat())
 
     print(six_days)
@@ -221,6 +223,23 @@ def show_new_search():
     #search.six_days = six_days
     #return jsonify({six_days}) and search data, ozone, pm, if possible.
     return render_template("search.details.html", search=search, six_days=six_days)
+
+def make_six_days(date):
+    """A function to test logic in show_new_search() above.
+    python3 -m doctest -v server.py
+    For example:
+    >>> make_six_days('2021-01-19')
+    ['2021-01-13', '2021-01-14', '2021-01-15', '2021-01-16', '2021-01-17', '2021-01-18']
+    """
+    date_get = datetime.strptime(date, "%Y-%m-%d")
+    six_days = []
+    delta1 = timedelta(days=1)
+    for _ in range(6):
+        date_get = date_get - delta1
+        date = date_get.date()  #.date() needed originally with date from js.
+        six_days.append(date.isoformat())
+    six_days.reverse()
+    return(six_days)
 
 
 ## Graph Routes ##
