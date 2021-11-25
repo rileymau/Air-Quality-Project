@@ -207,8 +207,7 @@ def show_new_search():
     #add dates 1 to 6 to list
     for _ in range(6):
         date_get = date_get - delta1
-        date = date_get
-        #was .date(), only need in original with date from js.
+        date = date_get  #was .date(), in original with date from js instead of database.
         six_days.append(date.isoformat())
 
     print(six_days)

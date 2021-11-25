@@ -162,6 +162,100 @@ COPY public.searches (search_id, user_id, date, zipcode, reporting_area, ozone, 
 46	3	2021-11-16	55123	Minneapolis-St. Paul	\N	51	2
 47	1	2021-11-16	55119	Minneapolis-St. Paul	\N	48	1
 48	1	2021-11-16	55120	Minneapolis-St. Paul	\N	48	1
+49	3	2021-11-18	55112	Minneapolis-St. Paul	\N	22	1
+50	3	2021-11-18	55112	Minneapolis-St. Paul	\N	22	1
+51	3	2021-11-18	55112	Minneapolis-St. Paul	\N	22	1
+52	1	2021-11-18	55112	Minneapolis-St. Paul	\N	22	1
+53	1	2021-11-18	55112	Minneapolis-St. Paul	\N	22	1
+54	3	2021-11-18	55112	Minneapolis-St. Paul	\N	13	1
+55	3	2021-11-18	55112	Minneapolis-St. Paul	\N	15	1
+56	2	2021-11-19	55112	Minneapolis-St. Paul	\N	17	1
+57	2	2021-11-19	55116	Minneapolis-St. Paul	\N	17	1
+58	2	2021-11-19	55112	Minneapolis-St. Paul	\N	17	1
+59	2	2021-11-19	90210	NW Coastal LA	\N	21	1
+60	2	2021-11-19	11237	New York City Region	\N	21	1
+61	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+62	2	2021-11-19	55103	Minneapolis-St. Paul	\N	19	1
+63	2	2021-11-19	55127	Minneapolis-St. Paul	\N	19	1
+64	2	2021-11-19	55119	Minneapolis-St. Paul	\N	19	1
+65	2	2021-11-19	55119	Minneapolis-St. Paul	\N	19	1
+66	2	2021-11-19	55119	Minneapolis-St. Paul	\N	19	1
+67	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+68	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+69	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+70	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+71	2	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+72	2	2021-11-19	55104	Minneapolis-St. Paul	\N	19	1
+73	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+74	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+75	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+76	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+77	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+78	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+79	3	2021-11-19	55112	Minneapolis-St. Paul	\N	19	1
+80	3	2021-11-19	55112	Minneapolis-St. Paul	\N	22	1
+81	3	2021-11-19	55112	Minneapolis-St. Paul	\N	22	1
+82	3	2021-11-19	55112	Minneapolis-St. Paul	\N	22	1
+83	3	2021-11-19	55112	Minneapolis-St. Paul	\N	22	1
+84	3	2021-11-19	55112	Minneapolis-St. Paul	\N	22	1
+85	3	2021-11-19	55112	Minneapolis-St. Paul	\N	36	1
+86	3	2021-11-19	55123	Minneapolis-St. Paul	\N	36	1
+87	3	2021-11-19	55123	Minneapolis-St. Paul	\N	36	1
+88	3	2021-11-19	55112	Minneapolis-St. Paul	\N	36	1
+89	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+90	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+91	3	2021-11-19	80134	Denver-Boulder	\N	43	1
+92	3	2021-11-19	80134	Denver-Boulder	\N	43	1
+93	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+94	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+95	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+96	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+97	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+98	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+99	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+100	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+101	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+102	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+103	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+104	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+105	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+106	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+107	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+108	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+109	3	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+110	2	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+111	2	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+112	2	2021-11-19	55113	Minneapolis-St. Paul	\N	37	1
+113	2	2021-11-19	55113	Minneapolis-St. Paul	\N	37	1
+114	2	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+115	2	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+116	2	2021-11-19	55112	Minneapolis-St. Paul	\N	37	1
+117	2	2021-11-22	55112	Minneapolis-St. Paul	\N	23	1
+118	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+119	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+120	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+121	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+122	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+123	3	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+124	2	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+125	1	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+126	1	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+127	1	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+128	1	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+129	1	2021-11-22	55112	Minneapolis-St. Paul	\N	22	1
+130	2	2021-11-22	55102	Minneapolis-St. Paul	\N	19	1
+131	2	2021-11-22	55112	Minneapolis-St. Paul	\N	19	1
+132	2	2021-11-22	55112	Minneapolis-St. Paul	\N	19	1
+133	2	2021-11-22	55112	Minneapolis-St. Paul	\N	19	1
+134	3	2021-11-22	55112	Minneapolis-St. Paul	\N	19	1
+135	3	2021-11-22	55112	Minneapolis-St. Paul	\N	23	1
+136	2	2021-11-22	55112	Minneapolis-St. Paul	\N	24	1
+137	2	2021-11-22	55112	Minneapolis-St. Paul	\N	24	1
+138	1	2021-11-22	90210	NW Coastal LA	\N	26	1
+139	4	2021-11-23	55119	Minneapolis-St. Paul	\N	30	1
+140	4	2021-11-23	55412	Minneapolis-St. Paul	\N	28	1
+141	4	2021-11-23	90210	NW Coastal LA	\N	30	1
+142	4	2021-11-24	55112	Minneapolis-St. Paul	\N	46	1
 \.
 
 
@@ -173,6 +267,7 @@ COPY public.users (user_id, email, password) FROM stdin;
 1	me@gmail.com	123
 2	hello@comcast.net	123
 3	hi@gmail.com	123
+4	hithere@gmail.com	123
 \.
 
 
@@ -180,14 +275,14 @@ COPY public.users (user_id, email, password) FROM stdin;
 -- Name: searches_search_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.searches_search_id_seq', 48, true);
+SELECT pg_catalog.setval('public.searches_search_id_seq', 142, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 3, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 4, true);
 
 
 --
