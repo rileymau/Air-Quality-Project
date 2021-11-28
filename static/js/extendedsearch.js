@@ -137,7 +137,7 @@ function makeSpecDateChart() {
   makeCustomColorsC();
   console.log(customColorsC);
 
-  new Chart($('#spec-date-chart'), {
+  customChart = new Chart($('#spec-date-chart'), {
     type: 'bar',
     data: {
       labels: graphDaysC,  
@@ -180,33 +180,60 @@ function addData(evt) {
 
 
   //Make click chart data from graphDays, graphAQI lists.
-  let clickData = [];
-  for (const day of graphDaysC) {
-    index = graphDaysC.indexOf(day);
-    clickData.push({'date': day, 'AQI': graphAQIC[index]});
-  };
-  console.log(clickData); 
+  // let clickData = [];
+  // for (const day of graphDaysC) {
+  //   index = graphDaysC.indexOf(day);
+  //   clickData.push({'date': day, 'AQI': graphAQIC[index]});
+  // };
+  // console.log(clickData); 
 
-  //get the new day's AQI, append date and AQI to clickData.  Sort clickData by date (key).
+  //get the new day's AQI, append date and AQI to clickData.  Run dateToAdd through some comparisons to see where to add in graphAQIC, graphDaysC.
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${dateToAdd}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
     console.log(result);
     console.log(result[0]['AQI']);
 
-    //if dateToAdd > last day in graphDays:
-    graphAQIC.push(result[0]['AQI']); 
-    graphDaysC.push(dateToAdd);
-    console.log(graphDaysC);
-    console.log(graphAQIC);
-    clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
-    
-    console.log("sorted", clickData);
+    //if dateToAdd > last day in graphDaysC:
+    if (dateToAdd > graphDaysC[6]) {
+      graphAQIC.push(result[0]['AQI']); 
+      graphDaysC.push(dateToAdd);
+      console.log(graphDaysC);
+      console.log(graphAQIC);
+    }
+
+    //if dateToAdd < first day in graphDaysC:
+    else if (dateToAdd < graphDaysC[6]) {
+      graphAQIC.unshift(result[0]['AQI']); 
+      graphDaysC.unshift(dateToAdd);
+      console.log(graphDaysC);
+      console.log(graphAQIC);
+    }
+
+    else {
+      //compare date to each item in graphDaysC
+      //find its place
+      //scoot all others down an index
+      //add it in graph days
+      //get that index
+      //scoot all down in graphAQIC
+      //add AQI in at that index
+      console.log(graphDaysC);
+      console.log(graphAQIC);
+    }
+
+
+
+    //clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
+    //console.log("sorted", clickData);
 
     //remake aqi, data list. 
     // for (const dict in clickData) {
     //   graphAQIC.push(dict.AQI);
     //   graphDaysC.push(dict.date);
     // }
+
+    //the old chart on the canvas has to be destroyed before printing the updated chart.
+    customChart.destroy();
     makeSpecDateChart();
   });
 }; 
