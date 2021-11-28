@@ -277,8 +277,7 @@ def searches_by_zipcode():  #tried (zipcode):
     zipcode = request.args.get("zipcode")
     print(zipcode)
     searches_by_zip = crud.get_searches_by_zipcode(zipcode)
-    print("in zipcode route")
-    #print(searches_by_zip)
+    #print("in zipcode route")
     #print(crud.get_searches_by_zipcode(55112)) ... it works.
 
     date_tracker = []
@@ -297,7 +296,7 @@ def searches_by_zipcode():  #tried (zipcode):
                 aqi_value = search.ozone
             data_dict.append({'date': date_value.isoformat(), 'AQI': aqi_value})
             date_tracker.append(search.date)
-            print(aqi_value)
+            # print(aqi_value)
             # print(search.ozone)
             # print(search.pm)
             # print(data_dict)
@@ -322,6 +321,8 @@ def searches_by_zipcode():  #tried (zipcode):
     #     "pm": [search.pm for search in searches_by_zip]}
     # data = {"dates": date_values, "AQIs": aqi_values}
     # print(data)
+    # return jsonify({'data': sales_this_week})
+    
     print(data_dict)
 
     return jsonify({'data': data_dict})
@@ -329,7 +330,7 @@ def searches_by_zipcode():  #tried (zipcode):
     #create list of dates, ozones, pm's, then jsonify and send to extended search.
 
 
-    # return jsonify({'data': sales_this_week})
+
 
 
 if __name__ == "__main__":

@@ -34,15 +34,16 @@ function makeSevenDays(stringList, string) {
 //make master list of six previous days plus current search day.
 const graphDaysC = makeSevenDays(six_days, today);
 
-  //pop last one on seven days before doing api CALLS. 
+  //pop last one on seven days before doing api calls. Search data can be added later for day 7.
 const APIDaysC = graphDaysC.slice(0,6);
 console.log(APIDaysC);
 
+
+ // Functions to make first chart before dates are added.  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const graphAQIC = [0, 0, 0, 0, 0, 0];
 const graphLabelsC = ["", "", "", "", "", ""];
 const customColorsC = [];
 let counterC = 0;
-
 
 for (const day of APIDaysC) {
   let index = APIDaysC.indexOf(day);
@@ -55,6 +56,7 @@ for (const day of APIDaysC) {
     console.log(result[0]['AQI']);
     graphAQIC[index] = result[0]['AQI'];
     graphLabelsC[index] = result[0]['ParameterName'];
+    counterC += 1;
     if (counterC === 6) {
       makeGraphDataC();
       makeSpecDateChart();
@@ -99,8 +101,6 @@ function makeGraphDataC() {
     //   searchAQI: searchAQI};
 };
 
-
-  // Specific Date Chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   //make the graph the current search and a previous date. Start with current 7 day chart. 
   //pass graphDays, graphAQI, graphLabels to chart.  
@@ -161,14 +161,17 @@ function makeSpecDateChart() {
   });
 };
 
+  // Specific Date Chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 //Make click chart data from graphDays, graphAQI lists.
 function makeClickData() {
   let clickData = [];
-  for (const day in graphDaysC) {
+  for (const day of graphDaysC) {
     index = graphDaysC.indexOf(day);
-    clickData.append({'date': day, 'AQI': graphAQIC[index]});
+    clickData.push({'date': day, 'AQI': graphAQIC[index]});
   };
   console.log(clickData);
+  return clickData;
 };
 
 
@@ -226,7 +229,7 @@ function addData(evt) {
 $('#date-form').on('submit', addData);
 
 
-  // Zipcode chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  // Zipcode chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (below this all works.)
   
 function makeAllZipChart(result) {
     //make the graph with big list of searches, and their AQI data and dates.
@@ -293,6 +296,7 @@ function makeAllZipChart(result) {
       });
 };
 
+  //giit zipcode data from server route/crud function. comes back jsonified.
 $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(result)})
 
 // double checked, zipcode chart is showing correct values from allzipsearch list:
@@ -300,6 +304,10 @@ $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(res
 //{'date': '2021-11-19', 'AQI': 17}, {'date': '2021-11-22', 'AQI': 23}, {'date': '2021-11-24', 'AQI': 46}]
 //Chart shows: 27, 38, 22, 17, 23, 46. 
 
+
+//Note, sometimes the saved search data for a zipcode and day is diiffernt from that date pulled up in
+//the six days previous of another search.  The six day previous function takes data at midnight on each day,
+//and the new search function takes it at the current time.
   
 
 // other function/chart ideas: 
