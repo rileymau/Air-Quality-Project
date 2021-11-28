@@ -221,8 +221,6 @@ function addData(evt) {
     //   console.log(graphAQIC);
     // }
 
-
-
     //clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
     //console.log("sorted", clickData);
 
