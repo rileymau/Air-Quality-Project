@@ -291,12 +291,16 @@ def searches_by_zipcode():  #tried (zipcode):
     for search in searches_by_zip:
         if search.date not in date_tracker:
             date_value = search.date
-            if search.ozone == "None":
+            if search.ozone == None:
                 aqi_value = search.pm
             else:
                 aqi_value = search.ozone
-            data_dict.append({'date': date_value, 'AQI': aqi_value})
+            data_dict.append({'date': date_value.isoformat(), 'AQI': aqi_value})
             date_tracker.append(search.date)
+            print(aqi_value)
+            # print(search.ozone)
+            # print(search.pm)
+            # print(data_dict)
 
     # sales_this_week.append({'date': date.isoformat(),
     #                             'melons_sold': total})

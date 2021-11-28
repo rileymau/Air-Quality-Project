@@ -38,20 +38,24 @@ const graphDaysC = makeSevenDays(six_days, today);
 const APIDaysC = graphDaysC.slice(0,6);
 console.log(APIDaysC);
 
-const graphAQIC = [];
-const graphLabelsC = [];
+const graphAQIC = [0, 0, 0, 0, 0, 0];
+const graphLabelsC = ["", "", "", "", "", ""];
 const customColorsC = [];
+let counterC = 0;
 
 
 for (const day of APIDaysC) {
+  let index = APIDaysC.indexOf(day);
 
+  // This was adjusted to assign data to index of day as it comes in from API. 
+  // After this function, graphAQIC and graphLabels just have 6 values each. 
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
     console.log(result);
     console.log(result[0]['AQI']);
-    graphAQIC.push(result[0]['AQI']);
-    graphLabelsC.push(result[0]['ParameterName']);
-    if (graphAQIC.length === 6) {
+    graphAQIC[index] = result[0]['AQI'];
+    graphLabelsC[index] = result[0]['ParameterName'];
+    if (counterC === 6) {
       makeGraphDataC();
       makeSpecDateChart();
     };
@@ -95,11 +99,6 @@ function makeGraphDataC() {
     //   searchAQI: searchAQI};
 };
 
-
-
-  
-
-  
 
   // Specific Date Chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -162,6 +161,16 @@ function makeSpecDateChart() {
   });
 };
 
+//Make click chart data from graphDays, graphAQI lists.
+function makeClickData() {
+  let clickData = [];
+  for (const day in graphDaysC) {
+    index = graphDaysC.indexOf(day);
+    clickData.append({'date': day, 'AQI': graphAQIC[index]});
+  };
+  console.log(clickData);
+};
+
 
 //Customize 7 day chart with new date added. 
 
@@ -171,18 +180,26 @@ function addData(evt) {
   console.log("in add data");
   const dateToAdd = $('#custom-date').val();
 
+  makeClickData(); 
+
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${dateToAdd}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
     console.log(result);
     console.log(result[0]['AQI']);
-    graphAQIC.push(result[0]['AQI']);
-    graphLabelsC.push(result[0]['ParameterName']);
-    if (graphAQIC.length === 6) {
-      makeGraphDataC();
-      makeSpecDateChart();
-    };
-  }); 
-};
+    clickData.append({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
+    console.log(clickData);
+    clickData.sort();
+    console.log("sorted", clickData);
+    // graphAQIC.push(result[0]['AQI']);
+    // graphLabelsC.push(result[0]['ParameterName']);
+    //if (graphAQIC.length === 6) {
+
+    //remake aqi, data list. 
+    //makeGraphDataC();
+    makeAddedDateChart();
+  });
+}; 
+
 
 // Needs to be added to make data in right order: 
 // (result) => { 
@@ -242,7 +259,7 @@ $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(res
 
   
 
-
+// other function/chart ideas: 
 // function makePrevWeekChart(result) {
 //   //make the graph with the current search, last 6 days, and previous week.
 //   new Chart($('#prev-week-chart'), {
