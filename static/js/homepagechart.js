@@ -62,9 +62,9 @@ for (const day of APIDaysR) {
         // graphLabelsR.push(result[0]['ParameterName']);
         graphAQIR[index] = result[0]['AQI'];
         graphLabelsR[index] = result[0]['ParameterName'];
-        counter += 1;
+        counterR += 1;
         console.log(graphAQIR);
-        if (counter === 6) {
+        if (counterR === 6) {
         //if (graphAQI.length === 6) {
           makeGraphDataR();
           makeTheChartR();

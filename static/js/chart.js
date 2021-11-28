@@ -112,6 +112,7 @@ function makeGraphData() {
   //pass graphDays, graphAQI, graphLabels to chart.  
   //Call chart after the 6 api calls run and after graph AQI list is complete with 7 items.
 function makeTheChart() {
+  console.log("getting to make the chart");
   function makeCustomColors() {
   //this function sets the bar colors depending on the value.  
   //this uses the same color scheme as the AirNow website.
@@ -162,9 +163,6 @@ function makeTheChart() {
     },
   });
 }
-
-  //add code of colors acording to AQI category.
-  
 
 
 
