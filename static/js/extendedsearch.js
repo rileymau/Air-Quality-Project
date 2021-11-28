@@ -227,15 +227,54 @@ $('#date-form').on('submit', addData);
 
 
   // Zipcode chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
   
 function makeAllZipChart(result) {
-    //make the graph with big list ofsearches, and their AQI data and dates.
+    //make the graph with big list of searches, and their AQI data and dates.
+    //this maps the list of dictionaries to the x, y data pairs. 
     const data = result.data.map(zipcodedata => ({x: zipcodedata.date, y: zipcodedata.AQI})); 
       //z: zipcodedata.labels}));
       //loop result.data each item
-    console.log("in js zipcode")
+    console.log("in js zipcode");
+    console.log(data);
+    console.log(data[0].y);
+
+    const zipColors = [];
+
+    function makeColorsFromMap(value) {
+      //this function sets the bar colors depending on the value.  
+      //this uses the same color scheme as the AirNow website.
+      
+        if (value < 50) {
+          zipColors.push('green')
+            };
+        if (value < 100 && value >= 51) {
+          zipColors.push('yellow')
+            };
+        if (value < 150 && value >= 101) {
+          zipColors.push('orange')
+            };
+        if (value < 200 && value >= 151) {
+          zipColors.push('red')
+            };
+        if (value < 300 && value >= 201) {
+          zipColors.push('purple')
+            };
+        if (value < 300 && value >= 201) {
+          zipColors.push('purple')
+            };
+        if (value < 500 && value >= 301) {
+          zipColors.push('maroon')
+            };
+      };
+
+    // loop zipcode data to get color list (zipColors) for chart.
+    for (let i = 0; i < data.length; i += 1) {
+      let value = data[i].y;
+      console.log(value);
+      makeColorsFromMap(value);
+    }
+    
+    console.log(zipColors);
 
     new Chart($('#zipcode-chart'), {
         type: 'bar',
@@ -243,19 +282,23 @@ function makeAllZipChart(result) {
           datasets: [
             {
               label: 'AQI',
-              data, //AQIs.values,
+              data, 
+              backgroundColor: zipColors,  //'rgba(255, 100, 130, 0.5)',
+              borderColor: 'rgba(255, 100, 130)',
+              borderWidth: 1,
             },
           ],
         },
         options: {},
       });
 };
-//add color info later.
 
 $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(result)})
 
-// tried `${zipcode}`
-
+// double checked, zipcode chart is showing correct values from allzipsearch list:
+//[{'date': '2021-11-15', 'AQI': 27}, {'date': '2021-11-16', 'AQI': 38}, {'date': '2021-11-18', 'AQI': 22}, 
+//{'date': '2021-11-19', 'AQI': 17}, {'date': '2021-11-22', 'AQI': 23}, {'date': '2021-11-24', 'AQI': 46}]
+//Chart shows: 27, 38, 22, 17, 23, 46. 
 
   
 
