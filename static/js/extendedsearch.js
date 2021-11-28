@@ -192,17 +192,22 @@ function addData(evt) {
   (result) => { 
     console.log(result);
     console.log(result[0]['AQI']);
-    clickData.append({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
-    console.log(clickData);
-    clickData.sort();
+
+    //if dateToAdd > last day in graphDays:
+    graphAQIC.push(result[0]['AQI']); 
+    graphDaysC.push(dateToAdd);
+    console.log(graphDaysC);
+    console.log(graphAQIC);
+    clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
+    
     console.log("sorted", clickData);
-    // graphAQIC.push(result[0]['AQI']);
-    // graphLabelsC.push(result[0]['ParameterName']);
-    //if (graphAQIC.length === 6) {
 
     //remake aqi, data list. 
-    //makeGraphDataC();
-    makeAddedDateChart();
+    // for (const dict in clickData) {
+    //   graphAQIC.push(dict.AQI);
+    //   graphDaysC.push(dict.date);
+    // }
+    makeSpecDateChart();
   });
 }; 
 
