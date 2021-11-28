@@ -207,19 +207,19 @@ function addData(evt) {
       graphDaysC.unshift(dateToAdd);
       console.log(graphDaysC);
       console.log(graphAQIC);
-    }
+    };
 
-    else {
-      //compare date to each item in graphDaysC
-      //find its place
-      //scoot all others down an index
-      //add it in graph days
-      //get that index
-      //scoot all down in graphAQIC
-      //add AQI in at that index
-      console.log(graphDaysC);
-      console.log(graphAQIC);
-    }
+    // else {  < there is never an else.  The 7 day list is consecutive. :)
+    //   //compare date to each item in graphDaysC
+    //   //find its place
+    //   //scoot all others down an index
+    //   //add it in graph days
+    //   //get that index
+    //   //scoot all down in graphAQIC
+    //   //add AQI in at that index
+    //   console.log(graphDaysC);
+    //   console.log(graphAQIC);
+    // }
 
 
 
