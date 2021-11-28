@@ -184,6 +184,25 @@ function addData(evt) {
   }); 
 };
 
+// Needs to be added to make data in right order: 
+// (result) => { 
+//   console.log(result);
+//   console.log(result[0]['AQI']);
+//   // graphAQIR.push(result[0]['AQI']);
+//   // graphLabelsR.push(result[0]['ParameterName']);
+//   graphAQIR[index] = result[0]['AQI'];
+//   graphLabelsR[index] = result[0]['ParameterName'];
+//   counter += 1;
+//   console.log(graphAQIR);
+//   if (counter === 6) {
+//   //if (graphAQI.length === 6) {
+//     makeGraphDataR();
+//     makeTheChartR();
+//   };
+// }); 
+// };
+
+
   //add date form button on submit... run the add function. 
 
 //on clicking submit, the functions above run

@@ -35,25 +35,32 @@ const graphDays = makeSevenDays(six_days, today);
 const APIDays = graphDays.slice(0,6);
 console.log(APIDays);
 
-const graphAQI = [];
-const graphLabels = [];
+const graphAQI = [0, 0, 0, 0, 0, 0];
+const graphLabels = ["", "", "", "", "", ""];
 const customColors = [];
+let counter = 0;
 //const dayCount = graphAQI.length;
 
 //function makeG() {
 for (const day of APIDays) {
+  let index = APIDays.indexOf(day);
+  //console.log(index);
   //console.log(day);
   //setTimeout(() => console.log('wait'), 10000)
 
+  // because this function was appendind the aqi and label data in whatever order the api calls were completed, 
+  // the data is now assigned to an index as it comes back. 
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
       console.log(result);
       console.log(result[0]['AQI']);
-      graphAQI.push(result[0]['AQI']);
-      graphLabels.push(result[0]['ParameterName']);
-      if (graphAQI.length === 6) {
+      graphAQI[index] = result[0]['AQI'];
+      graphLabels[index] = result[0]['ParameterName'];
+      counter += 1;
+      console.log(graphAQI);
+      if (counter === 6) {
+      //if (graphAQI.length === 6) {
         makeGraphData();
-        //makeCustomColors();
         makeTheChart();
       };
       //graphOzone.push([result[0]['Ozone']]);

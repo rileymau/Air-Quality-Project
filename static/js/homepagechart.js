@@ -41,23 +41,31 @@ const graphDaysR = makeSevenDaysR(six_daysR, todayR);
 const APIDaysR = graphDaysR.slice(0,6);
 console.log(APIDaysR);
   
-const graphAQIR = [];
-const graphLabelsR = [];
+const graphAQIR = [0, 0, 0, 0, 0, 0];
+const graphLabelsR = ["", "", "", "", "", ""];
 const customColorsR = [];
+let counterR = 0;
   //const dayCount = graphAQI.length;
 
 
 for (const day of APIDaysR) {
+    let index = APIDaysR.indexOf(day);
     //console.log(day);
     //setTimeout(() => console.log('wait'), 10000)
   
+    // This was adjusted to assign data to index of day as it comes in from API. 
     $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcodeR}&date=${day}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
     (result) => { 
         console.log(result);
         console.log(result[0]['AQI']);
-        graphAQIR.push(result[0]['AQI']);
-        graphLabelsR.push(result[0]['ParameterName']);
-        if (graphAQIR.length === 6) {
+        // graphAQIR.push(result[0]['AQI']);
+        // graphLabelsR.push(result[0]['ParameterName']);
+        graphAQIR[index] = result[0]['AQI'];
+        graphLabelsR[index] = result[0]['ParameterName'];
+        counter += 1;
+        console.log(graphAQIR);
+        if (counter === 6) {
+        //if (graphAQI.length === 6) {
           makeGraphDataR();
           makeTheChartR();
         };
