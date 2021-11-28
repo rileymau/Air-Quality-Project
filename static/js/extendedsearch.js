@@ -163,16 +163,11 @@ function makeSpecDateChart() {
 
   // Specific Date Chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-//Make click chart data from graphDays, graphAQI lists.
-function makeClickData() {
-  let clickData = [];
-  for (const day of graphDaysC) {
-    index = graphDaysC.indexOf(day);
-    clickData.push({'date': day, 'AQI': graphAQIC[index]});
-  };
-  console.log(clickData);
-  return clickData;
-};
+
+// function makeClickData() {
+
+//   return clickData;
+// };
 
 
 //Customize 7 day chart with new date added. 
@@ -183,8 +178,16 @@ function addData(evt) {
   console.log("in add data");
   const dateToAdd = $('#custom-date').val();
 
-  makeClickData(); 
 
+  //Make click chart data from graphDays, graphAQI lists.
+  let clickData = [];
+  for (const day of graphDaysC) {
+    index = graphDaysC.indexOf(day);
+    clickData.push({'date': day, 'AQI': graphAQIC[index]});
+  };
+  console.log(clickData); 
+
+  //get the new day's AQI, append date and AQI to clickData.  Sort clickData by date (key).
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${dateToAdd}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
   (result) => { 
     console.log(result);
@@ -203,29 +206,7 @@ function addData(evt) {
   });
 }; 
 
-
-// Needs to be added to make data in right order: 
-// (result) => { 
-//   console.log(result);
-//   console.log(result[0]['AQI']);
-//   // graphAQIR.push(result[0]['AQI']);
-//   // graphLabelsR.push(result[0]['ParameterName']);
-//   graphAQIR[index] = result[0]['AQI'];
-//   graphLabelsR[index] = result[0]['ParameterName'];
-//   counterR += 1;
-//   console.log(graphAQIR);
-//   if (counterR === 6) {
-//   //if (graphAQI.length === 6) {
-//     makeGraphDataR();
-//     makeTheChartR();
-//   };
-// }); 
-// };
-
-
-  //add date form button on submit... run the add function. 
-
-//on clicking submit, the functions above run
+//on clicking submit, the functions above run to add date to chart.
 $('#date-form').on('submit', addData);
 
 
