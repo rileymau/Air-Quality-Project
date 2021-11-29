@@ -151,13 +151,7 @@ function makeSpecDateChart() {
         },
       ],
     },
-    options: {
-      datasets: {
-        bar: {
-        },
-        
-      },
-    },
+    options: {},
   });
 };
 
@@ -300,7 +294,6 @@ $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(res
 //[{'date': '2021-11-15', 'AQI': 27}, {'date': '2021-11-16', 'AQI': 38}, {'date': '2021-11-18', 'AQI': 22}, 
 //{'date': '2021-11-19', 'AQI': 17}, {'date': '2021-11-22', 'AQI': 23}, {'date': '2021-11-24', 'AQI': 46}]
 //Chart shows: 27, 38, 22, 17, 23, 46. 
-
 
 //Note, sometimes the saved search data for a zipcode and day is diiffernt from that date pulled up in
 //the six days previous of another search.  The six day previous function takes data at midnight on each day,

@@ -145,11 +145,18 @@ function makeGraphDataR() {
           ],
         },
         options: {
-          datasets: {
-            bar: {
-            },
-            
-          },
+          tooltips: {
+            displayColors: false,
+            borderWidth: 1, 
+            callbacks: {
+            //   footer: graphLabels,
+            // }
+                  footer: function(item) {
+                    let graphIndex = item[0].index;
+                    return 'Parameter' + graphLabels[graphIndex];
+              }
+            }
+          }
         },
       });
     }
