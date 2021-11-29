@@ -14,6 +14,10 @@ crossorigin="anonymous"></script>
 
 {% block body %}
 <h1>Welcome Back {{ user.email }}!</h1>
+<br>
+<hr>
+<hr>
+<br>
 
 <h2>Create a new air quality search:</h2>
 <form id="newsearch-form">
@@ -30,18 +34,25 @@ crossorigin="anonymous"></script>
 
 </form> 
 <br>
+<hr>
+<hr>
+<br>
 <!-- <h3>Test Data</h3>
 <ul id="ajax"></ul> -->
 
-<h2>Your New AQI Search Info</h2>
+<h2>Your New AQI Search Info:</h2>
   <ul id="display"></ul>
 
   <form action="/getnewsearch">
     <button type="submit" id="show-button" style="visibility:hidden;">See New Search Details</button>
   </form>
+  <br>
+  <hr>
+  <hr>
+  <br>
 
 {% if my_searches %}
- <h2> Here are your past searches:</h2>
+ <h2> Your Past Searches:</h2>
     {% for search in my_searches %}
     <li>
       <a href="/searches/{{ search.search_id }}">

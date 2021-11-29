@@ -19,12 +19,13 @@ crossorigin="anonymous"
 {% endblock %}
 
 {% block body %}
-<h1>Extended Search Info</h1>
-    
-<h1>
-  Search Details for search # {{ search.search_id  }} for zipcode {{ search.zipcode }}
-  </h1>
-  <h2>Your AQI Search Info</h2>
+<h1>Extended Search Information for Search # {{ search.search_id  }} for Zipcode {{ search.zipcode }}</h1>
+<br>
+<hr>
+<hr>
+<br>
+
+  <h2>Your AQI Search Info:</h2>
     <ul id="search-info">
       <li>Date: {{ search.date }}</li>
       <li>Zipcode: {{ search.zipcode }}</li>
@@ -50,8 +51,10 @@ crossorigin="anonymous"
 
       
 
-      <br>
-      <h2>######################################################################</h2>
+<br>
+<hr>
+<hr>
+<br>
 
 <div id="site-content">
   <h2>Your Search AQI Graph: 
@@ -81,10 +84,13 @@ crossorigin="anonymous"
 <span id="search-pm" style="visibility:hidden;">{{ search.pm }}</span>
 
 <br>
-<h2>######################################################################</h2>
+<hr>
+<hr>
+<br>
+<!-- <h2>######################################################################</h2> -->
 
 <div id="site-content">
-  <h2>Graph of all AQI Searches for Zipcode {{ search.zipcode }} in {{ search.reporting_area }}</h2>
+  <h2>Graph of all AQI Searches for Zipcode {{ search.zipcode }} in {{ search.reporting_area }}:</h2>
   <canvas id="zipcode-chart"></canvas>
   
 </div>

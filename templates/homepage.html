@@ -19,10 +19,14 @@ crossorigin="anonymous"></script>
 {% endblock %}
 {% block body %}
 <body>
-    <h1 id="doctest">Welcome to Air Quality Project Page</h1>
+
+<h1 id="doctest">Welcome to Air Quality Zipcode Lookup Page</h1>
+<br>
+<hr>
+<hr>
+<br>
   
-  <h2>About This Website</h2>
-  <!--side by side layout later-->
+<h2>About This Website:</h2>
 
   <p>
     Login as a user, and then do an Air quality search. Air Quality Index (AQI) has many measurements.
@@ -34,9 +38,13 @@ crossorigin="anonymous"></script>
     <br>The extended search pages has a summary of the last year's AQI's for any zipcode or reporting area. 
     </p>
 
-  <h2>For more information on AQI and these measurements:</h2>
-  <a href="https://docs.airnowapi.org/aq101">AirNow API AQI Information</a>
-  
+  <h4>For more information on AQI and these measurements:  <a href="https://docs.airnowapi.org/aq101">AirNow API AQI Information</a></h4>
+
+<br>
+<hr>
+<hr>
+<br>
+
   {% if recent %}
   <h2>Most Recent Search:</h2>
   <p>This is what our searches look like. </p>
@@ -53,6 +61,10 @@ crossorigin="anonymous"></script>
       {% endif %}
     <li>Category: {{ recent.category }}</li>
   </ul>
+<br>
+<hr>
+<hr>
+<br>
 
   <div id="site-content">
     <h2>Graph for Most Recent AQI Search: 
@@ -70,8 +82,12 @@ crossorigin="anonymous"></script>
 <span id="recent-ozone" style="visibility:hidden;">{{ recent.ozone }}</span>
 <span id="recent-pm" style="visibility:hidden;">{{ recent.pm }}</span>
   {% endif %}
+  <br>
+  <hr>
+  <hr>
+  <br>
 
-  <h2>Log In to Create an Air Quality Search</h2>
+  <h2>Log In to Create an Air Quality Search:</h2>
   <!--Make a nav bar later-->
   <ul>
     <li><a href="/login.page">Login or Create User</a></li>

@@ -1,5 +1,3 @@
-//extended yearlong search functions
-
 'use strict';
 
 //get all dates (and six_days?) for each search

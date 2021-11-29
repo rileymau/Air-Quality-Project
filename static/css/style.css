@@ -1,9 +1,11 @@
 body {
-	background-color: #b6e1fc
+	background-color: #b6e1fc;
+  width: 1300px;
+  margin: 0 auto;
   }
   /* was lightskyblue; #ceebfd; */
 
   #site-content {
-    width: 1200px;
+    width: 1250px;
     margin: 0 auto;
   }
