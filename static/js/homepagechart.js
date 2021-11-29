@@ -133,7 +133,7 @@ function makeGraphDataR() {
     new Chart($('#most-recent-chart'), {
         type: 'bar',
         data: {
-          labels: graphDaysR,  
+          labels: graphDaysR,
           datasets: [
             {
               label: 'Daily AQI',
@@ -145,18 +145,18 @@ function makeGraphDataR() {
           ],
         },
         options: {
-          tooltips: {
-            displayColors: false,
-            borderWidth: 1, 
-            callbacks: {
-            //   footer: graphLabels,
-            // }
+          plugins: {
+            tooltip: {
+              displayColors: false,
+              footerFont: {weight: 'normal'},
+              callbacks: {
                   footer: function(item) {
-                    let graphIndex = item[0].index;
-                    return 'Parameter' + graphLabels[graphIndex];
+                    let graphIndex = item[0].dataIndex;
+                    return 'Parameter: ' + graphLabelsR[graphIndex];
+                  }
               }
             }
-          }
+          },
         },
       });
     }

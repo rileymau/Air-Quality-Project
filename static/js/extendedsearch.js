@@ -133,6 +133,7 @@ function makeSpecDateChart() {
     }; 
   };
 
+  
   makeCustomColorsC();
   console.log(customColorsC);
 
@@ -150,7 +151,13 @@ function makeSpecDateChart() {
         },
       ],
     },
-    options: {},
+    options: {
+      plugins: {
+        tooltip: {
+          displayColors: false,
+        }
+      },
+    },
   });
 };
 
@@ -283,6 +290,13 @@ function makeAllZipChart(result) {
           ],
         },
         options: {},
+        options: {
+          plugins: {
+            tooltip: {
+              displayColors: false,
+            }
+          },
+        },
       });
 };
 

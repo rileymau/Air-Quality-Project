@@ -147,21 +147,19 @@ function makeTheChart() {
         },
       ],
     },
-    options: myOptions,
+    options: {
+      plugins: {
+        tooltip: {
+          displayColors: false,
+          footerFont: {weight: 'normal'},
+          callbacks: {
+              footer: function(item) {
+                let graphIndex = item[0].dataIndex;
+                return 'Parameter: ' + graphLabels[graphIndex];
+              }
+          }
+        }
+      },
+    },
   });
 };
-
-const myOptions = {
-      tooltips: {
-        displayColors: false, 
-        borderWidth: 1, 
-        callbacks: {
-        //   footer: graphLabels,
-        // }
-              footer: function(item) {
-                let graphIndex = item[0].index;
-                return 'Parameter' + graphLabels[graphIndex];
-          },
-        },
-      },
-    };
