@@ -2,6 +2,7 @@ body {
 	background-color: #b6e1fc;
   width: 1300px;
   margin: 0 auto;
+  font-family: "Arial", sans-serif;
   }
   /* was lightskyblue; #ceebfd; */
 
@@ -14,5 +15,4 @@ hr{
     height: 1px;
     background-color: rgb(107, 84, 235);
     border: none;
-  }
-
+}
