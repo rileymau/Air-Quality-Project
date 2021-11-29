@@ -5,7 +5,13 @@ body {
   }
   /* was lightskyblue; #ceebfd; */
 
-  #site-content {
+#site-content {
     width: 1250px;
     margin: 0 auto;
+  }
+
+hr{
+    height: 1px;
+    background-color: rgb(107, 84, 235);
+    border: none;
   }

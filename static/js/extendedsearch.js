@@ -99,6 +99,7 @@ function makeGraphDataC() {
   console.log(graphLabelsC);
 };
 
+let customChart;  //so that it doesn't error on first pass before chart is made. 
 
   //make the graph the current search and a previous date. Start with current 7 day chart. 
   //pass graphDays, graphAQI, graphLabels to chart.  
