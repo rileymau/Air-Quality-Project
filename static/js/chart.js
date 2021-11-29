@@ -149,7 +149,7 @@ function makeTheChart() {
           label: 'Daily AQI',
           data: graphAQI,
           backgroundColor: customColors,  //'rgba(255, 100, 130, 0.5)',
-          borderColor: 'rgba(255, 100, 130)',
+          borderColor: 'rgba(81, 45, 168)',
           borderWidth: 1,
         },
       ],

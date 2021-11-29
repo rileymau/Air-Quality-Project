@@ -146,7 +146,7 @@ function makeSpecDateChart() {
           label: 'Daily AQI',
           data: graphAQIC,
           backgroundColor: customColorsC,  //'rgba(255, 100, 130, 0.5)',
-          borderColor: 'rgba(255, 100, 130)',
+          borderColor: 'rgba(81, 45, 168)', //'rgba(255, 100, 130)',
           borderWidth: 1,
         },
       ],
@@ -202,24 +202,35 @@ function addData(evt) {
     }
 
     //if dateToAdd < first day in graphDaysC:
-    else if (dateToAdd < graphDaysC[6]) {
+    if (dateToAdd < graphDaysC[0]) {
       graphAQIC.unshift(result[0]['AQI']); 
       graphDaysC.unshift(dateToAdd);
       console.log(graphDaysC);
       console.log(graphAQIC);
-    };
+    }
 
-    // else {  < there is never an else.  The 7 day list is consecutive. :)
-    //   //compare date to each item in graphDaysC
-    //   //find its place
-    //   //scoot all others down an index
-    //   //add it in graph days
-    //   //get that index
-    //   //scoot all down in graphAQIC
-    //   //add AQI in at that index
-    //   console.log(graphDaysC);
-    //   console.log(graphAQIC);
-    // }
+    else {  // else - only needed if adding multiple days.  Otherwise, one new day will always be before or after week long set. 
+            //compare date to each item in graphDaysC, find place (idx) of new day.
+      let idx;
+      for (let i = 0; i < graphDaysC.length; i += 1) {
+        if (graphDaysC[i] < dateToAdd) {
+          console.log(i, "keep going");
+          continue;
+        }
+        else if (graphDaysC[i] >= dateToAdd) {
+            idx = i;
+            console.log("found it", i)
+            break;
+            };
+        };
+      console.log(idx);
+      // insert day into graphDaysC at index i.
+      // insert AQI into graphAQIC at index i. 
+      graphDaysC.splice(idx, 0, dateToAdd);
+      graphAQIC.splice(idx, 0, result[0]['AQI']);
+      console.log(graphDaysC);
+      console.log(graphAQIC);
+    };
 
     //clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
     //console.log("sorted", clickData);
@@ -298,7 +309,7 @@ function makeAllZipChart(result) {
               label: 'AQI',
               data, 
               backgroundColor: zipColors,  //'rgba(255, 100, 130, 0.5)',
-              borderColor: 'rgba(255, 100, 130)',
+              borderColor: 'rgba(81, 45, 168)',
               borderWidth: 1,
             },
           ],

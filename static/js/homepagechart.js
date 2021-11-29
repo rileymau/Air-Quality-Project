@@ -149,7 +149,7 @@ function makeGraphDataR() {
               label: 'Daily AQI',
               data: graphAQIR,
               backgroundColor: customColorsR,  //'rgba(255, 100, 130, 0.5)',
-              borderColor: 'rgba(255, 100, 130)',
+              borderColor: 'rgba(81, 45, 168)',
               borderWidth: 1,
             },
           ],
