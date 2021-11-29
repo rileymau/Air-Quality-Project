@@ -144,12 +144,16 @@ function makeTheChart() {
           backgroundColor: customColors,  //'rgba(255, 100, 130, 0.5)',
           borderColor: 'rgba(81, 45, 168)',
           borderWidth: 1.5,
-        }
-      ]
+        },
+      ],
     },
-    options: {
+    options: myOptions,
+  });
+};
+
+const myOptions = {
       tooltips: {
-        displayColors: false,
+        displayColors: false, 
         borderWidth: 1, 
         callbacks: {
         //   footer: graphLabels,
@@ -157,10 +161,7 @@ function makeTheChart() {
               footer: function(item) {
                 let graphIndex = item[0].index;
                 return 'Parameter' + graphLabels[graphIndex];
-          }
-        }
-        
-      }
-    }
-  })
-}
+          },
+        },
+      },
+    };
