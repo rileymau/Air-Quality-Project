@@ -1,5 +1,7 @@
 //extended yearlong search functions
 
+'use strict';
+
 //get all dates (and six_days?) for each search
 //get six day and main search date from html or chart.js
 //make graph of those dates.
@@ -97,8 +99,6 @@ function makeGraphDataC() {
   };
   console.log(graphAQIC);
   console.log(graphLabelsC);
-    // return {searchLabel: searchLabel,
-    //   searchAQI: searchAQI};
 };
 
 
@@ -147,7 +147,7 @@ function makeSpecDateChart() {
           data: graphAQIC,
           backgroundColor: customColorsC,  //'rgba(255, 100, 130, 0.5)',
           borderColor: 'rgba(81, 45, 168)', //'rgba(255, 100, 130)',
-          borderWidth: 1,
+          borderWidth: 1.5,
         },
       ],
     },
@@ -161,31 +161,15 @@ function makeSpecDateChart() {
   });
 };
 
+
   // Specific Date Chart functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-// function makeClickData() {
-
-//   return clickData;
-// };
-
-
 //Customize 7 day chart with new date added. 
-
 function addData(evt) {
   evt.preventDefault();
 
   console.log("in add data");
   const dateToAdd = $('#custom-date').val();
-
-
-  //Make click chart data from graphDays, graphAQI lists.
-  // let clickData = [];
-  // for (const day of graphDaysC) {
-  //   index = graphDaysC.indexOf(day);
-  //   clickData.push({'date': day, 'AQI': graphAQIC[index]});
-  // };
-  // console.log(clickData); 
 
   //get the new day's AQI, append date and AQI to clickData.  Run dateToAdd through some comparisons to see where to add in graphAQIC, graphDaysC.
   $.get(`https://www.airnowapi.org/aq/observation/zipCode/historical/?format=application/json&zipCode=${zipcode}&date=${dateToAdd}T00-0000&distance=1&API_KEY=65D54607-91C0-4049-93F6-04717AFA5B70`,
@@ -231,15 +215,6 @@ function addData(evt) {
       console.log(graphDaysC);
       console.log(graphAQIC);
     };
-
-    //clickData.push({'date': `${dateToAdd}`, 'AQI': result[0]['AQI']});
-    //console.log("sorted", clickData);
-
-    //remake aqi, data list. 
-    // for (const dict in clickData) {
-    //   graphAQIC.push(dict.AQI);
-    //   graphDaysC.push(dict.date);
-    // }
 
     //the old chart on the canvas has to be destroyed before printing the updated chart.
     customChart.destroy();
@@ -310,7 +285,7 @@ function makeAllZipChart(result) {
               data, 
               backgroundColor: zipColors,  //'rgba(255, 100, 130, 0.5)',
               borderColor: 'rgba(81, 45, 168)',
-              borderWidth: 1,
+              borderWidth: 1.5,
             },
           ],
         },
@@ -318,7 +293,7 @@ function makeAllZipChart(result) {
       });
 };
 
-  //giit zipcode data from server route/crud function. comes back jsonified.
+  //get zipcode data from server route/crud function. comes back jsonified.
 $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(result)})
 
 // double checked, zipcode chart is showing correct values from allzipsearch list:
@@ -330,42 +305,3 @@ $.get('/allzipsearch.json', {"zipcode": zipcode}, result => {makeAllZipChart(res
 //Note, sometimes the saved search data for a zipcode and day is diiffernt from that date pulled up in
 //the six days previous of another search.  The six day previous function takes data at midnight on each day,
 //and the new search function takes it at the current time.
-  
-
-// other function/chart ideas: 
-// function makePrevWeekChart(result) {
-//   //make the graph with the current search, last 6 days, and previous week.
-//   new Chart($('#prev-week-chart'), {
-//       type: 'bar',
-//       data: {
-//         labels: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
-//         datasets: [
-//           {
-//             label: 'AQI',
-//             data: [10, 36, 27, 12, 16, 32, 41],
-//           },
-//         ],
-//       },
-//     });
-// };
-
-
-//Unused: 
-//function makeMonthlyChart(result) {
-//   //make the graph with current search date, and first day of month for the last year.
-
-//   new Chart($('#monthly-chart'), {
-//       type: 'bar',
-//       data: {
-//         labels: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
-//         datasets: [
-//           {
-//             label: 'AQI',
-//             data: [10, 36, 27, 12, 16, 32, 41],
-//           },
-//         ],
-//       },
-//     });
-// };
-
-// $.get('/allzipsearch', result => {makeMonthlyChart(result)})

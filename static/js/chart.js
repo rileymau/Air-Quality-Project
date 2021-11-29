@@ -39,9 +39,8 @@ const graphAQI = [0, 0, 0, 0, 0, 0];
 const graphLabels = ["", "", "", "", "", ""];
 const customColors = [];
 let counter = 0;
-//const dayCount = graphAQI.length;
 
-//function makeG() {
+
 for (const day of APIDays) {
   let index = APIDays.indexOf(day);
   //console.log(index);
@@ -59,15 +58,11 @@ for (const day of APIDays) {
       counter += 1;
       console.log(graphAQI);
       if (counter === 6) {
-      //if (graphAQI.length === 6) {
         makeGraphData();
         makeTheChart();
       };
-      //graphOzone.push([result[0]['Ozone']]);
-      //graphPM.push(result[0]['PM2.5']);
     }); 
 };
-    //finishGraphData(dayCount);
 
 
   // Get search AQI value and label from search details page, add to graphAQI and graphLabels.
@@ -103,8 +98,6 @@ function makeGraphData() {
   };
   console.log(graphAQI);
   console.log(graphLabels);
-  // return {searchLabel: searchLabel,
-  //   searchAQI: searchAQI};
 };
 
 
@@ -150,69 +143,24 @@ function makeTheChart() {
           data: graphAQI,
           backgroundColor: customColors,  //'rgba(255, 100, 130, 0.5)',
           borderColor: 'rgba(81, 45, 168)',
-          borderWidth: 1,
-        },
-      ],
+          borderWidth: 1.5,
+        }
+      ]
     },
     options: {
-      datasets: {
-        bar: {
-        },
+      tooltips: {
+        displayColors: false,
+        borderWidth: 1, 
+        callbacks: {
+        //   footer: graphLabels,
+        // }
+              footer: function(item) {
+                let graphIndex = item[0].index;
+                return 'Parameter' + graphLabels[graphIndex];
+          }
+        }
         
-      },
-    },
-  });
+      }
+    }
+  })
 }
-
-
-
-//previous function ideas: 
-//function display_chart(table) {
-    //$$user.profile.append(chart.table)
-    //$$search.details.append(chart.table)
-// //}
-// function displayDetails(evt) {
-//     evt.preventDefault();
-
-//     function makeChart(six_days) {
-//         console.log(six_days)
-//     }
-
-//     function makeGraph(six_days) {
-//     }
-//     function goToSearchDetails() {
-//         //goes to that route
-//     }
-// }
-
-// $('#show-button').on('click', displayDetails);
-// move to initial search.js if need to call this button. 
-
-//on click, make 7 day route
-//and make chart
-//on search details page
-
-//previous data dictionary idea: 
-      //data['Ozone AQI'] = result[0]['Ozone'];
-      //data['PM2.5 AQI'] = result[0]['PM2.5'];
-
-        // function makeGraphData(result) {
-        //     data['Ozone AQI'] = result[0]['Ozone'];
-        //     data['PM2.5 AQI'] = result[0]['PM2.5'];
-        //     data['Category'] = result[0]['Category']['Number'];
-        //     return data
-        // };
-
-        // function storeGraphData(data) {
-
-        //     graphOzone.push.data['Ozone AQI'];
-        //     graphPM.push.data['PM2.5 AQI'];
-        //     graphCat.push.data['Category'];
-        // };
-
-//console.log(searchAQI);
-//console.log(searchLabel);
- // Set length requirement so that JS doesn't add the searchAQI and searchLabel before the API calls all run. 
-
-//function finishGraphData(dayCount) { HERE.
-//if (dayCount === 6) {}

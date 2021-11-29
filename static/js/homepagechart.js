@@ -1,10 +1,6 @@
 'use strict';
 
-//make chart with date from most recent search.
-//try to get 6 days with jsonify
-//or, get 6 day list from homepage hidden divs. 
 //Most of this page is copies from chart.js with a few changes (for recent search).
-
 //Customized functions for recent search data are called "recent" or ...R.
 
 //Create graph data from saved search and 6 new API calls.
@@ -45,7 +41,6 @@ const graphAQIR = [0, 0, 0, 0, 0, 0];
 const graphLabelsR = ["", "", "", "", "", ""];
 const customColorsR = [];
 let counterR = 0;
-  //const dayCount = graphAQI.length;
 
 
 for (const day of APIDaysR) {
@@ -58,14 +53,11 @@ for (const day of APIDaysR) {
     (result) => { 
         console.log(result);
         console.log(result[0]['AQI']);
-        // graphAQIR.push(result[0]['AQI']);
-        // graphLabelsR.push(result[0]['ParameterName']);
         graphAQIR[index] = result[0]['AQI'];
         graphLabelsR[index] = result[0]['ParameterName'];
         counterR += 1;
         console.log(graphAQIR);
         if (counterR === 6) {
-        //if (graphAQI.length === 6) {
           makeGraphDataR();
           makeTheChartR();
         };
@@ -106,8 +98,6 @@ function makeGraphDataR() {
     };
     console.log(graphAQIR);
     console.log(graphLabelsR);
-    // return {searchLabel: searchLabel,
-    //   searchAQI: searchAQI};
   };
 
   //pass graphDays, graphAQI, graphLabels to chart.  
@@ -150,7 +140,7 @@ function makeGraphDataR() {
               data: graphAQIR,
               backgroundColor: customColorsR,  //'rgba(255, 100, 130, 0.5)',
               borderColor: 'rgba(81, 45, 168)',
-              borderWidth: 1,
+              borderWidth: 1.5,
             },
           ],
         },
@@ -163,4 +153,3 @@ function makeGraphDataR() {
         },
       });
     }
-
