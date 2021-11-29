@@ -68,7 +68,7 @@ class FlaskTestsDatabase(TestCase):
                                   "ReportingArea": "Minneapolis-St. Paul", "StateCode": "MN", "Latitude": 44.955,
                                   "Longitude": -93.185, "ParameterName": "PM2.5", "AQI": 19, "Category": {"Number": 1, "Name": "Good"}}]},
                                   follow_redirects=True)
-                                  #This is normally a list with the dictionary as iitem 0.  The placement of quotes didn't work for
+                                  #This is normally a list with the dictionary as item 0.  The placement of quotes didn't work for
                                   #it to run as normal, so its format is edited a little vs. what is really coming from the API.
                                   #not able to get this as a string, only unhashable dict, list.
         print(result.data)
