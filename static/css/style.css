@@ -21,3 +21,13 @@ ul.wind {
   list-style-image: url('/static/img/icons8-wind-48-copy2.jpg');
   margin-left: 15px;
   }
+
+#aqi-key {
+  margin-left: 50px;
+}
+
+img {  
+  max-width: 80%;  
+  height: auto;  
+  margin: auto;
+}
