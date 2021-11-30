@@ -19,4 +19,5 @@ hr{
 
 ul.wind {
   list-style-image: url('/static/img/icons8-wind-48-copy2.jpg');
+  margin-left: 15px;
   }
