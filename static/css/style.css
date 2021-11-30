@@ -16,3 +16,7 @@ hr{
     background-color: rgb(107, 84, 235);
     border: none;
 }
+
+ul.wind {
+  list-style-image: url('/static/img/icons8-wind-48-copy2.jpg');
+  }
