@@ -19,7 +19,7 @@ crossorigin="anonymous"></script>
 {% endblock %}
 {% block body %}
 <body>
-
+<br>
 <h1 id="doctest">Welcome to Air Quality Zipcode Lookup Page</h1>
 <br>
 <hr>
@@ -29,13 +29,14 @@ crossorigin="anonymous"></script>
 <h2>About This Website:</h2>
 
   <p>
-    Login as a user, and then do an Air quality search. Air Quality Index (AQI) has many measurements.
-    <br>Two important ones are ground level ozone (ozone), and particle matter 2.5 micrometers or smaller (PM 2.5).
-    </p>
-    <p>
-    A variety of air quality data is available.  This website searches for ozone and PM 2.5 data by 
-    <br>zipcode or by reporting area.  Cities and towns are assigned to larger reporting areas that share measurements. 
-    <br>The extended search pages has a summary of the last year's AQI's for any zipcode or reporting area. 
+    Have you ever wanted to look up air quality data before you traveled?  Would you like to know more about
+    <br>the air quality where you live?  Search by zipcode on our website, that gets data from AirNow.gov. 
+    <br>
+    <br>Air Quality Index (AQI) has many measurements. Two important ones are ground level ozone (ozone), 
+    <br>and particle matter 2.5 micrometers or smaller (PM 2.5).  This website shows current AQI levels by zipcode,
+    <br>AQI levels from the previous week, and AQI levels on previous days you would like to look up. You can also see
+    <br>a summary of all searches done for each zipcode.    
+    <br>
     </p>
 
   <h4>For more information on AQI and these measurements:  <a href="https://docs.airnowapi.org/aq101">AirNow API AQI Information</a></h4>
@@ -70,6 +71,9 @@ crossorigin="anonymous"></script>
     <h2>Graph for Most Recent AQI Search: 
       <br>Zipcode {{ recent.zipcode }} in {{ recent.reporting_area }} on {{ recent.date}} and the Previous Week</h2>
   <canvas id="most-recent-chart"></canvas>
+  </div>
+  <div id="aqi-key"><img src="/static/img/aqi-index-information-air-quality copy.jpg">
+    <p>Color key courtesy of AirNow.gov. </p>
   </div>
 
 <span id="recent-date" style="visibility:hidden;">{{ recent.date }}</span>
