@@ -30,3 +30,7 @@ img {
   max-width: 80%;  
   height: auto;  
 }
+
+img.intro {
+  height: 273px;
+}
