@@ -177,7 +177,7 @@ function addData(evt) {
     console.log(dateToAdd);
     console.log(graphDaysC[(graphDaysC.length-1)]);
     //if dateToAdd >= last day in graphDaysC:
-    if (graphDaysC[(graphDaysC.length-1)] <= dateToAdd) {
+    if (dateToAdd >= graphDaysC[(graphDaysC.length-1)]) {
       graphAQIC.push(result[0]['AQI']); 
       graphDaysC.push(dateToAdd);
       console.log(graphDaysC);
