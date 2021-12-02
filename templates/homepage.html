@@ -32,7 +32,7 @@ crossorigin="anonymous"></script>
     Have you ever wanted to look up air quality data before you traveled?  Would you like to know more about
     <br>the air quality where you live?  Search by zipcode on our website, that gets data from AirNow.gov. 
     <br>
-    <br>Air Quality Index (AQI) has many measurements. Two important ones are ground level ozone (ozone), 
+    <br>Air Quality Index (AQI) has many measurements. Two important ones are ground level ozone (OZONE), 
     <br>and particle matter 2.5 micrometers or smaller (PM 2.5).  This website shows current AQI levels by zipcode,
     <br>AQI levels from the previous week, and AQI levels on previous days you would like to look up. You can also see
     <br>a summary of all searches done for each zipcode.    
@@ -68,11 +68,15 @@ crossorigin="anonymous"></script>
 <br>
 
   <div id="site-content">
-    <h2>Graph for Most Recent AQI Search: 
+    <h2>Chart for Most Recent AQI Search: 
       <br>Zipcode {{ recent.zipcode }} in {{ recent.reporting_area }} on {{ recent.date}} and the Previous Week</h2>
   <canvas id="most-recent-chart"></canvas>
   </div>
-  <div id="aqi-key"><img src="/static/img/aqi-index-information-air-quality copy.jpg">
+  <br>
+
+  <div id="aqi-key">
+    <p>Chart indicates if highest AQI parameter is OZONE or PM2.5.  Colors indicate AQI level. </p>
+    <img src="/static/img/aqi-index-information-air-quality copy.jpg">
     <p>Color key courtesy of AirNow.gov. </p>
   </div>
 

@@ -53,14 +53,16 @@ crossorigin="anonymous"></script>
   <br>
 
 <div id="site-content">
-<h2>Your Search AQI Graph: 
+<h2>Your Search AQI Chart: 
   <br> Zipcode {{ search.zipcode }} in {{ search.reporting_area }} on {{ search.date}} and Previous Week</h2>
   <canvas id="7-day-chart"></canvas>
 </div>
 <br>
 <br>
 
-<div id="aqi-key"><img src="/static/img/aqi-index-information-air-quality copy.jpg">
+<div id="aqi-key">
+  <p>Chart indicates if highest AQI parameter is OZONE or PM2.5.  Colors indicate AQI level. </p>
+  <img src="/static/img/aqi-index-information-air-quality copy.jpg">
   <p>Color key courtesy of AirNow.gov. </p>
 </div>
 <br>

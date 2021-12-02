@@ -111,22 +111,22 @@ function makeTheChart() {
   //this uses the same color scheme as the AirNow website.
     for (let i = 0; i < graphAQI.length; i += 1) {
       if (graphAQI[i] < 50) {
-        customColors.push('green')
+        customColors.push('#00e400')  //green
       };
       if (graphAQI[i] < 100 && graphAQI[i] >= 51) {
-          customColors.push('yellow')
+          customColors.push('#ffff00')  //yellow
       };
       if (graphAQI[i] < 150 && graphAQI[i] >= 101) {
-          customColors.push('orange')
+          customColors.push('#ff7e00')  //orange
        };
       if (graphAQI[i] < 200 && graphAQI[i] >= 151) {
-          customColors.push('red')
+          customColors.push('r#ff0000')  //red
       };
       if (graphAQI[i] < 300 && graphAQI[i] >= 201) {
-          customColors.push('purple')
+          customColors.push('#8f3f97')  //purple
       };
       if (graphAQI[i] < 500 && graphAQI[i] >= 301) {
-          customColors.push('maroon')
+          customColors.push('#7e0023')  //maroon
       };
     }; 
   };

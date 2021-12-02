@@ -108,22 +108,22 @@ function makeGraphDataR() {
     //this uses the same color scheme as the AirNow website.
       for (let i = 0; i < graphAQIR.length; i += 1) {
         if (graphAQIR[i] < 50) {
-          customColorsR.push('green')
+          customColorsR.push('#00e400')  //green
         };
         if (graphAQIR[i] < 100 && graphAQIR[i] >= 51) {
-            customColorsR.push('yellow')
+            customColorsR.push('#ffff00')  //yellow
         };
         if (graphAQIR[i] < 150 && graphAQIR[i] >= 101) {
-            customColorsR.push('orange')
+            customColorsR.push('#ff7e00')  //orange
          };
         if (graphAQIR[i] < 200 && graphAQIR[i] >= 151) {
-            customColorsR.push('red')
+            customColorsR.push('r#ff0000')  //red
         };
         if (graphAQIR[i] < 300 && graphAQIR[i] >= 201) {
-            customColorsR.push('purple')
+            customColorsR.push('#8f3f97')  //purple
         };
         if (graphAQIR[i] < 500 && graphAQIR[i] >= 301) {
-             customColorsR.push('maroon')
+             customColorsR.push('#7e0023')  //maroon
         };
       }; 
     };

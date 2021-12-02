@@ -110,25 +110,22 @@ function makeSpecDateChart() {
   //this uses the same color scheme as the AirNow website.
     for (let i = 0; i < graphAQIC.length; i += 1) {
       if (graphAQIC[i] < 50) {
-        customColorsC.push('green')
+        customColorsC.push('#00e400')  //green
       };
       if (graphAQIC[i] < 100 && graphAQIC[i] >= 51) {
-          customColorsC.push('yellow')
+          customColorsC.push('#ffff00')  //yellow
       };
       if (graphAQIC[i] < 150 && graphAQIC[i] >= 101) {
-          customColorsC.push('orange')
+          customColorsC.push('#ff7e00')  //orange
        };
       if (graphAQIC[i] < 200 && graphAQIC[i] >= 151) {
-          customColorsC.push('red')
+          customColorsC.push('r#ff0000')  //red
       };
       if (graphAQIC[i] < 300 && graphAQIC[i] >= 201) {
-          customColorsC.push('purple')
-      };
-      if (graphAQIC[i] < 300 && graphAQIC[i] >= 201) {
-        customColorsC.push('purple')
+        customColorsC.push('#8f3f97')  //purple
       };
       if (graphAQIC[i] < 500 && graphAQIC[i] >= 301) {
-        customColorsC.push('maroon')
+        customColorsC.push('#7e0023')  //maroon
       };
     }; 
   };
@@ -245,25 +242,22 @@ function makeAllZipChart(result) {
       //this uses the same color scheme as the AirNow website.
       
         if (value < 50) {
-          zipColors.push('green')
+          zipColors.push('#00e400')  //green
             };
         if (value < 100 && value >= 51) {
-          zipColors.push('yellow')
+          zipColors.push('#ffff00')  //yellow
             };
         if (value < 150 && value >= 101) {
-          zipColors.push('orange')
+          zipColors.push('#ff7e00')  //orange
             };
         if (value < 200 && value >= 151) {
-          zipColors.push('red')
+          zipColors.push('r#ff0000')  //red
             };
         if (value < 300 && value >= 201) {
-          zipColors.push('purple')
-            };
-        if (value < 300 && value >= 201) {
-          zipColors.push('purple')
+          zipColors.push('#8f3f97')  //purple
             };
         if (value < 500 && value >= 301) {
-          zipColors.push('maroon')
+          zipColors.push('#7e0023')  //maroon
             };
       };
 
