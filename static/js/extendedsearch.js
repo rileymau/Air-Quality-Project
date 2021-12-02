@@ -174,20 +174,24 @@ function addData(evt) {
     console.log(result);
     console.log(result[0]['AQI']);
 
-    //if dateToAdd > last day in graphDaysC:
-    if (dateToAdd > graphDaysC[6]) {
+    console.log(dateToAdd);
+    console.log(graphDaysC[(graphDaysC.length-1)]);
+    //if dateToAdd >= last day in graphDaysC:
+    if (graphDaysC[(graphDaysC.length-1)] <= dateToAdd) {
       graphAQIC.push(result[0]['AQI']); 
       graphDaysC.push(dateToAdd);
       console.log(graphDaysC);
       console.log(graphAQIC);
+      console.log("added at end");
     }
 
     //if dateToAdd < first day in graphDaysC:
-    if (dateToAdd < graphDaysC[0]) {
+    else if (dateToAdd < graphDaysC[0]) {
       graphAQIC.unshift(result[0]['AQI']); 
       graphDaysC.unshift(dateToAdd);
       console.log(graphDaysC);
       console.log(graphAQIC);
+      console.log("added at beginning");
     }
 
     else {  // else - only needed if adding multiple days.  Otherwise, one new day will always be before or after week long set. 
@@ -215,6 +219,9 @@ function addData(evt) {
 
     //the old chart on the canvas has to be destroyed before printing the updated chart.
     customChart.destroy();
+    //custom colors must be emptied and recreated. 
+    let x = customColorsC.length;
+    customColorsC.splice(0, x);
     makeSpecDateChart();
   });
 }; 
