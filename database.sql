@@ -256,6 +256,36 @@ COPY public.searches (search_id, user_id, date, zipcode, reporting_area, ozone, 
 140	4	2021-11-23	55412	Minneapolis-St. Paul	\N	28	1
 141	4	2021-11-23	90210	NW Coastal LA	\N	30	1
 142	4	2021-11-24	55112	Minneapolis-St. Paul	\N	46	1
+143	4	2021-11-27	55112	Minneapolis-St. Paul	\N	35	1
+144	4	2021-11-28	55112	Minneapolis-St. Paul	\N	17	1
+145	4	2021-11-28	90210	NW Coastal LA	\N	40	1
+146	3	2021-11-29	55112	Minneapolis-St. Paul	\N	30	1
+147	3	2021-11-29	55119	Minneapolis-St. Paul	\N	30	1
+148	3	2021-12-02	55119	Minneapolis-St. Paul	\N	18	1
+149	4	2021-12-02	55427	Minneapolis-St. Paul	\N	22	1
+150	4	2021-12-02	93650	Fresno	\N	38	1
+151	4	2021-12-02	93701	Fresno	\N	38	1
+152	4	2021-12-02	93706	Fresno	\N	38	1
+153	4	2021-12-02	94111	San Francisco	\N	21	1
+154	4	2021-12-02	94107	San Francisco	\N	21	1
+155	4	2021-12-06	55119	Minneapolis-St. Paul	\N	21	1
+156	4	2021-12-06	55112	Minneapolis-St. Paul	\N	21	1
+157	4	2021-12-06	80205	Denver-Boulder	\N	44	1
+158	4	2021-12-06	80205	Denver-Boulder	\N	44	1
+159	4	2021-12-06	91321	Santa Clarita Vly	\N	16	1
+160	4	2021-12-06	55112	Minneapolis-St. Paul	\N	23	1
+161	4	2021-12-06	91321	Santa Clarita Vly	\N	16	1
+162	4	2021-12-06	55427	Minneapolis-St. Paul	\N	23	1
+163	4	2021-12-06	91321	Santa Clarita Vly	\N	16	1
+164	4	2021-12-13	81321	Four Corners Area	\N	39	1
+165	4	2021-12-13	90210	NW Coastal LA	\N	11	1
+166	4	2021-12-13	92242	Twentynine Palms	\N	7	1
+167	4	2021-12-13	92243	Imperial Valley	\N	8	1
+168	4	2021-12-13	92244	El Centro	\N	6	1
+169	4	2021-12-13	94158	San Francisco	\N	26	1
+170	6	2021-12-18	55112	Minneapolis-St. Paul	\N	44	1
+171	6	2021-12-18	80132	Colorado Springs	\N	21	1
+172	6	2021-12-18	90210	NW Coastal LA	\N	33	1
 \.
 
 
@@ -268,6 +298,9 @@ COPY public.users (user_id, email, password) FROM stdin;
 2	hello@comcast.net	123
 3	hi@gmail.com	123
 4	hithere@gmail.com	123
+5	now@gmail.com	123
+6	myself@gmail.com	123
+7	hello@gmail.com	123
 \.
 
 
@@ -275,14 +308,14 @@ COPY public.users (user_id, email, password) FROM stdin;
 -- Name: searches_search_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.searches_search_id_seq', 142, true);
+SELECT pg_catalog.setval('public.searches_search_id_seq', 172, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackbright
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 4, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 7, true);
 
 
 --
