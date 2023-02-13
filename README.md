@@ -2,7 +2,7 @@
 
 ## About the Developer
 
-Molly enjoys problem solving, learning, training new employees, and working on collaborative teams. She loves problem solving and being a software engineer! She was a mathematics major in college, enjoyed her early programming experience with R, and wants to use math in practical ways and serve her community.
+Molly is a software engineer at Target. She enjoys problem solving, learning, and working on collaborative teams. She was a mathematics major in college, enjoyed her early programming experience with R and Mathematica, and wants to use math in practical ways and serve her community. This is her private non-work related repo.
 
 ## Project Description
 
